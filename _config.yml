@@ -1,0 +1,44 @@
+title: "Risorse Artificiali"
+email: maestri.stefano@gmail.com
+description: >-
+  AI Engineer & Technical Manager focused on Multi-Agent Systems and AI for Middleware.
+baseurl: "" 
+url: "https://tuo-username.github.io"  # cambia 'tuo-username' con il tuo GitHub username
+
+remote_theme: "mmistakes/minimal-mistakes@4.24.0"
+
+plugins:
+  - jekyll-include-cache
+
+author:
+  name: "Risorse Artificiali"
+  avatar: "/assets/images/profile.jpg"
+  bio: "La tua bussola settimanale <br/> nel mondo dell’AI"
+  links:
+    - label: "LinkedIn"
+      icon: "fab fa-linkedin"
+      url: "https://www.linkedin.com/company/risorseartificiali/"
+    - label: "X / Twitter"
+      icon: "fab fa-twitter"
+      url: "https://x.com/risorseAI"
+    - label: "YouTube"
+      icon: "fab fa-youtube"
+      url: "https://www.youtube.com/channel/UCYQgzIby7QHkXBonTWk-2Fg"
+    - label: "Spotify"
+      icon: "fab fa-spotify"
+      url: "https://open.spotify.com/show/16dTKEEtKkIzhr1JJNMmSF?si=900902f2dca8442e"
+    
+    
+# Abilita sezione autore nella homepage
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: single
+      author_profile: true
+
+collections:
+  pages:
+    output: true
+    permalink: /:path/
