@@ -1,9 +1,9 @@
 title: "Risorse Artificiali"
 email: maestri.stefano@gmail.com
 description: >-
-  AI Engineer & Technical Manager focused on Multi-Agent Systems and AI for Middleware.
+  Risorse Artificiali è la tua bussola settimanale nel mondo dell’Intelligenza Artificiale Generativa. Notizie, tendenze, strumenti e riflessioni critiche.
 baseurl: "" 
-url: "https://tuo-username.github.io"  # cambia 'tuo-username' con il tuo GitHub username
+url: "https://risorseartificiali.com"
 
 remote_theme: "mmistakes/minimal-mistakes@4.24.0"
 

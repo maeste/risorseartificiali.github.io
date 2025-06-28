@@ -5,20 +5,7 @@ permalink: /
 author_profile: true
 ---
 
-<style>
-  .lang-tabs { display: flex; gap: 1rem; margin-bottom: 1rem; }
-  .lang-tabs button {
-    padding: 0.5rem 1rem;
-    border: none;
-    background: #007acc;
-    color: white;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  .lang-tabs button.active { background: #005b99; }
-  .lang-section { display: none; }
-  .lang-section.active { display: block; }
-</style>
+
 
 
 ## Risorse Artificiali è la tua bussola settimanale nel mondo dell’Intelligenza Artificiale Generativa.
