@@ -10,7 +10,7 @@ author_profile: true
 
 ## Risorse Artificiali è la tua bussola settimanale nel mondo dell’Intelligenza Artificiale Generativa.
 
-Notizie, tendenze, strumenti, riflessioni critiche e oscuri riferimenti nerd: ogni settimana accompagniamo chi vuole capire (davvero) cosa sta succedendo con l’AI che cambia il nostro modo di lavorare, creare, pensare.
+Notizie, tendenze, strumenti, riflessioni critiche e oscuri riferimenti nerd: ogni settimana [Alessio](https://www.linkedin.com/in/alessiosoldano/), [Paolo](https://www.linkedin.com/in/paoloantinori/) e  [Stefano](https://maeste.it) accompagnano chi vuole capire (davvero) cosa sta succedendo con l’AI che cambia il nostro modo di lavorare, creare, pensare.
 
 🎙️ Con un podcast settimanale, esploriamo:
 
