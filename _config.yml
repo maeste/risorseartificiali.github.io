@@ -27,8 +27,13 @@ author:
     - label: "Spotify"
       icon: "fab fa-spotify"
       url: "https://open.spotify.com/show/16dTKEEtKkIzhr1JJNMmSF?si=900902f2dca8442e"
-    
-    
+    - label: "Apple Podcasts"
+      icon: "fab fa-apple"
+      url: "https://podcasts.apple.com/us/podcast/risorse-artificiali-appunti-e-spunti-dal-mondo-dellintelligenza/id1816213074"
+    - label: "Amazon Music"
+      icon: "fab fa-amazon"
+      url: "https://music.amazon.it/podcasts/d483b182-41a7-4b03-ba9c-a75e528ea7ed/risorse-artificiali-appunti-e-spunti-dal-mondo-dell%E2%80%99intelligenza-artificiale"
+
 # Abilita sezione autore nella homepage
 defaults:
   - scope:
