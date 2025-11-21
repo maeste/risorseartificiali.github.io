@@ -9,7 +9,6 @@ tags:
   - Multimodali
 layout: single
 author_profile: true
-date: 2025-11-21 17:50:01
 ---
 
 
