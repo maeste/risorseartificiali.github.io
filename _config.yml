@@ -10,6 +10,11 @@ remote_theme: "mmistakes/minimal-mistakes@4.24.0"
 
 plugins:
   - jekyll-include-cache
+  - jekyll-paginate
+
+# Impostazioni Paginazione
+paginate: 5          # Numero di articoli per pagina
+paginate_path: /page:num/
 
 author:
   name: "Risorse Artificiali"
