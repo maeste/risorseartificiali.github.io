@@ -1,5 +1,6 @@
 ---
 title: "AI, social e innovazione: cosa cambia davvero con Gemini 3 e i nuovi modelli multimodali - #27"
+date: 2025-11-21 17:50:01
 categories:
   - Puntate
 tags:
