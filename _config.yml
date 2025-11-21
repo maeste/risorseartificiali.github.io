@@ -1,4 +1,5 @@
 title: "Risorse Artificiali"
+timezone: "Europe/Rome"
 email: maestri.stefano@gmail.com
 description: >-
   Risorse Artificiali è la tua bussola settimanale nel mondo dell’Intelligenza Artificiale Generativa. Notizie, tendenze, strumenti e riflessioni critiche.
@@ -42,6 +43,14 @@ defaults:
     values:
       layout: single
       author_profile: true
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: single
+      author_profile: true
+      share: true   # Abilita i tasti di condivisione social sotto gli articoli
+      comments: true # Predispone per i commenti (se li userai)
 
 collections:
   pages:
