@@ -1,0 +1,28 @@
+name: Merge Schedule
+on:
+  schedule:
+    - cron: 55 16 * * 3  # Every Wednesday at 16:55 UTC
+    - cron: 55 12 * * 6  # Every Saturday at 12:55 UTC
+  workflow_dispatch:  # Allows manual triggering
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  merge_scheduled:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Merge scheduled PRs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Get PRs with /schedule comment containing today's date
+          gh pr list --state open --json number,body,title --limit 100 | \
+          jq -r '.[] | select(.body | contains("'$(date +%Y-%m-%d)'")) | .number' | \
+          while read pr; do
+            echo "Merging PR #$pr"
+            gh pr merge $pr --auto --squash || true
+          done
