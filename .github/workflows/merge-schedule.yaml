@@ -1,8 +1,8 @@
 name: Merge Schedule
 on:
   schedule:
-    - cron: 55 16 * * 3  # Every Wednesday at 16:55 UTC
-    - cron: 55 12 * * 6  # Every Saturday at 12:55 UTC
+    - cron: 35 16 * * 3  # Every Wednesday at 16:55 UTC
+    - cron: 50 12 * * 6  # Every Saturday at 12:55 UTC
   workflow_dispatch:  # Allows manual triggering
 
 permissions:
