@@ -11,7 +11,12 @@ layout: single
 author_profile: true
 ---
 
-# Trascrizione: Veronica Brizzi Magic Episode Nov 28 2025
+{% include video id="WsaOl2izdM4" provider="youtube" %}
+
+👉 [Ascolta su Spotify](https://open.spotify.com/show/16dTKEEtKkIzhr1JJNMmSF?si=900902f2dca8442e)<br/>
+👉 [Guarda su YouTube](https://www.youtube.com/channel/UCYQgzIby7QHkXBonTWk-2Fg)<br/>
+👉 [Segui su LinkedIn](https://www.linkedin.com/company/risorseartificiali)<br/>
+
 
 ## [00:00] Introduzione e Presentazione di Veronica Brizzi
 
