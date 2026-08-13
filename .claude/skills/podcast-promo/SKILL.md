@@ -3,11 +3,73 @@ name: podcast-promo
 description: Skill master per la pubblicazione di un nuovo episodio del podcast "Risorse Artificiali". Un'unica invocazione produce titolo high-CTR (pattern numerato o intervista), frasi in sovraimpressione verbatim per il video (7 brevi + 3 lunghe con timestamp), brief thumbnail con prompt image pronto per ChatGPT Image 2 (con face reference photo del soggetto), chapters YouTube, descrizioni YouTube/Spotify + tag SEO (review unificata), script Shorts + spec Spotify Clip (review unificata), post LinkedIn, sezione newsletter codiceartificiale, e per le interviste un Guest Launch Kit completo. In output scrive DUE file: un promo file consolidato (`podcast-promo/episodes/{date}-{slug}_promo.md`) con tutti i contenuti pronti copia-incolla, e il post Jekyll (`_posts/{date}-{slug}.md`) con frontmatter v3.0 e trascrizione verbatim. Attiva quando l'utente vuole pubblicare un nuovo episodio, preparare il drop di una puntata, menziona Riverside, o materiali episodio.
 metadata:
   author: risorseartificiali
-  version: "4.6"
+  version: "4.8"
 ---
 
 <!--
 CHANGELOG
+
+v4.7 → v4.8 (2026-08-07) — youtube-cross-link integrato come Passaggio 12 finale
+- FEEDBACK utente: il cross-link YT (end screen + 5 cards) andava invocato a
+  mano con skill separata dopo il drop. L'utente vuole che sia un passo finale
+  automatico della podcast-promo, cosi' il drop finisce con i materiali + i
+  link interni del canale in un'unica skill.
+- NUOVO Passaggio 12 "Cross-link YT (end screen + cards)": dopo la scrittura
+  dei 2 file (Passaggio 11), la skill invoca la logica di youtube-cross-link
+  v1.2 in modalita' automatica sul promo file appena generato. Aggiunge il
+  capitolo "# N. End screen + YT Cards" al promo file (N = ultimo capitolo +1,
+  derivato automaticamente). Nessuna invocazione manuale.
+- youtube-cross-link v1.2 e' stata allineata di conseguenza: numerazione
+  capitolo automatica (non piu' "# 18" hardcodato), gestione re-invocazione
+  (sovrascrive invece di duplicare), limite views N/D documentato (cache
+  flat-playlist non da' view_count, score su semantic + recency).
+- IL NUMERO DI PASSAGGI PRINCIPALI PASSA DA 11 A 12. Il messaggio del
+  Passaggio 0 e l'header della sezione flusso sono aggiornati a 12 passaggi.
+- INVARIATO il resto: interazione minimale (gate solo su P0, P1, checkpoint
+  ID), file temporaneo _pre.md, derivazione LLM da transcript, regole stile,
+  deep-link UTM, output 2 file.
+
+v4.6 → v4.7 (2026-08-07) — interazione minimale + file temporaneo `_pre` unificato
+- FEEDBACK utente: troppi gate interrompono il flusso. Tenere interattivi
+  SOLO i passaggi che richiedono davvero un input/decisione umana (Passaggio 0
+  input, Passaggio 1 titolo, checkpoint YT/Spotify ID). Tutti gli altri
+  passaggi vanno eseguiti di filato: mostri il deliverable e avanzi subito
+  senza attendere "Va bene. Continua.".
+- GATE RIMOSSI dai Passaggi 2, 3, 4, 5, 6, 7, 8, 9, 10. L'utente puo'
+  interrompere in qualsiasi momento per chiedere una correzione: riscrivi il
+  deliverable e riprendi da li' (rigenerando i passaggi a valle che dipendono
+  dalla modifica).
+- GATE MANTENUTI su: Passaggio 0 (raccolta input), Passaggio 1 (gate titolo
+  `Il titolo definitivo e': "..."`), checkpoint pre-Passaggio 5 (YT ID +
+  Spotify Episode ID, bloccante per i deep-link UTM).
+- FILE TEMPORANEO UNIFICATO `_pre.md`: il vecchio file separato
+  `{date}-{slug}_overlay.md` (solo frasi overlay) e' sostituito da un unico
+  `{date}-{slug}_pre.md` che raccoglie TUTTI i deliverable urgenti da avviare
+  in parallelo: frasi overlay (Passaggio 2) E brief thumbnail + prompt image
+  (Passaggio 3). Il Passaggio 2 crea il file con la sua sezione; il Passaggio 3
+  gli appende la sezione thumbnail (riscrivendo l'intero file). Il Passaggio 11
+  lo rimuove dopo aver consolidato i contenuti nel promo file (cap. 2 + cap. 3).
+- NUOVO MODELLO: "Flusso di Lavoro (11 passaggi, interazione minimale)". Il
+  `_pre.md` resta l'unico file scritto prima del Passaggio 11 (come prima era
+  l'`_overlay.md`), ma ora contiene due sezioni invece di una.
+- RIFACIMENTO Passaggio 0: da listone unico di input (3 obbligatori + 9
+  opzionali A-I) a flusso interattivo a 3 step:
+    (1) menu a tendina sul format (AskUserQuestion);
+    (2) input obbligatori in testo libero, con il FILE DELL'OSPITE che ACCORPA
+        guest_credential + guest_bio + social (li deriva la skill dal file);
+    (3) menu a tendina di conferma di 2 default (data drop, newsletter length).
+  Il nome file Jekyll NON si conferma al P0: si conferma al Passaggio 1 insieme
+  al titolo (lo slug e' definitivo li'), con la skill che deriva slug e compone
+  {drop_date}-{slug}.md.
+  RIMOSSI gli opzionali A-E, G (capitoli Riverside, note, duration, resources,
+  guest social separati, thumbnail path): mai usati nel workflow reale o
+  derivabili dal transcript / dal file ospite. H, I diventano il menu conferma.
+- PASSAGGIO 1: scelta del titolo e conferma del nome file Jekyll via menu a
+  tendina (AskUserQuestion) invece del gate testuale "Il titolo definitivo e':
+  ...". Coerente col P0.
+- INVARIATO il resto: derivazione LLM da transcript, regole stile anti-AI-feel,
+  deep-link UTM, logica campaign_id/slug, 11 passaggi (numerazione invariata),
+  output files, reference files on-demand.
 
 v4.5 → v4.6 (2026-06-22) — NUOVO Passaggio 2 "Frasi in sovraimpressione"
 - FEEDBACK utente: dopo aver deciso il titolo serve un set di frasi verbatim
@@ -177,19 +239,19 @@ Note di design (decisioni ambigue documentate):
   a 11; il checkpoint resta un gate intermedio sugli input, non un passaggio.
 -->
 
-# Podcast Promo v4.6 - Skill Master per Drop Nuovo Episodio
+# Podcast Promo v4.8 - Skill Master per Drop Nuovo Episodio
 
 ## Workflow integrato con le altre skill
 
 Questa skill e' la **skill master** per il workflow standard di pubblicazione di un nuovo episodio.
 
-1. **`podcast-promo` v4.6** (questa skill, MASTER) — unica invocazione per il drop standard. Produce tutti i materiali promo, le frasi in sovraimpressione, il brief thumbnail con prompt image pronto, e scrive il post Jekyll completo.
+1. **`podcast-promo` v4.8** (questa skill, MASTER) — unica invocazione per il drop standard. Produce tutti i materiali promo, le frasi in sovraimpressione, il brief thumbnail con prompt image pronto, scrive il post Jekyll completo, e al Passaggio 12 genera automaticamente end screen + 5 YT cards via youtube-cross-link.
 2. **`thumbnail-gen` v1.1** — usa SOLO per use-case non-standard: iterazioni su thumbnail di un episodio gia' droppato, A/B test manuali con modelli diversi, batch rigenerazione visual. Per il drop normale il brief e il prompt pronto stanno gia' nel **Passaggio 3** di questa skill.
 3. **`podcast-transcript` v3.0** — usa SOLO per retrofit di post gia' esistenti (modalita' B, `--retrofit-existing`) o correzioni chirurgiche su trascrizioni gia' pubblicate. Per il drop normale il post Jekyll e' scritto dal **Passaggio 11** di questa skill.
 4. **`interview-relaunch` v1.2+** — orchestratore dedicato al rilancio retroattivo di interviste gia' pubblicate (angle callback, reflection post, Guest Re-Launch Kit). Usa QUESTA skill solo per episodi nuovi.
 5. **`newsletter-cover-gen`** — genera cover Substack (1200×630). Use case: SOLO se inserisci una sezione dedicata in `codiceartificiale` con modalita' `short` o `full` (cap. 8) e vuoi una cover Substack-style separata. Per la modalita' default `bullet` non serve cover.
 
-Workflow tipico nuovo episodio: **`podcast-promo` v4.6** (unica invocazione) → ai Passaggi 1-4 (titolo, frasi overlay, thumbnail brief, chapters) lancia in parallelo upload privato YT Studio + Spotify for Creators, generazione immagine dal prompt, e montaggio overlay → al checkpoint pre-Passaggio 5 fornisci YT ID + Spotify Episode ID → la skill prosegue con i Passaggi 5-10 → al Passaggio 11 scrive i 2 file consolidati → carica thumbnail in `/assets/images/episodes/` → commit dei 2 file + immagine → push → `newsletter-cover-gen` quando pubblichi la newsletter settimanale (solo se modalita' newsletter `short`/`full`).
+Workflow tipico nuovo episodio: **`podcast-promo` v4.8** (unica invocazione). Il Passaggio 0 raccoglie gli input, il Passaggio 1 fissa il titolo (entrambi interattivi), poi la skill **corre di filato**: Passaggi 2-4 (frasi overlay e brief thumbnail scritti nel file temporaneo `_pre.md`, poi chapters) senza gate; l'utente avvia in parallelo upload privato YT Studio + Spotify for Creators, generazione immagine dal prompt e montaggio overlay → al checkpoint pre-Passaggio 5 fornisce YT ID + Spotify Episode ID → la skill prosegue di filato con i Passaggi 5-10 (senza gate) → al Passaggio 11 scrive i 2 file consolidati e rimuove il `_pre.md` → il Passaggio 12 genera end screen + 5 YT cards via youtube-cross-link automatico e le appende al promo file → carica thumbnail in `/assets/images/episodes/` → commit dei 2 file + immagine → push → `newsletter-cover-gen` quando pubblichi la newsletter settimanale (solo se modalita' newsletter `short`/`full`).
 
 ## Reference files caricati on-demand
 
@@ -289,84 +351,66 @@ Deep-link Spotify da Episode ID: `https://open.spotify.com/episode/{SPOTIFY_ID}`
 
 ---
 
-## Flusso di Lavoro (11 passaggi con gate)
+## Flusso di Lavoro (12 passaggi, interazione minimale)
 
-Il flusso e' rigidamente sequenziale. Non saltare mai avanti. Ogni passaggio richiede conferma esplicita dell'utente prima di procedere al successivo. Il gate standard e' `Va bene. Continua.` (o varianti esplicite come `Continua.`, `ok`). Fa eccezione il Passaggio 1 (titolo) dove il gate e' `Il titolo definitivo e': "<titolo>". Continua.` e il Passaggio 11 (scrittura file) che e' automatico dopo l'ultimo "Continua" del Passaggio 10.
+Il flusso e' sequenziale. Non saltare mai avanti. Il modello di interazione e' **minimale**: solo i passaggi che richiedono un input o una decisione umana bloccano in attesa dell'utente; tutti gli altri si eseguono di filato.
+
+**INTERATTIVI (bloccano in attesa dell'utente)**:
+- **Passaggio 0**: raccolta input obbligatori.
+- **Passaggio 1**: gate su **titolo + nome file Jekyll**, via menu a tendina (`AskUserQuestion`). L'utente sceglie una delle 3 varianti (o custom via Other), la skill deriva lo slug e propone il nome file `{drop_date}-{slug}.md`, l'utente lo conferma. Se chiede modifiche, proponi nuove varianti senza avanzare.
+- **Checkpoint pre-Passaggio 5**: YT ID + Spotify Episode ID (bloccante per i deep-link UTM). Resta fermo finche' non riceve entrambi gli ID validati.
+
+**AUTOMATICI (di filato, nessun gate)**: Passaggi 2, 3, 4, 5, 6, 7, 8, 9, 10, 11. Per ognuno: produci il deliverable, mostralo, e procedi subito al passaggio successivo senza attendere conferma. Il Passaggio 11 resta automatico dopo l'ultimo deliverable del Passaggio 10. L'utente puo' interrompere in qualsiasi momento per chiedere una correzione: riscrivi il deliverabile e riprendi da li', rigenerando anche i passaggi a valle che dipendono dalla modifica.
+
+Non esiste piu' il gate standard `Va bene. Continua.` fra i passaggi intermedi.
 
 ### Passaggio 0 — Raccolta input semplificata
 
-Il passaggio 0 e' la chiave del salto v4.0: raccogli **pochi input obbligatori**, deriva tutto il resto dal transcript.
+Il Passaggio 0 e' un **flusso interattivo a 3 step**: una domanda preliminare a menu, poi la raccolta degli obbligatori (in base al format), poi un menu a tendina di conferma sui default. Non passare al Passaggio 1 finche' non hai tutti gli obbligatori e le 3 conferme.
 
-Chiedi all'utente con questo messaggio:
+#### Step 0.1 — Domanda preliminare (menu a tendina): Format
 
-```
-Ciao, sono Promo Artificiali v4.6, skill master per il drop del nuovo episodio.
-Genero tutti i materiali promo e scrivo 2 file: il promo consolidato e il post Jekyll.
+Presenta un menu a tendina con una sola domanda. Usa lo strumento `AskUserQuestion` (fallback: elenco numerato se non disponibile):
 
-Mi servono 3 input obbligatori (6 se intervista):
+- **Format dell'episodio**: `numerato` | `intervista`
 
-OBBLIGATORI:
-1. Format: numerato | intervista
-2. Trascrizione completa con speaker + timestamp (formato
-   "[HH:MM:SS] Speaker Name: testo" o equivalente). Il timestamp
-   mi serve per derivare frasi overlay, capitoli e clip moments.
-3. Episode number (intero). Se intervista senza numero, rispondi "null".
+Salva la risposta in `format`.
 
-SE FORMAT = INTERVISTA, aggiungi:
-4. guest_name (nome cognome, es. "Alessandro Maserati")
-5. guest_credential (1 frase, es. "CTO PandasAI", "ex-Red Hat", "YC W24",
-   "ricercatore allineamento AI")
-6. guest_bio (2-3 righe, usate nel frontmatter Jekyll e nel Guest Launch Kit)
+#### Step 0.2 — Input obbligatori (dipendono dal format)
 
-NOTA: YouTube ID e Spotify Episode ID NON richiesti ora. Te li chiedero'
-in un checkpoint dedicato dopo il Passaggio 4 (Chapters), prima del
-Passaggio 5 (Descrizioni). Cosi' puoi lanciare l'upload privato su YT
-Studio e Spotify for Creators IN PARALLELO mentre lavoriamo su titolo,
-frasi overlay, thumbnail brief, e capitoli. Quando arriviamo al checkpoint,
-gli upload sono tipicamente gia' completati e gli ID disponibili.
+Dopo il format, chiedi SOLO gli obbligatori, in testo libero:
 
-OPZIONALI (migliorano l'output ma non bloccano):
-A. Capitoli Riverside pre-generati (formato "HH:MM Titolo capitolo").
-   Se li fornisci, uso quelli invece di derivare dal transcript.
-B. Note/summary Riverside (contesto ulteriore).
-C. Duration ISO 8601 (es. PT1H5M, PT58M30S, PT25M) — usata in schema.org.
-D. guest_linkedin, guest_twitter, guest_website (solo intervista).
-E. Resources list: per ogni link/tool citato nell'episodio fornisci
-   titolo + URL + descrizione breve.
-F. Nome file output Jekyll (default: {YYYY-MM-DD}-{titolo-slug}.md,
-   data = data del drop programmato).
-G. Thumbnail path esistente (se hai gia' una thumbnail pronta, altrimenti
-   al Passaggio 3 genero brief + prompt image pronto).
-H. Data drop programmato (sabato per numerato, mercoledi' per intervista).
-   Se diversa da oggi, dimmela: finisce nel campo `date:` del frontmatter.
-I. Newsletter length: lunghezza desiderata per la sezione newsletter (cap. 8).
-   Scelte:
-     - `bullet` (30-50 parole, default): 1-2 bullet da inserire nell'intro
-       della newsletter esistente `codiceartificiale`
-     - `short` (150-300 parole): sezione compatta dedicata a Risorse Artificiali
-       dentro codiceartificiale
-     - `full` (800-1500 parole): post standalone (solo se un giorno lanci
-       una newsletter dedicata al podcast)
-     - intero (es. `200`): target parole specifico, uso la struttura piu' vicina
-   Default se non specificato: `bullet`. La newsletter di riferimento e'
-   `codiceartificiale` (quella che hai gia' attiva), non una dedicata a
-   Risorse Artificiali.
+**Sempre (qualsiasi format)**:
+1. **Trascrizione completa** con speaker + timestamp (formato `[HH:MM:SS] Speaker: testo` o equivalente). I timestamp servono per derivare frasi overlay, capitoli e clip moments.
+2. **Episode number** (intero). Se intervista senza numero, rispondi `null`.
 
-NOTA IMPORTANTE: Apple URL NON richiesto ora. Lo aggiungerai dopo con
-un micro-commit quando Apple auto-pubblica via RSS (tipicamente T+4-24h dal
-drop). Il frontmatter avra' il campo commentato come promemoria.
+**Solo se `format = intervista`**:
+3. **guest_name** (nome cognome, es. "Alessandro Maserati").
+4. **File dell'ospite**: percorso o contenuto di un file di testo con la bio/profilo del guest. Da questo file **derivi tu** tutto il resto che ti serve sull'ospite: `guest_credential` (1 frase), `guest_bio` (2-3 righe, per frontmatter Jekyll e Guest Launch Kit), e gli eventuali link social (`guest_linkedin` / `guest_twitter` / `guest_website`). Non chiedere credential, bio e social separatamente: sono tutti nel file.
 
-Condividi tutto quello che hai e parto con il flusso sequenziale a 11 passaggi.
-```
+Tutto il resto (capitoli Riverside pre-generati, note/summary Riverside, duration, resources list, thumbnail path esistente) **NON si chiede al Passaggio 0**: e' derivabile dal transcript (es. duration dall'ultimo timestamp, resources dai link citati) o non serve nel workflow reale.
 
-**Non procedere finche' non hai tutti gli obbligatori.** Se mancano:
-- Format non dichiarato → chiedi esplicitamente
+#### Step 0.3 — Menu a tendina di conferma (proponi tu i default)
+
+Una volta avuti gli obbligatori, presenta un secondo menu a tendina (`AskUserQuestion` con 2 domande; fallback elenco numerato) dove **proponi tu i valori di default** e l'utente conferma o corregge (puo' sempre dare un valore custom):
+
+1. **Data drop** che proponi: prossimo `sabato` se `numerato`, prossimo `mercoledi'` se `intervista`. Se confermata, questa data finisce nel campo `date:` del frontmatter e determina la `{YYYY-MM-DD}` del nome file Jekyll (confermato al Passaggio 1).
+2. **Newsletter length**: proponi `bullet` (default). Opzioni: `bullet` (30-50 parole) | `short` (150-300) | `full` (800-1500) | intero custom (es. `200`).
+
+Il **nome file Jekyll** NON si conferma qui: si conferma al Passaggio 1, dopo che il titolo fissa lo slug definitivo.
+
+#### Cosa NON si chiede al Passaggio 0
+
+- **YouTube ID** e **Spotify Episode ID**: raccolti al checkpoint pre-Passaggio 5 (servono per i deep-link UTM). Se l'utente li fornisce gia' qui spontaneamente, accettali e annotali, ma non bloccare il flusso.
+- **Apple URL**: retrofit post-publish via RSS (tipicamente T+4-24h dal drop). Il frontmatter avra' il campo commentato come promemoria.
+
+#### Validazione e stato interno
+
+Non procedere al Passaggio 1 finche' non hai: `format` + transcript con timestamp + `episode_number` (+ `guest_name` + file ospite se intervista) + le 2 conferme dello Step 0.3 (data drop, newsletter length). Se manca qualcosa:
 - Transcript senza timestamp → chiedi di ri-esportare da Riverside con timestamp
-- Intervista senza guest_name/credential/bio → chiedi tutti e tre
+- Intervista senza `guest_name` o senza file ospite → chiedi entrambi
 
-YT ID e Spotify Episode ID **NON sono obbligatori al Passaggio 0**: vengono raccolti al checkpoint pre-Passaggio 5. Se l'utente li fornisce gia' qui spontaneamente, accettali e annotali, ma non bloccare il flusso se mancano.
-
-Una volta ricevuti i materiali, salva mentalmente: `format`, `episode_number`, `guest_*` (se intervista), `duration` (se fornita), `resources` (se fornite), `drop_date` (se fornita, default oggi), `newsletter_length` (se fornito, default `bullet`). `youtube_id` e `spotify_episode_id` arriveranno al checkpoint pre-Passaggio 5. Usali nei passaggi successivi.
+Salva mentalmente: `format`, `episode_number`, `guest_*` derivati dal file ospite (credential, bio, social), `drop_date` e `newsletter_length` dal menu di conferma. `jekyll_filename` sara' derivato e confermato al Passaggio 1 (dipende dallo slug del titolo). `youtube_id` e `spotify_episode_id` arriveranno al checkpoint pre-Passaggio 5.
 
 **Derivazione campaign_id**:
 - Se `episode_number` e' un intero → `campaign_id = ep{N}_drop`
@@ -390,7 +434,13 @@ Applica il template corrispondente al `format` dichiarato al Passaggio 0. **NON 
 
 Proponi sempre **3 varianti** differenziate per angolo (hook contrarian / numero concreto / keyword-first). Conta sempre i caratteri prima di proporre. Se una variante supera 60, riscrivila.
 
-**Gate**: procedi SOLO quando l'utente scrive `Il titolo definitivo e':` seguito dal titolo. Se chiede modifiche, proponi nuove varianti senza avanzare.
+**Conferma titolo + nome file Jekyll** (gate del Passaggio 1, via menu a tendina):
+1. Presenta le 3 varianti con `AskUserQuestion` (1 domanda, le 3 varianti come opzioni; fallback elenco numerato). Ogni opzione ha il titolo come label e, come descrizione, il conteggio caratteri + l'angolo. L'utente puo' scegliere "Other" per digitare una sua versione o una correzione.
+2. Una volta scelto il titolo, deriva lo **slug** dal titolo: lowercase, senza accenti, spazi → trattini, max 60 char (per intervista senza numero, vale la regola `{guest_slug}-{hook}` del blocco "Derivazione slug" sopra).
+3. Componi il **nome file Jekyll** = `{drop_date}-{slug}.md` usando la `drop_date` confermata al Passaggio 0.
+4. Presenta un secondo `AskUserQuestion` (1 domanda) che propone il nome file `{drop_date}-{slug}.md` come opzione consigliata, con alternativa "modifica slug / nome file". L'utente conferma o corregge.
+
+Procedi al Passaggio 2 SOLO dopo che l'utente ha confermato sia il titolo sia il nome file Jekyll. Se chiede modifiche al titolo (via Other o a voce), proponi nuove varianti senza avanzare. Salva `slug` e `jekyll_filename` per il Passaggio 11.
 
 ### Passaggio 2 — Frasi in sovraimpressione (overlay video, derivazione LLM da transcript)
 
@@ -418,25 +468,29 @@ Regole di selezione:
 
 Formato proposta (per ogni frase): `[MM:SS] "frase verbatim" (N parole)`. Raggruppa in due blocchi (7 brevi / 3 lunghe), con totale e nota "precisione timestamp ±15s, dimmi se vuoi spostare o sostituire una singola frase". Per ogni frase aggiungi una brevissima motivazione della scelta (es. "claim contro-intuitivo a 12:30") cosi' l'utente puo' verificarla nel transcript.
 
-**Output: file MD standalone temporaneo.** Questo passaggio scrive un proprio file markdown dedicato SOLO alle frasi overlay (e' l'**unico** file scritto prima del Passaggio 11). Serve perche' le frasi sono il deliverable piu' urgente: il montaggio video parte da qui, in parallelo al resto del flusso.
+**Output: file MD temporaneo condiviso (`_pre.md`).** Questo passaggio crea il file `_pre.md` con la sezione frasi overlay. E' il **primo** dei due deliverable urgenti che finiscono in questo file (l'altro e' il brief thumbnail del Passaggio 3). Servono perche' montaggio overlay e generazione immagine partono da qui, in parallelo al resto del flusso.
 
-- **Quando scriverlo**: alla conferma del gate (frasi validate), via tool `Write`.
-- **Path**: `podcast-promo/episodes/{YYYY-MM-DD}-{slug}_overlay.md` (stessi `{YYYY-MM-DD}` e `{slug}` derivati per il promo file finale).
+- **Quando scriverlo**: subito dopo aver generato e mostrato le frasi (nessun gate), via tool `Write`.
+- **Path**: `podcast-promo/episodes/{YYYY-MM-DD}-{slug}_pre.md` (stessi `{YYYY-MM-DD}` e `{slug}` derivati per il promo file finale). Questo file temporaneo raccoglie TUTTI i deliverable urgenti da avviare in parallelo: frasi overlay (questo passaggio) E brief thumbnail + prompt image (Passaggio 3). Il Passaggio 3 gli appendera' la sua sezione.
 - **Contenuto** (template):
 
 ```markdown
-# Frasi overlay — {Titolo finale}
+# _Pre_ drop — {Titolo finale}
 
-> FILE TEMPORANEO. Verra' rimosso automaticamente al Passaggio 11, quando le
-> stesse frasi confluiscono nel cap. 2 del promo file consolidato
-> `podcast-promo/episodes/{YYYY-MM-DD}-{slug}_promo.md`. Usalo intanto per il
-> montaggio degli overlay nel video.
+> FILE TEMPORANEO. Raccoglie i deliverable urgenti da avviare in parallelo
+> (montaggio overlay + generazione thumbnail). Il Passaggio 3 gli appendera'
+> la sezione thumbnail. Verra' rimosso automaticamente al Passaggio 11,
+> quando gli stessi contenuti confluiscono nel promo file consolidato
+> `podcast-promo/episodes/{YYYY-MM-DD}-{slug}_promo.md` (cap. 2 frasi overlay
+> + cap. 3 thumbnail brief).
 
-## Frasi brevi (max 10 parole) — 7
+## Frasi in sovraimpressione
+
+### Frasi brevi (max 10 parole) — 7
 - [MM:SS] "frase verbatim" (N parole)
 - ... (7 totali)
 
-## Frasi lunghe (max 20 parole) — 3
+### Frasi lunghe (max 20 parole) — 3
 - [MM:SS] "frase verbatim" (N parole)
 - ... (3 totali)
 
@@ -444,11 +498,11 @@ Nota: timestamp ±15s. Frasi verbatim dal transcript: sovrapponi ogni frase
 intorno al suo timestamp cosi' l'overlay combacia con cio' che si sente.
 ```
 
-- **Se il titolo (e quindi lo slug) cambia** al Passaggio 1 dopo che hai gia' scritto questo file (rielaborazione): riscrivilo col nuovo nome e rimuovi la versione vecchia, cosi' non resta un `_overlay.md` orfano.
+- **Se il titolo (e quindi lo slug) cambia** dopo che hai gia' scritto questo file (rielaborazione del Passaggio 1): riscrivilo col nuovo nome e rimuovi la versione vecchia, cosi' non resta un `_pre.md` orfano. Poiche' il Passaggio 1 e' l'unico gate prima di questo file, in pratica il file si scrive sempre DOPO il titolo fissato: la rielaborazione e' rara.
 
 **Razionale del posizionamento**: questo passaggio sta subito dopo il titolo perche' dipende solo dal transcript (gia' disponibile dal Passaggio 0) e non dagli ID di piattaforma. Avere le frasi presto, gia' su file, permette all'utente di iniziare il montaggio degli overlay in parallelo mentre la skill prosegue con i passaggi successivi.
 
-**Gate**: procedi SOLO dopo "Va bene. Continua.". Alla conferma scrivi il file `_overlay.md` di cui sopra, poi avanza al Passaggio 3.
+**Avanzamento**: nessun gate. Subito dopo aver generato e mostrato le frasi, scrivi il file `_pre.md` di cui sopra (con la sola sezione frasi overlay), poi procedi al Passaggio 3 che gli appendera' il brief thumbnail.
 
 ### Passaggio 3 — Brief thumbnail + prompt image pronto (ChatGPT Image 2 + face reference)
 
@@ -469,7 +523,9 @@ Deriva dal **titolo finale del Passaggio 1**:
 
 Output: brief + 1 prompt pronto copia-incolla per **ChatGPT Image 2** (con istruzione esplicita di preservare il volto della reference photo allegata) + fallback post-production se rendering testo fallisce + checklist verifica pre-upload. Template esatto in `references/image-prompts-templates.md` sezione "Prompt ChatGPT Image 2 con face reference".
 
-**Gate**: procedi SOLO dopo "Va bene. Continua.".
+**Scrittura su file temporaneo**: subito dopo aver mostrato brief + prompt (nessun gate), **appendi** una sezione `## Brief thumbnail + prompt image (ChatGPT Image 2)` al file `podcast-promo/episodes/{YYYY-MM-DD}-{slug}_pre.md` creato al Passaggio 2, via tool `Write` (riscrivi l'intero file: sezione frasi overlay + nuova sezione thumbnail). Cosi' l'utente ha un unico file `_pre.md` con entrambi i deliverable urgenti pronti per partire in parallelo.
+
+**Avanzamento**: nessun gate. Mostra il deliverable e procedi subito al passaggio successivo (l'utente puo' interrompere per correzioni in qualsiasi momento).
 
 ### Passaggio 4 — Chapters YouTube (derivazione LLM da transcript)
 
@@ -489,7 +545,7 @@ Se l'utente ha fornito l'opzionale A (capitoli Riverside), usa quelli. Altriment
 
 Formato proposta: lista `HH:MM Titolo` (o `MM:SS` per episodi <1h), totale, e nota "precisione timestamp ±15s, dimmi se vuoi affinare un singolo item".
 
-**Gate**: procedi SOLO dopo "Va bene. Continua.".
+**Avanzamento**: nessun gate. Mostra il deliverable e procedi subito al passaggio successivo (l'utente puo' interrompere per correzioni in qualsiasi momento).
 
 ### Checkpoint pre-Passaggio 5 — Raccolta YT ID + Spotify Episode ID
 
@@ -584,7 +640,7 @@ Regole:
 
 Output: lista CSV pronta da incollare in YouTube Studio > Dettagli > Tag, con breve lista dei termini chiave pescati dall'episodio per trasparenza.
 
-**Gate**: procedi SOLO dopo "Va bene. Continua." (vale per tutte e 3 le sotto-sezioni insieme; se l'utente chiede modifiche puntuali a una sotto-sezione, riscrivi solo quella e ripresenta).
+**Avanzamento**: nessun gate. Mostra le 3 sotto-sezioni insieme e procedi al Passaggio 6 (l'utente puo' interrompere per correzioni puntuali a una singola sotto-sezione; in tal caso riscrivi solo quella e riprendi).
 
 ### Passaggio 6 — YouTube Shorts script + Spotify Clip spec (review unificata)
 
@@ -631,7 +687,7 @@ Output spec: timestamp start-end + durata + relazione con lo Short YT (stesso mo
 
 Publishing hint: STESSO MOMENTO del drop episodio. Zero gap (diversamente dallo YT Short). Spotify Clips va ai non-follower discovery feed, episodi ai follower Library. Niente cannibalizzazione.
 
-**Gate**: procedi SOLO dopo "Va bene. Continua." (vale per entrambe le sotto-sezioni insieme).
+**Avanzamento**: nessun gate. Mostra le 2 sotto-sezioni insieme e procedi al Passaggio 7.
 
 ### Passaggio 7 — Post LinkedIn (host)
 
@@ -650,7 +706,7 @@ Publishing hint differenziato per format:
 - NUMERATO (drop sabato 13:00): post LinkedIn **MARTEDI' 14:00 Europe/Rome**. +3 giorni dal drop, peak audience italiano, cavalca long-tail push YT del weekend.
 - INTERVISTA (drop mercoledi' 12:00): post LinkedIn **MERCOLEDI' 14:00 Europe/Rome stesso giorno** del drop. +2h dal drop, sincronizzato col post del guest (Guest Launch Kit, Passaggio 9) per amplificazione simultanea.
 
-**Gate**: procedi SOLO dopo "Va bene. Continua.".
+**Avanzamento**: nessun gate. Mostra il deliverable e procedi subito al passaggio successivo (l'utente puo' interrompere per correzioni in qualsiasi momento).
 
 ### Passaggio 8 — Sezione per newsletter `codiceartificiale`
 
@@ -709,7 +765,7 @@ Nella proposta:
 3. Lunghezza totale effettiva in parole (conteggio reale, non stima)
 4. Indicazione "da inserire in intro" (bullet) o "come sezione dedicata" (short/full)
 
-**Gate**: procedi SOLO dopo "Va bene. Continua.".
+**Avanzamento**: nessun gate. Mostra il deliverable e procedi subito al passaggio successivo (l'utente puo' interrompere per correzioni in qualsiasi momento).
 
 ### Passaggio 9 — Guest Launch Kit (SOLO se format = intervista)
 
@@ -729,7 +785,7 @@ I 5 componenti del kit (template completi in `references/guest-launch-kit-templa
 4. **9.4 Quote-image spec** (1200×630, frase max 15 parole del guest, brief per tool grafico).
 5. **9.5 Email accompagnatoria al guest** (template subject + body, publishing sync Mer 14:00, spedire T-7gg).
 
-**Gate**: procedi SOLO dopo "Va bene. Continua.".
+**Avanzamento**: nessun gate. Mostra il deliverable e procedi subito al passaggio successivo (l'utente puo' interrompere per correzioni in qualsiasi momento).
 
 ### Passaggio 10 — Checklist Publishing
 
@@ -764,13 +820,13 @@ Struttura della checklist:
 
 Formato con checkbox markdown `- [ ]` per ogni item cosi' l'utente puo' spuntarli.
 
-**Gate**: procedi SOLO dopo "Va bene. Continua.".
+**Avanzamento**: nessun gate. Mostra il deliverable e procedi subito al passaggio successivo (l'utente puo' interrompere per correzioni in qualsiasi momento).
 
-### Passaggio 11 — Scrittura 2 file consolidati (finale, automatico)
+### Passaggio 11 — Scrittura 2 file consolidati (automatico)
 
 **Al Passaggio 11, leggi `references/output-file-templates.md` per i template completi dei 2 file da scrivere: promo consolidato (12 capitoli) e post Jekyll (frontmatter v3.0 + body trascrizione verbatim), con relative regole di validazione e summary finale in chat.**
 
-Dopo l'ultimo "Va bene. Continua." del Passaggio 10, **SCRIVI automaticamente via tool `Write` i due file consolidati**. Niente ulteriore prompt all'utente: tutti i deliverable sono stati validati ai gate precedenti. Mostra solo un breve summary finale in chat.
+Dopo l'ultimo deliverable del Passaggio 10 (nessun gate finale), **SCRIVI automaticamente via tool `Write` i due file consolidati**. Niente ulteriore prompt all'utente: tutti i deliverable sono gia' prodotti e mostrati nei passaggi precedenti. Mostra solo un breve summary finale in chat.
 
 **File A — Promo consolidato**:
 - Path: `podcast-promo/episodes/{YYYY-MM-DD}-{slug}_promo.md`
@@ -782,9 +838,9 @@ Dopo l'ultimo "Va bene. Continua." del Passaggio 10, **SCRIVI automaticamente vi
 - Body: trascrizione verbatim pulita, capitoli H2 con timestamp + speaker bold + blockquote. NIENTE `{% include video %}`, NIENTE link fissi, NIENTE sezione "Ospite"/"Risorse"/share buttons (tutto iniettato dal layout).
 - Vedi `references/output-file-templates.md` per frontmatter + body template completi + checklist validazione.
 
-**Cleanup file temporaneo overlay**: dopo aver scritto File A e File B, **rimuovi** il file temporaneo `podcast-promo/episodes/{YYYY-MM-DD}-{slug}_overlay.md` creato al Passaggio 2 (le sue frasi sono ora nel cap. 2 del promo file consolidato, quindi il temporaneo e' ridondante). Usa `rm` via Bash. Se il file non esiste (es. slug cambiato in corsa), non bloccare: rimuovi eventuali `*_overlay.md` orfani nella stessa cartella che corrispondono a questo episodio.
+**Cleanup file temporaneo `_pre.md`**: dopo aver scritto File A e File B, **rimuovi** il file temporaneo `podcast-promo/episodes/{YYYY-MM-DD}-{slug}_pre.md` creato al Passaggio 2 e esteso al Passaggio 3 (frasi overlay e brief thumbnail sono ora consolidati nei cap. 2 e 3 del promo file, quindi il temporaneo e' ridondante). Usa `rm` via Bash. Se il file non esiste (es. slug cambiato in corsa), non bloccare: rimuovi eventuali `*_pre.md` orfani nella stessa cartella che corrispondono a questo episodio.
 
-**Summary finale in chat**: breve (NON il contenuto completo dei file), con path dei 2 file scritti, conferma che il file `_overlay.md` temporaneo e' stato rimosso, lista 12 capitoli del promo file, prossimi passi operativi (thumbnail, montaggio overlay, commit, YT Studio, Spotify, Apple T+4-24h, social publishing). Template completo in `references/output-file-templates.md`.
+**Summary finale in chat**: breve (NON il contenuto completo dei file), con path dei 2 file scritti, conferma che il file `_pre.md` temporaneo e' stato rimosso, lista 12 capitoli del promo file, prossimi passi operativi (thumbnail, montaggio overlay, commit, YT Studio, Spotify, Apple T+4-24h, social publishing). Template completo in `references/output-file-templates.md`.
 
 **Vincoli di scrittura**:
 - File autocontenuti (chi li apre non deve chiedere "dove trovo X")
@@ -793,17 +849,34 @@ Dopo l'ultimo "Va bene. Continua." del Passaggio 10, **SCRIVI automaticamente vi
 - Nessun contenuto aggiuntivo in chat oltre al breve summary
 - Se file esistono gia' (rigenerazione), sovrascrivi senza chiedere conferma
 - Path assoluti combinando working directory
-- Rimuovi il file temporaneo `_overlay.md` del Passaggio 2 (vedi "Cleanup file temporaneo overlay" sopra): il workspace deve restare pulito, i deliverable finali sono solo i 2 file consolidati
+- Rimuovi il file temporaneo `_pre.md` (Passaggi 2+3) (vedi "Cleanup file temporaneo `_pre.md`" sopra): il workspace deve restare pulito, i deliverable finali sono solo i 2 file consolidati
+
+### Passaggio 12 — Cross-link YT: end screen + 5 cards (automatico)
+
+Dopo la scrittura dei 2 file (Passaggio 11) e la rimozione del `_pre.md`, la skill esegue automaticamente il cross-link interno del canale YouTube. E' l'integrazione di **youtube-cross-link v1.2** in modalita' automatica: nessuna invocazione manuale, nessun gate (e' l'ultimo passo del flusso, dopo tutti i gate interattivi).
+
+Cosa fa:
+1. Usa il promo file appena scritto come episodio corrente (titolo, YT ID, drop date, chapters, descrizione, tag sono gia' li').
+2. Verifica `yt-dlp` disponibile; refresha la cache canale se stale (>5gg) in `.claude/skills/youtube-cross-link/.cache/channel-videos.json` (fallback cache stale se il fetch fallisce).
+3. Parsa `_posts/*.md` per estrarre metadata + capitoli H2 degli episodi passati (NO transcript, come da youtube-cross-link v1.1+).
+4. Pre-screening semantico top-15, scoring (`0.55*semantic + 0.25*recency + 0.20*views_log`; NB: `views_log = 0` con cache `--flat-playlist`, score reale su semantic + recency), selezione di 1 end screen (layout Subscribe + Video) + 5 cards a timestamp distribuiti del video corrente.
+5. Appende il capitolo `# N. End screen + YT Cards` al promo file, dove **N = max(header `#` nel promo file) + 1** (es. promo con 12 capitoli -> cross-link = `# 13`). Se il promo file ha gia' un capitolo "End screen + YT Cards" (re-invocazione), lo sovrascrive allo stesso numero dopo conferma.
+
+Riferimento: template del capitolo, logica di scoring e vincoli di distribuzione stanno in `.claude/skills/youtube-cross-link/` (SKILL.md + `references/output-chapter-template.md`). Per i dettagli operativi (setup YT Studio, CTR di riferimento) vedi il capitolo generato nel promo file.
+
+**Output**: capitolo `# N. End screen + YT Cards` aggiunto al promo file + riepilogo breve in chat (end screen + 5 card con timestamp). Nessun file ulteriore, nessun commit automatico.
+
+Questo passaggio chiude il drop: materiali promo + post Jekyll + link interni del canale, tutto in un'unica invocazione di podcast-promo.
 
 ## Vincoli generali
 
-- **Mai saltare un passaggio** (eccezione: Passaggio 9 Guest Launch Kit si attiva solo se format=intervista; il Passaggio 11 e' automatico dopo il gate del Passaggio 10)
-- **Mai procedere senza conferma** a ogni gate, eccetto il Passaggio 0 (raccolta input) e il Passaggio 11 (automatico)
+- **Mai saltare un passaggio** (eccezione: Passaggio 9 Guest Launch Kit si attiva solo se format=intervista; il Passaggio 11 e' automatico)
+- **Interazione minimale**: gli unici gate sono il Passaggio 0 (input), il Passaggio 1 (titolo) e il checkpoint pre-Passaggio 5 (YT ID + Spotify ID). Tutti gli altri passaggi (2-4, 5-10, 11) si eseguono di filato, mostrando il deliverable e avanzando subito senza attendere conferma. L'utente puo' interrompere per correzioni in qualsiasi momento
 - **Mai usare `#N` nel titolo**: il numero puntata vive solo in `episode_number` (frontmatter) e nel footer della descrizione YT/Spotify
 - **Mai link generici**: sempre deep-link con UTM campaign `{campaign_id}`
 - **Mai inventare contenuti**: basa tutto sul transcript e sugli input forniti dall'utente al Passaggio 0
 - **Frasi overlay sempre verbatim**: al Passaggio 2 non riformulare, riporta cio' che viene detto davvero al minuto indicato (ripulito solo da intercalari)
-- **File overlay temporaneo**: il Passaggio 2 scrive `{date}-{slug}_overlay.md`, il Passaggio 11 lo rimuove dopo aver consolidato le frasi nel cap. 2 del promo file. Mai lasciarlo nel repo a fine flusso
+- **File temporaneo `_pre.md`**: il Passaggio 2 crea `{date}-{slug}_pre.md` (frasi overlay) e il Passaggio 3 gli appende il brief thumbnail; il Passaggio 11 lo rimuove dopo aver consolidato i contenuti nei cap. 2 e 3 del promo file. Mai lasciarlo nel repo a fine flusso
 - **Mai em-dash**, mai superlativi marketing, mai emoji in apertura
 - **Mai richiedere Apple URL**: l'utente lo aggiungera' post-publish Apple RSS
 - **Mai invocare thumbnail-gen** come skill separata per un drop standard: il brief e il prompt stanno gia' al Passaggio 3
@@ -816,15 +889,15 @@ Dopo l'ultimo "Va bene. Continua." del Passaggio 10, **SCRIVI automaticamente vi
 
 ## Gestione Modifiche
 
-Quando l'utente chiede modifiche a un passaggio:
-- Riscrivi il contenuto integrando il feedback
+Quando l'utente interrompe per chiedere modifiche a un passaggio (puo' farlo in qualsiasi momento, anche su un deliverable gia' prodotto di filato):
+- Riscrivi il deliverable integrando il feedback
 - Ripresenta nel formato standard del passaggio
-- Non procedere al passaggio successivo finche' l'utente non conferma
-- Per i passaggi con sotto-sezioni (5 e 6), se l'utente chiede modifica solo a una sotto-sezione, riscrivi solo quella e ripresenta tutta la review (per non perdere il contesto delle altre)
-- Se l'utente cambia idea su un passaggio gia' confermato, torna indietro e rielabora da quel punto (inclusi passaggi a valle che dipendono — esempio: cambio titolo → rigenera brief thumbnail al Passaggio 3 → eventualmente rigenera descrizioni → rigenera LinkedIn post). Nota: le frasi overlay del Passaggio 2 derivano dal transcript, non dal titolo, quindi un cambio titolo non le invalida.
+- Riprendi il flusso dal punto corretto: se la modifica invalida passaggi a valle gia' prodotti, rigenerali (esempio: cambio titolo al Passaggio 1 → rigenera brief thumbnail P3, descrizioni P5, LinkedIn P7; le frasi overlay P2 derivano dal transcript non dal titolo, quindi di solito NON vanno rigenerate)
+- Per i passaggi con sotto-sezioni (5 e 6), se l'utente chiede modifica solo a una sotto-sezione, riscrivi solo quella
+- Se il titolo cambia dopo che il `_pre.md` e' gia' stato scritto, riscrivi il `_pre.md` col nuovo slug/nome e rimuovi il vecchio file
 - Al Passaggio 11, se l'utente chiede modifiche dopo la scrittura dei file, rigenera i capitoli interessati e **riscrivi i file completi** (non diff incrementali): i file sono autocontenuti per design
 
-## Integrazione con le altre skill — riepilogo operativo v4.6
+## Integrazione con le altre skill — riepilogo operativo v4.8
 
 | Passaggio | Cosa fa | Skill esterna invocata? | Reference file |
 |-----------|---------|--------------------------|----------------|
@@ -839,6 +912,7 @@ Quando l'utente chiede modifiche a un passaggio:
 | 9 | Guest Launch Kit (solo intervista) | No (embedded) | `guest-launch-kit-templates.md` |
 | 10 | Checklist publishing | No (embedded) | — |
 | 11 | Scrittura 2 file (promo + Jekyll) | No (core di podcast-transcript v3.0 modalita' A embedded) | `output-file-templates.md` |
+| 12 | Cross-link YT (end screen + cards) | youtube-cross-link v1.2 (embedded automatico) | — |
 
 Questa skill **non duplica** output delle altre skill del quintetto: assorbe cio' che serve per il workflow standard, lascia alle altre skill i use-case specialistici (retrofit batch, iterazioni thumbnail, rilanci retroattivi, cover Substack).
 
