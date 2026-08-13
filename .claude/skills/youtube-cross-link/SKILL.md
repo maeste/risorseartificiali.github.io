@@ -8,6 +8,29 @@ metadata:
 
 <!--
 CHANGELOG
+v1.2 (2026-08-07): numerazione capitolo automatica + integrazione come passo finale di podcast-promo + limite views documentato.
+- NUMERAZIONE CAPITOLO AUTOMATICA: niente piu' "# 18" hardcodato. La skill
+  rileva l'ultimo header "# N." nel promo file e usa N+1. Compatibile con
+  podcast-promo v4.7+ (12 capitoli -> cross-link = # 13) e future variazioni
+  del numero di capitoli del promo file.
+- RE-INVOCAZIONE GESTITA: se il promo file ha gia' un capitolo "End screen +
+  YT Cards", la skill lo rileva e SOVRASCRIVE il contenuto (stesso numero),
+  invece di appendere un duplicato # N+1. Prima chiede conferma all'utente.
+- INTEGRAZIONE COME PASSO FINALE DI podcast-promo v4.8: nuova modalita'
+  "automatica" oltre a default/manuale. In modalita' automatica (invocata
+  dal Passaggio 12 di podcast-promo subito dopo la scrittura dei 2 file),
+  la skill usa il promo file appena generato, salta i gate interattivi P0,
+  ed esegue fetch + scoring + selezione + append in un unico flusso (un solo
+  check finale opzionale prima di scrivere). Il flusso standard di drop ora
+  finisce col cross-link senza invocazione manuale separata.
+- VIEWS N/D DOCUMENTATO: yt-dlp --flat-playlist NON restituisce view_count,
+  quindi views_log = 0 per tutti e lo score poggia su semantic (0.55) +
+  recency (0.25). Documentato esplicitamente nel Passaggio 2, Passaggio 5 e
+  nel template output. Per views reali servirebbe fetch per-video (lento,
+  opzionale, non nel default).
+- INVARIATO il resto: algoritmo di scoring, pesi, half-life recency 6 mesi,
+  vincoli distribuzione card, layout end screen Subscribe+Video, cache 5gg.
+
 v1.1 (2026-04-25): NO transcript reading.
   Modifica strutturale dopo feedback utente: il deep match NON legge piu' i
   transcript completi degli episodi passati (troppo oneroso in token, ~150k
@@ -55,11 +78,11 @@ v1.0 (2026-04-24): Prima versione.
 
 ## Workflow integrato con le altre skill
 
-Questa skill si invoca **dopo** `podcast-promo` v4.2 (manuale, non automatico). Non sostituisce le altre skill della suite, le completa per la fase post-drop.
+Questa skill si invoca **dopo** `podcast-promo` (in due modi: automatico come passo finale, oppure manuale). Non sostituisce le altre skill della suite, le completa per la fase post-drop.
 
-- **`podcast-promo` v4.2** produce il promo file consolidato `podcast-promo/episodes/{date}-{slug}_promo.md` con 17 capitoli (titolo, descrizioni, hook, chapters, etc.). Termina tipicamente con `# 17. Note operative`.
-- **`youtube-cross-link` v1.0** (questa skill) appende un nuovo capitolo `# 18. End screen + YT Cards` allo stesso file, oppure crea un file separato in modalita' manuale.
-- **Pattern simile a `interview-relaunch`** (che aggiunge il capitolo "Aged well") e a `thumbnail-gen` (che resta separata): la skill modifica il promo file con un nuovo capitolo identificabile, senza toccare gli altri 17.
+- **`podcast-promo` v4.8** produce il promo file consolidato `podcast-promo/episodes/{date}-{slug}_promo.md` e al suo **Passaggio 12** invoca questa skill in modalita' automatica, appendendo il capitolo end screen + cards subito dopo la scrittura dei 2 file. Nessuna invocazione manuale richiesta nel flusso standard di drop.
+- **`youtube-cross-link` v1.2** (questa skill) appende un nuovo capitolo `# N. End screen + YT Cards` al promo file, dove N e' derivato automaticamente (ultimo capitolo del promo file + 1). In modalita' manuale crea invece un file separato.
+- **Pattern simile a `interview-relaunch`** (che aggiunge il capitolo "Aged well"): la skill modifica il promo file con un nuovo capitolo identificabile, senza toccare gli altri capitoli esistenti.
 
 Quando attivare:
 - Hai appena pubblicato un nuovo episodio e devi configurare end screen + cards in YT Studio
@@ -133,7 +156,14 @@ Apri con questo messaggio:
 ```
 Per generare suggerimenti data-driven di end screen + YT cards mi servono input.
 
-Modalita' default (post podcast-promo v4.2):
+Modalita' automatica (passo finale podcast-promo v4.8):
+  Se invocata dal Passaggio 12 di podcast-promo, il promo file e' gia' noto
+  (appena scritto). SALTA questo Passaggio 0 e i gate interattivi: vai dritto
+  al Passaggio 1 con il path del promo file ricevuto, ed esegui fetch +
+  scoring + selezione + append in un unico flusso (un solo check finale
+  opzionale prima di appendere).
+
+Modalita' default (post podcast-promo, invocazione manuale):
   Path del promo file generato, es:
   podcast-promo/episodes/2026-04-25-i-guardrail-degli-llm-sono-una-tassa-sul-coding_promo.md
 
@@ -220,6 +250,8 @@ Top 3 piu' visti:
   2. {titolo} — {views} views
   3. {titolo} — {views} views
 ```
+
+**Limite views N/D**: `yt-dlp --flat-playlist` NON restituisce `view_count` (produce solo metadata superficiali: id, title, duration, upload_date). Di conseguenza `views_log = 0` per tutti i candidati e lo score finale poggia su `0.55*semantic + 0.25*recency` (il termine views a valore 0 non discrimina). Segnalalo all'utente nella proposta finale. Per ottenere views reali servirebbe un fetch per-video (comando `yt-dlp --skip-download --dump-json <URL>` per ciascun candidato top-15, ~3-5 min in piu'): e' opzionale, non nel default. Se l'utente lo richiede, attivalo esplicitamente.
 
 Nessun gate. Prosegui automaticamente al Passaggio 3.
 
@@ -351,6 +383,7 @@ Per ognuno dei top-15 calcola lo score finale:
      allineati a meno di ore).
 
 5. **Calcola `views_log`**: `log10(view_count + 1) / log10(max_views + 1)`
+   - **N.B.**: con la cache `--flat-playlist` `view_count` non e' disponibile, quindi `views_log = 0` per tutti. Lo score finale si riduce a `0.55*semantic + 0.25*recency`. Documentalo nella proposta (vedi Passaggio 2 "Limite views N/D").
 
 6. **Score finale** = `0.55 * semantic + 0.25 * recency + 0.20 * views_log`
 
@@ -423,10 +456,18 @@ Quel file contiene:
 
 Componi il capitolo riempiendo i placeholder con i dati reali della selezione.
 
-**Append al promo file** (modalita' default):
+**Numerazione capitolo automatica + gestione re-invocazione** (PRIMA di scrivere):
+- Leggi il promo file, estrai tutti gli header di primo livello numerati con regex `^# (\d+)\.\s`.
+- **RE-INVOCAZIONE**: se esiste gia' un header il cui titolo contiene "End screen + YT Cards", il promo file e' gia' stato cross-linkato. NON appendere un duplicato: usa lo stesso numero di quel capitolo e SOVRASCRIVINE il contenuto (dall'header al prossimo `^# ` di pari livello o a EOF). Chiedi conferma all'utente ("Capitolo cross-link gia' presente come # N: lo sovrascrivo con la selezione aggiornata?").
+- **PRIMA INVOCAZIONE**: numero del nuovo capitolo = `max(N trovati) + 1`.
+
+**Append al promo file** (modalita' default, prima invocazione):
 - Usa `Edit` tool con `replace_all=false`
-- `old_string` = ultime 3-5 righe identificabili univocamente del promo file (tipicamente l'ultima nota del capitolo `# 17. Note operative`)
-- `new_string` = stesse righe + `\n\n---\n\n` + nuovo capitolo completo
+- `old_string` = ultime 3-5 righe identificabili univocamente del promo file (l'ultima nota dell'ultimo capitolo, qualunque sia il suo numero)
+- `new_string` = stesse righe + `\n\n---\n\n` + nuovo capitolo completo con header `# N. End screen + YT Cards`
+
+**Sovrascrittura** (modalita' default, re-invocazione):
+- Usa `Edit` con `old_string` = intero blocco del vecchio capitolo cross-link (dall'header `# N. End screen + YT Cards` al prossimo `^# ` o a EOF), `new_string` = nuovo capitolo completo con lo stesso numero N.
 
 **Crea file separato** (modalita' manuale, no promo file):
 - Path: `podcast-promo/episodes/{slug}_cross-link.md`

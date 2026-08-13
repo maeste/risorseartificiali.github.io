@@ -130,20 +130,9 @@ Queste regole valgono per **entrambi i format**:
 
 ## Formato proposta delle 3 varianti
 
-Proponi sempre **3 varianti** applicando il template giusto:
+Proponi sempre **3 varianti** applicando il template giusto, presentandole come **menu a tendina** via `AskUserQuestion` (1 domanda, 3 opzioni; fallback elenco numerato). Ogni opzione ha il titolo come label e, come descrizione, il char count + l'angolo. L'utente puo' scegliere "Other" per una sua versione o una correzione.
 
-```
-Ecco 3 proposte di titolo per l'episodio ([format]):
-
-1. [Titolo 1] ([N] char)
-2. [Titolo 2] ([N] char)
-3. [Titolo 3] ([N] char)
-
-Dimmi quale preferisci, se vuoi modifiche, o proponi il tuo. Quando hai deciso, scrivi:
-Il titolo definitivo e': "<titolo>". Continua.
-```
-
-Conta sempre i caratteri prima di proporre. Se una variante supera 60, riscrivila.
+Conta sempre i caratteri prima di proporre (riporta il char count nella descrizione di ogni opzione). Se una variante supera 60, riscrivila.
 
 **Differenziazione delle 3 varianti**: evita di produrre 3 varianti che siano parafrasi della stessa linea. Copri angoli diversi:
 

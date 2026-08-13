@@ -4,27 +4,31 @@ Questo file contiene il template completo del capitolo "End screen + YT Cards" c
 
 ## Numerazione capitolo
 
-Il capitolo deve essere numerato in modo coerente con il file ricevuto:
+Il numero del capitolo si deriva AUTOMATICAMENTE dal promo file (niente hardcoded):
 
-- Se il promo file generato da `podcast-promo` v4.2 termina con `# 17. Note operative` (caso tipico), aggiungi il nuovo capitolo come `# 18. End screen + YT Cards`.
-- Se l'utente ha invocato la skill in modalita' manuale (no promo file) → scrivi il file separato `podcast-promo/episodes/{slug}_cross-link.md` SENZA numerazione `#NN.` ma con titolo `# End screen + YT Cards`.
-- Se il promo file ha gia' un capitolo `End screen + YT Cards` (re-invocazione), NON appendere: chiedi all'utente se vuole sovrascrivere o creare un file separato.
+- Leggi tutti gli header `^# (\d+)\.\s` del promo file.
+- **Prima invocazione**: numero = `max(N) + 1`. Esempi: podcast-promo v4.7 termina con `# 12. Note operative` -> cross-link = `# 13`; una futura v4.x con 15 capitoli -> `# 16`.
+- **Re-invocazione** (esiste gia' un header "End screen + YT Cards"): usa lo STESSO numero e sovrascrivi il contenuto. Chiedi conferma all'utente prima di sovrascrivere.
+- Se l'utente ha invocato la skill in modalita' manuale (no promo file) -> scrivi il file separato `podcast-promo/episodes/{slug}_cross-link.md` SENZA numerazione `#NN.` ma con titolo `# End screen + YT Cards`.
 
 ## Anchor di append
 
-Per appendere al promo file usa `Edit` tool con `old_string` = ultime 3-5 righe identificabili univocamente del file (tipicamente l'ultima riga del cap. 17 "Note operative"). Il `new_string` ricostruisce quelle stesse righe + `\n\n---\n\n` + il nuovo capitolo.
+Per appendere al promo file usa `Edit` tool con `old_string` = ultime 3-5 righe identificabili univocamente del file (l'ultima nota dell'ultimo capitolo, qualunque sia il suo numero). Il `new_string` ricostruisce quelle stesse righe + `\n\n---\n\n` + il nuovo capitolo.
 
 NON usare `replace_all=true`. NON usare `Write` (sovrascriverebbe il file).
 
 ## Template completo del capitolo
 
 ```markdown
-# 18. End screen + YT Cards (suggerito da youtube-cross-link v1.0)
+# {N}. End screen + YT Cards (suggerito da youtube-cross-link v1.2)
 
-<!-- Generato da .claude/skills/youtube-cross-link v1.0 il {DATA_GENERAZIONE}.
+<!-- Generato da .claude/skills/youtube-cross-link v1.2 il {DATA_GENERAZIONE}.
      Cache canale: {CACHE_PATH} (timestamp {CACHE_MTIME}).
      Episodio target: {YT_ID_CORRENTE} | "{TITOLO_CORRENTE}" | drop {DROP_DATE}.
-     Candidati pre-screened: 15 | Selezione finale: 1 end screen + 5 cards. -->
+     Candidati pre-screened: 15 | Selezione finale: 1 end screen + 5 cards.
+     Numero capitolo N derivato automaticamente (max header # del promo file + 1).
+     NB: view_count non disponibile dalla cache flat-playlist yt-dlp -> score
+     su semantic (0.55) + recency (0.25), views_log = 0 per tutti. -->
 
 ## End screen — 1 video (layout: Subscribe + Video)
 

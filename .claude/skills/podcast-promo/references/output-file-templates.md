@@ -324,8 +324,8 @@ File scritti:
   1. Promo consolidato: `podcast-promo/episodes/{YYYY-MM-DD}-{slug}_promo.md`
   2. Post Jekyll: `_posts/{YYYY-MM-DD}-{slug}.md`
 
-File temporaneo rimosso: `podcast-promo/episodes/{YYYY-MM-DD}-{slug}_overlay.md`
-(frasi overlay del Passaggio 2 ora consolidate nel cap. 2 del promo file).
+File temporaneo rimosso: `podcast-promo/episodes/{YYYY-MM-DD}-{slug}_pre.md`
+(frasi overlay del Passaggio 2 + brief thumbnail del Passaggio 3, consolidati nei cap. 2 e 3 del promo file).
 
 Capitoli nel promo file (12):
   1. Titolo
@@ -390,6 +390,6 @@ unico fino a completamento del drop.
 - **Codeblock copia-incolla** per titolo, frasi overlay, descrizioni, post, email, YAML retrofit, prompt image: cosi' l'utente copia al volo in YT Studio / Spotify / LinkedIn / ChatGPT Image 2 senza riformattare
 - **Checkbox markdown `- [ ]`** nella checklist del cap. 10, cosi' l'utente puo' spuntarli in editor markdown
 - **Nessun contenuto aggiuntivo nella chat** oltre al breve summary: il valore e' nei file, non nella chat
-- Se i file esistono gia' (rigenerazione), **sovrascrivi** senza chiedere conferma (l'utente ha gia' validato tutti i passaggi)
+- Se i file esistono gia' (rigenerazione), **sovrascrivi** senza chiedere conferma (l'utente ha gia' prodotto tutti i passaggi)
 - Usa path assoluti combinando la working directory: `/home/user/.../_posts/...` e `/home/user/.../podcast-promo/episodes/...`
-- **Cleanup**: dopo aver scritto i 2 file consolidati, rimuovi via `rm` il file temporaneo `podcast-promo/episodes/{YYYY-MM-DD}-{slug}_overlay.md` creato al Passaggio 2 (le frasi sono ora nel cap. 2 del promo file). Se manca, non bloccare; rimuovi eventuali `*_overlay.md` orfani dello stesso episodio
+- **Cleanup**: dopo aver scritto i 2 file consolidati, rimuovi via `rm` il file temporaneo `podcast-promo/episodes/{YYYY-MM-DD}-{slug}_pre.md` creato al Passaggio 2 ed esteso al Passaggio 3 (frasi overlay e brief thumbnail ora consolidati nei cap. 2 e 3 del promo file). Se manca, non bloccare; rimuovi eventuali `*_pre.md` orfani dello stesso episodio
