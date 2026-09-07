@@ -8,13 +8,16 @@ time on physics: an animated SVG of a man doing skateboard tricks on a pipe,
 prompted verbatim (typos included). The "real physics" constraint tests whether
 the model can encode gravity, momentum and pendulum motion in code.
 Models: <strong>GPT-6 Astra</strong> (reasoning medium),
-<strong>GPT-5.6 Luna</strong> and <strong>DeepSeek V4 Flash</strong>. Open the raw SVG to see the animation.</p>
+<strong>GPT-5.6 Luna</strong>, <strong>Claude Sonnet 5</strong>,
+<strong>Gemini 3.8 Flash</strong>, <strong>Claude Fable 5.1</strong>,
+<strong>Kimi K3</strong>. Open the raw SVG to see the animation.</p>
 <style>
   .card { background:#1c1c1c; border:1px solid #333; border-radius:12px;
           padding:1rem; margin-bottom:2rem; }
   .card h2 { color:#ffd700; margin-top:0; font-size:1.1rem; }
   .meta { color:#888; font-size:0.85rem; }
   .err { color:#ff5555; }
+  .note { color:#ffaa55; font-size:0.85rem; }
   .svgwrap { background:#000; border-radius:8px; overflow:hidden; }
   details.promptbox { margin:1.5rem 0; background:#1c1c1c; border:1px solid #333;
           border-radius:12px; padding:0.75rem 1rem; }
@@ -50,14 +53,16 @@ Constraints:
 
 <div class="card">
   <h2>gpt-6-astra-medium-minimal</h2>
-  <p class="meta">len=10398 · anim=False · tech=SMIL/CSS · 5279 tok · 136.7s · cost=$0.26275</p>
+  <p class="meta">len=10398 · anim=False · tech=SMIL/CSS · 5279 tok · 136.7s · cost=$0.26</p>
+  
   <div class="svgwrap"><iframe src="gpt-6-astra-medium.svg" loading="lazy" style="width:100%;height:480px;border:0;background:#000"></iframe></div>
   <p><a href="gpt-6-astra-medium.svg">open raw SVG</a></p>
 </div>
 
 <div class="card">
   <h2>gpt-6-astra-constrained</h2>
-  <p class="meta">len=12912 · anim=True · tech=SMIL/CSS · 11712 tok · 309.3s · cost=$0.5758</p>
+  <p class="meta">len=12912 · anim=True · tech=SMIL/CSS · 11712 tok · 309.3s · cost=$0.58</p>
+  
   <div class="svgwrap"><iframe src="gpt-6-astra-constrained.svg" loading="lazy" style="width:100%;height:480px;border:0;background:#000"></iframe></div>
   <p><a href="gpt-6-astra-constrained.svg">open raw SVG</a></p>
 </div>
@@ -65,6 +70,7 @@ Constraints:
 <div class="card">
   <h2>gpt-5-6-luna-minimal</h2>
   <p class="meta">len=6635 · anim=True · tech=SMIL/CSS · 4057 tok · 30.1s · cost=$0.0048</p>
+  
   <div class="svgwrap"><iframe src="gpt-5-6-luna-minimal.svg" loading="lazy" style="width:100%;height:480px;border:0;background:#000"></iframe></div>
   <p><a href="gpt-5-6-luna-minimal.svg">open raw SVG</a></p>
 </div>
@@ -72,20 +78,50 @@ Constraints:
 <div class="card">
   <h2>gpt-5-6-luna-constrained</h2>
   <p class="meta">len=7078 · anim=True · tech=SMIL/CSS · 4394 tok · 41.1s · cost=$0.0050</p>
+  
   <div class="svgwrap"><iframe src="gpt-5-6-luna-constrained.svg" loading="lazy" style="width:100%;height:480px;border:0;background:#000"></iframe></div>
   <p><a href="gpt-5-6-luna-constrained.svg">open raw SVG</a></p>
 </div>
 
 <div class="card">
-  <h2>deepseek-v4-flash-minimal</h2>
-  <p class="meta">len=8123 · anim=True · tech=SMIL/CSS · 3148 tok · 296.2s · cost=$0.0005</p>
-  <div class="svgwrap"><iframe src="deepseek-v4-flash-minimal.svg" loading="lazy" style="width:100%;height:480px;border:0;background:#000"></iframe></div>
-  <p><a href="deepseek-v4-flash-minimal.svg">open raw SVG</a></p>
+  <h2>claude-sonnet-5-minimal</h2>
+  <p class="meta">len=3314 · anim=True · tech=SMIL/CSS · 18364 tok · 186.7s · cost=$0.18</p>
+  <p class="note">recovered via rerun (first attempt returned no SVG)</p>
+  <div class="svgwrap"><iframe src="claude-sonnet-5-minimal.svg" loading="lazy" style="width:100%;height:480px;border:0;background:#000"></iframe></div>
+  <p><a href="claude-sonnet-5-minimal.svg">open raw SVG</a></p>
+</div>
+<div class="card"><h2>claude-sonnet-5-constrained</h2><p class="err">ERROR: no SVG in response (empty) - rerun not attempted (user decision)</p></div>
+
+<div class="card">
+  <h2>gemini-3-8-flash-minimal</h2>
+  <p class="meta">len=27992 · anim=True · tech=SMIL/CSS · 17495 tok · 100.7s · cost=$0.07</p>
+  
+  <div class="svgwrap"><iframe src="gemini-3-8-flash-minimal.svg" loading="lazy" style="width:100%;height:480px;border:0;background:#000"></iframe></div>
+  <p><a href="gemini-3-8-flash-minimal.svg">open raw SVG</a></p>
 </div>
 
 <div class="card">
-  <h2>deepseek-v4-flash-constrained</h2>
-  <p class="meta">len=15024 · anim=True · tech=SMIL/CSS · 5359 tok · 1151.2s · cost=$0.0009</p>
-  <div class="svgwrap"><iframe src="deepseek-v4-flash-constrained.svg" loading="lazy" style="width:100%;height:480px;border:0;background:#000"></iframe></div>
-  <p><a href="deepseek-v4-flash-constrained.svg">open raw SVG</a></p>
+  <h2>gemini-3-8-flash-constrained</h2>
+  <p class="meta">len=21880 · anim=True · tech=SMIL/CSS · 24421 tok · 151.1s · cost=$0.09</p>
+  
+  <div class="svgwrap"><iframe src="gemini-3-8-flash-constrained.svg" loading="lazy" style="width:100%;height:480px;border:0;background:#000"></iframe></div>
+  <p><a href="gemini-3-8-flash-constrained.svg">open raw SVG</a></p>
 </div>
+
+<div class="card">
+  <h2>claude-fable-5-1-minimal</h2>
+  <p class="meta">len=8055 · anim=True · tech=SMIL/CSS · 24464 tok · 296.7s · cost=$1.22</p>
+  
+  <div class="svgwrap"><iframe src="claude-fable-5-1-minimal.svg" loading="lazy" style="width:100%;height:480px;border:0;background:#000"></iframe></div>
+  <p><a href="claude-fable-5-1-minimal.svg">open raw SVG</a></p>
+</div>
+
+<div class="card">
+  <h2>claude-fable-5-1-constrained</h2>
+  <p class="meta">len=9811 · anim=True · tech=SMIL/CSS · 30617 tok · 379.9s · cost=$1.52</p>
+  
+  <div class="svgwrap"><iframe src="claude-fable-5-1-constrained.svg" loading="lazy" style="width:100%;height:480px;border:0;background:#000"></iframe></div>
+  <p><a href="claude-fable-5-1-constrained.svg">open raw SVG</a></p>
+</div>
+<div class="card"><h2>kimi-k3-minimal</h2><p class="err">ERROR: no SVG in response (empty content, reasoning loop)</p></div>
+<div class="card"><h2>kimi-k3-constrained</h2><p class="err">ERROR: no SVG in response (empty content, reasoning loop)</p></div>

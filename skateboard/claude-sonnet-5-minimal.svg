@@ -1,0 +1,79 @@
+<svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#87CEEB"/>
+      <stop offset="1" stop-color="#e6f7ff"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="500" height="400" fill="url(#sky)"/>
+
+  <!-- sun -->
+  <circle cx="440" cy="40" r="20" fill="#ffe066"/>
+
+  <!-- clouds -->
+  <g fill="#ffffff" opacity="0.8">
+    <ellipse cx="90" cy="50" rx="25" ry="12"/>
+    <ellipse cx="110" cy="45" rx="20" ry="10"/>
+    <ellipse cx="70" cy="45" rx="18" ry="9"/>
+  </g>
+
+  <!-- pipe structure -->
+  <path d="M50,100 C50,300 100,350 150,350 L350,350 C400,350 450,300 450,100 L450,400 L50,400 Z"
+        fill="#b0b0b0" stroke="#888888" stroke-width="2"/>
+
+  <!-- riding surface (also used as the motion path) -->
+  <path id="rampSurface" d="M50,100 C50,300 100,350 150,350 L350,350 C400,350 450,300 450,100"
+        fill="none" stroke="#707070" stroke-width="3"/>
+
+  <!-- side decks -->
+  <rect x="0" y="92" width="50" height="8" fill="#9a9a9a"/>
+  <rect x="450" y="92" width="50" height="8" fill="#9a9a9a"/>
+
+  <!-- coping -->
+  <circle cx="50" cy="100" r="4" fill="#444"/>
+  <circle cx="450" cy="100" r="4" fill="#444"/>
+
+  <!-- ================= SKATER ================= -->
+  <g id="skaterPos">
+
+    <!-- Motion along the ramp: slow near the coping (top), fast on the flat bottom -->
+    <animateMotion dur="8s" repeatCount="indefinite"
+       calcMode="spline"
+       keyPoints="0;0;0.3;0.5;0.7;1;1;0.7;0.5;0.3;0;0"
+       keyTimes="0;0.05;0.2;0.25;0.3;0.45;0.55;0.7;0.75;0.8;0.95;1"
+       keySplines="0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1"
+       path="M50,100 C50,300 100,350 150,350 L350,350 C400,350 450,300 450,100"/>
+
+    <!-- ground shadow, stays flat (doesn't spin with the trick) -->
+    <ellipse cx="0" cy="6" rx="14" ry="3" fill="#000000" opacity="0.25"/>
+
+    <g id="skaterFlip">
+      <!-- 360 air trick only during the "hang time" pauses at each coping -->
+      <animateTransform attributeName="transform" type="rotate"
+         values="0 0 -20;360 0 -20;360 0 -20;720 0 -20;720 0 -20;1080 0 -20"
+         keyTimes="0;0.05;0.45;0.55;0.95;1"
+         dur="8s" repeatCount="indefinite"/>
+
+      <!-- skateboard -->
+      <rect x="-15" y="0" width="30" height="4" rx="2" fill="#3b2f2f"/>
+      <circle cx="-9" cy="5.5" r="3" fill="#222222"/>
+      <circle cx="9" cy="5.5" r="3" fill="#222222"/>
+
+      <!-- legs -->
+      <line x1="0" y1="-20" x2="-9" y2="0" stroke="#2b2b2b" stroke-width="4" stroke-linecap="round"/>
+      <line x1="0" y1="-20" x2="9" y2="0" stroke="#2b2b2b" stroke-width="4" stroke-linecap="round"/>
+
+      <!-- torso -->
+      <line x1="0" y1="-20" x2="0" y2="-36" stroke="#1565c0" stroke-width="7" stroke-linecap="round"/>
+
+      <!-- arms (out for balance) -->
+      <line x1="0" y1="-30" x2="-14" y2="-22" stroke="#1565c0" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="0" y1="-30" x2="14" y2="-22" stroke="#1565c0" stroke-width="3.5" stroke-linecap="round"/>
+
+      <!-- head -->
+      <circle cx="0" cy="-42" r="7" fill="#ffcc99"/>
+      <path d="M-7,-44 a7,6 0 0 1 14,0 Z" fill="#333333"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,556 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" width="100%" height="100%">
+  <defs>
+    <!-- Sky & Background Gradients -->
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#080b14"/>
+      <stop offset="60%" stop-color="#121829"/>
+      <stop offset="100%" stop-color="#1e1b38"/>
+    </linearGradient>
+
+    <!-- Stadium Floodlight Beams -->
+    <linearGradient id="spotLeft" x1="0%" y1="0%" x2="60%" y2="100%">
+      <stop offset="0%" stop-color="#c7d2fe" stop-opacity="0.35"/>
+      <stop offset="60%" stop-color="#818cf8" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="spotRight" x1="100%" y1="0%" x2="40%" y2="100%">
+      <stop offset="0%" stop-color="#c7d2fe" stop-opacity="0.35"/>
+      <stop offset="60%" stop-color="#818cf8" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Ramp Wooden Surface Gradients -->
+    <linearGradient id="rampWood" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="25%" stop-color="#b45309"/>
+      <stop offset="70%" stop-color="#78350f"/>
+      <stop offset="100%" stop-color="#451a03"/>
+    </linearGradient>
+    <linearGradient id="rampWoodInterior" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#92400e"/>
+      <stop offset="15%" stop-color="#b45309"/>
+      <stop offset="50%" stop-color="#d97706"/>
+      <stop offset="85%" stop-color="#b45309"/>
+      <stop offset="100%" stop-color="#92400e"/>
+    </linearGradient>
+
+    <!-- Metal Coping Pipe Gradient -->
+    <linearGradient id="copingGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="30%" stop-color="#94a3b8"/>
+      <stop offset="70%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+
+    <!-- Skateboard Graphic Gradient -->
+    <linearGradient id="deckGraphics" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="50%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+
+    <!-- Drop Shadow Filter for Rider Depth -->
+    <filter id="softGaze" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <style>
+    /* =========================================================================
+       PHYSICS-DRIVEN TIMELINE (6.0s Seamless Cycle):
+       0% - 6%   : Left Lip Stall / Coping Grind (zero speed, sparks fly)
+       6% - 24%  : Gravity drop-in down left vert (quadratic acceleration)
+       24% - 32% : Flat bottom transit (maximum kinetic energy & high speed)
+       32% - 46% : Ascending right vert (deceleration converting KE to PE)
+       46% - 68% : High Aerial Launch & Parabolic Arc above coping
+                   * 46%-53% : Launch climb into the air
+                   * 53%-60% : Weightless Apex float & Kickflip 360 board rotation
+                   * 60%-68% : Gravity acceleration descent back to ramp
+       68% - 76% : Landing touchdown and carving down right transition
+       76% - 86% : Flat bottom transit right-to-left (fast kinetic zoom)
+       86% - 98% : Ascending left transition to lip
+       98% - 100%: Lock onto coping grind, seamless loop back to 0%
+       ========================================================================= */
+
+    /* Skater Rig Main Movement */
+    .skater-rig {
+      animation: vertPhysics 6s cubic-bezier(0.4, 0.0, 0.6, 1.0) infinite;
+      transform-origin: 0 0;
+    }
+
+    @keyframes vertPhysics {
+      /* Left Lip Grind / Stall */
+      0% {
+        transform: translate(218px, 260px) rotate(76deg);
+      }
+      5% {
+        transform: translate(220px, 264px) rotate(74deg);
+      }
+      /* Drop-in down left curve (Accelerating) */
+      10% {
+        transform: translate(232px, 325px) rotate(64deg);
+      }
+      16% {
+        transform: translate(275px, 435px) rotate(45deg);
+      }
+      22% {
+        transform: translate(350px, 515px) rotate(22deg);
+      }
+      /* Blasting through flat bottom (Max Speed) */
+      26% {
+        transform: translate(440px, 548px) rotate(0deg);
+      }
+      30% {
+        transform: translate(560px, 548px) rotate(0deg);
+      }
+      /* Pumping up right curve (Decelerating) */
+      36% {
+        transform: translate(665px, 505px) rotate(-26deg);
+      }
+      41% {
+        transform: translate(735px, 415px) rotate(-55deg);
+      }
+      46% {
+        transform: translate(776px, 275px) rotate(-82deg);
+      }
+      /* Aerial Launch: Parabolic Trajectory above Coping */
+      50% {
+        transform: translate(774px, 175px) rotate(-65deg);
+      }
+      54% {
+        transform: translate(748px, 105px) rotate(-35deg);
+      }
+      57% {
+        /* Apex of Aerial Trick */
+        transform: translate(722px, 85px) rotate(-15deg);
+      }
+      61% {
+        transform: translate(740px, 115px) rotate(15deg);
+      }
+      65% {
+        transform: translate(768px, 185px) rotate(55deg);
+      }
+      /* Touchdown on Right Vert transition */
+      70% {
+        transform: translate(780px, 280px) rotate(82deg);
+      }
+      /* Compressing and speeding down right transition */
+      74% {
+        transform: translate(750px, 400px) rotate(60deg);
+      }
+      78% {
+        transform: translate(685px, 495px) rotate(32deg);
+      }
+      /* Flat bottom transit heading left (Max Speed) */
+      82% {
+        transform: translate(575px, 548px) rotate(0deg);
+      }
+      86% {
+        transform: translate(425px, 548px) rotate(0deg);
+      }
+      /* Climbing left transition (Decelerating) */
+      90% {
+        transform: translate(325px, 500px) rotate(-30deg);
+      }
+      94% {
+        transform: translate(255px, 410px) rotate(-58deg);
+      }
+      98% {
+        transform: translate(220px, 285px) rotate(-78deg);
+      }
+      100% {
+        transform: translate(218px, 260px) rotate(76deg);
+      }
+    }
+
+    /* Kickflip: Skateboard 360-degree barrel roll during apex */
+    .board-flip-rotator {
+      animation: kickflipAction 6s infinite;
+      transform-origin: 0 0;
+    }
+
+    @keyframes kickflipAction {
+      0%, 48% {
+        transform: rotate(0deg) scaleY(1);
+      }
+      /* Flick & Spin initiation */
+      51% {
+        transform: rotate(70deg) scaleY(0.7);
+      }
+      54% {
+        transform: rotate(180deg) scaleY(0.2); /* Edge-on flip illusion */
+      }
+      57% {
+        transform: rotate(270deg) scaleY(0.6);
+      }
+      /* Board caught clean by rider's feet before landing */
+      60%, 100% {
+        transform: rotate(360deg) scaleY(1);
+      }
+    }
+
+    /* Dynamic Human Body Articulation: Crouch, Pump, Tuck, and Catch */
+    .skater-pose {
+      animation: bodyCrouchPump 6s ease-in-out infinite;
+      transform-origin: 0 0;
+    }
+
+    @keyframes bodyCrouchPump {
+      /* Coping stall: balanced athletic extension */
+      0%, 5% {
+        transform: scale(1, 1) translateY(0);
+      }
+      /* Drop-in: leaning forward, compressing knees */
+      12% {
+        transform: scale(1.02, 0.9) translateY(4px);
+      }
+      /* G-force compression at the flat bottom (deep crouch/pump) */
+      26%, 30% {
+        transform: scale(1.08, 0.76) translateY(12px);
+      }
+      /* Pumping extension pushing off right coping */
+      44%, 47% {
+        transform: scale(0.96, 1.05) translateY(-5px);
+      }
+      /* Airborne Tuck & Indy Grab: pulling knees up, tweaking deck */
+      53%, 59% {
+        transform: scale(1.05, 0.8) translateY(8px) rotate(-8deg);
+      }
+      /* Landing extension & shock-absorbing compression */
+      68% {
+        transform: scale(0.95, 1.02) translateY(-2px);
+      }
+      72% {
+        transform: scale(1.08, 0.75) translateY(13px);
+      }
+      /* Second flat bottom pump */
+      82%, 86% {
+        transform: scale(1.08, 0.76) translateY(12px);
+      }
+      /* Ascending left lip */
+      95% {
+        transform: scale(0.98, 1.02) translateY(-2px);
+      }
+      100% {
+        transform: scale(1, 1) translateY(0);
+      }
+    }
+
+    /* Wheel high-speed rotation */
+    .wheel-spin {
+      animation: wheelRoll 0.4s linear infinite;
+      transform-origin: center;
+    }
+    @keyframes wheelRoll {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* Dynamic Ground Shadow */
+    .dynamic-shadow {
+      animation: shadowScale 6s infinite;
+      transform-origin: 0 0;
+    }
+    @keyframes shadowScale {
+      0%, 46% { opacity: 0.6; transform: scale(1, 1); }
+      /* Fades and stretches as skater flies into the air */
+      54%, 58% { opacity: 0.12; transform: scale(1.8, 0.3) translateY(60px); }
+      68%, 100% { opacity: 0.6; transform: scale(1, 1); }
+    }
+
+    /* Grind Sparks burst at Left Coping */
+    .sparks-burst {
+      animation: sparksTrigger 6s steps(1) infinite;
+    }
+    @keyframes sparksTrigger {
+      0%, 4% { opacity: 1; }
+      5%, 98% { opacity: 0; }
+      99%, 100% { opacity: 1; }
+    }
+
+    /* Speed Wind Streaks */
+    .speed-lines {
+      animation: speedVis 6s ease-in-out infinite;
+    }
+    @keyframes speedVis {
+      0%, 20% { opacity: 0; }
+      24%, 32% { opacity: 0.75; }
+      36%, 74% { opacity: 0; }
+      78%, 86% { opacity: 0.75; }
+      90%, 100% { opacity: 0; }
+    }
+  </style>
+
+  <!-- =========================================================================
+       GROUP 1: BACKGROUND & ARENA LIGHTING
+       ========================================================================= -->
+  <!-- Night Sky Backdrop -->
+  <rect width="1000" height="700" fill="url(#skyGrad)"/>
+
+  <!-- Arena Floodlight Towers (Silhouettes) -->
+  <g id="arena-lighting" opacity="0.9">
+    <!-- Left Floodlight Tower -->
+    <line x1="80" y1="260" x2="110" y2="40" stroke="#1e293b" stroke-width="4"/>
+    <line x1="140" y1="260" x2="110" y2="40" stroke="#1e293b" stroke-width="4"/>
+    <line x1="90" y1="180" x2="130" y2="180" stroke="#334155" stroke-width="2"/>
+    <line x1="98" y1="110" x2="122" y2="110" stroke="#334155" stroke-width="2"/>
+    <rect x="90" y="20" width="40" height="25" rx="3" fill="#334155"/>
+    <polygon points="90,40 25,680 480,680" fill="url(#spotLeft)"/>
+
+    <!-- Right Floodlight Tower -->
+    <line x1="920" y1="260" x2="890" y2="40" stroke="#1e293b" stroke-width="4"/>
+    <line x1="860" y1="260" x2="890" y2="40" stroke="#1e293b" stroke-width="4"/>
+    <line x1="910" y1="180" x2="870" y2="180" stroke="#334155" stroke-width="2"/>
+    <line x1="902" y1="110" x2="878" y2="110" stroke="#334155" stroke-width="2"/>
+    <rect x="870" y="20" width="40" height="25" rx="3" fill="#334155"/>
+    <polygon points="910,40 520,680 975,680" fill="url(#spotRight)"/>
+  </g>
+
+  <!-- Distant Skatepark Details & Crowd Barrier -->
+  <path d="M 0,580 L 1000,580 L 1000,700 L 0,700 Z" fill="#0b0f19"/>
+  <line x1="0" y1="580" x2="1000" y2="580" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- =========================================================================
+       GROUP 2: HALF-PIPE VERT RAMP STRUCTURE
+       ========================================================================= -->
+  <g id="half-pipe-ramp">
+    <!-- Ramp Outer Wooden Truss Framework -->
+    <path d="M 60,620 L 60,260 L 210,260 L 210,310 
+             C 215,450 280,560 380,560 
+             L 620,560 
+             C 720,560 785,450 790,310 
+             L 790,260 L 940,260 L 940,620 Z" 
+          fill="#1c1917" stroke="#0f172a" stroke-width="3"/>
+
+    <!-- Structural Timber Support Studs -->
+    <g stroke="#292524" stroke-width="2" opacity="0.8">
+      <line x1="90" y1="260" x2="90" y2="620"/>
+      <line x1="130" y1="260" x2="130" y2="620"/>
+      <line x1="170" y1="260" x2="170" y2="620"/>
+      <line x1="830" y1="260" x2="830" y2="620"/>
+      <line x1="870" y1="260" x2="870" y2="620"/>
+      <line x1="910" y1="260" x2="910" y2="620"/>
+      <!-- Diagonal Braces -->
+      <line x1="60" y1="360" x2="210" y2="500"/>
+      <line x1="60" y1="500" x2="210" y2="360"/>
+      <line x1="790" y1="360" x2="940" y2="500"/>
+      <line x1="790" y1="500" x2="940" y2="360"/>
+    </g>
+
+    <!-- Ramp Riding Surface (Plywood & Skatelite Face) -->
+    <path d="M 210,260 L 210,310 
+             C 215,450 280,560 380,560 
+             L 620,560 
+             C 720,560 785,450 790,310 
+             L 790,260 
+             L 796,260 L 796,312
+             C 791,455 723,568 620,568 
+             L 380,568 
+             C 277,568 209,455 204,312 
+             L 204,260 Z" 
+          fill="url(#rampWood)"/>
+
+    <!-- Ramp Face Veneer / Depth Plate -->
+    <path d="M 210,260 L 210,310 
+             C 215,450 280,560 380,560 
+             L 620,560 
+             C 720,560 785,450 790,310 
+             L 790,260 
+             L 784,260 L 784,310
+             C 779,445 715,554 620,554 
+             L 380,554 
+             C 285,554 221,445 216,310 
+             L 216,260 Z" 
+          fill="url(#rampWoodInterior)" opacity="0.9"/>
+
+    <!-- Plywood Sheet Seams / Vert Stripes (Visual motion anchors) -->
+    <g stroke="#78350f" stroke-width="1.5" opacity="0.6">
+      <path d="M 210,290 C 220,380 260,480 320,530"/>
+      <path d="M 440,560 L 440,554"/>
+      <path d="M 500,560 L 500,554"/>
+      <path d="M 560,560 L 560,554"/>
+      <path d="M 790,290 C 780,380 740,480 680,530"/>
+    </g>
+
+    <!-- Ramp Safety Platforms & Handrails -->
+    <!-- Left Deck Platform -->
+    <rect x="50" y="256" width="160" height="8" rx="2" fill="#475569"/>
+    <line x1="50" y1="210" x2="190" y2="210" stroke="#94a3b8" stroke-width="4"/>
+    <line x1="50" y1="256" x2="50" y2="210" stroke="#64748b" stroke-width="3"/>
+    <line x1="120" y1="256" x2="120" y2="210" stroke="#64748b" stroke-width="3"/>
+    <line x1="190" y1="256" x2="190" y2="210" stroke="#64748b" stroke-width="3"/>
+
+    <!-- Right Deck Platform -->
+    <rect x="790" y="256" width="160" height="8" rx="2" fill="#475569"/>
+    <line x1="810" y1="210" x2="950" y2="210" stroke="#94a3b8" stroke-width="4"/>
+    <line x1="810" y1="256" x2="810" y2="210" stroke="#64748b" stroke-width="3"/>
+    <line x1="880" y1="256" x2="880" y2="210" stroke="#64748b" stroke-width="3"/>
+    <line x1="950" y1="256" x2="950" y2="210" stroke="#64748b" stroke-width="3"/>
+
+    <!-- Heavy Steel Coping Pipes (Left & Right Lips) -->
+    <!-- Left Coping Pipe -->
+    <circle cx="210" cy="260" r="7" fill="url(#copingGrad)"/>
+    <circle cx="210" cy="260" r="5.5" fill="none" stroke="#f1f5f9" stroke-width="1.2" opacity="0.8"/>
+
+    <!-- Right Coping Pipe -->
+    <circle cx="790" cy="260" r="7" fill="url(#copingGrad)"/>
+    <circle cx="790" cy="260" r="5.5" fill="none" stroke="#f1f5f9" stroke-width="1.2" opacity="0.8"/>
+  </g>
+
+  <!-- Speed Lines / Air Rushes across flat bottom -->
+  <g class="speed-lines" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0">
+    <line x1="420" y1="520" x2="580" y2="520" stroke-dasharray="25 15"/>
+    <line x1="450" y1="500" x2="550" y2="500" stroke-dasharray="15 20"/>
+    <line x1="400" y1="535" x2="600" y2="535" stroke-dasharray="35 25"/>
+  </g>
+
+  <!-- Grind Sparks Particle FX (Active during Left Coping Grind) -->
+  <g class="sparks-burst" transform="translate(212, 260)">
+    <path d="M 0,0 L -12,-8 M 0,0 L -18,-1 M 0,0 L -10,-14 M 0,0 L -5,-18 M 0,0 L -15,8" 
+          stroke="#fef08a" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="-14" cy="-6" r="1.5" fill="#f97316"/>
+    <circle cx="-10" cy="-15" r="1.2" fill="#ef4444"/>
+    <circle cx="-19" cy="2" r="1.5" fill="#ffffff"/>
+  </g>
+
+  <!-- =========================================================================
+       GROUP 3: ANIMATED SKATER & SKATEBOARD ASSEMBLY
+       ========================================================================= -->
+  <!-- Top-level Rig with Physics Trajectory -->
+  <g class="skater-rig">
+
+    <!-- Contact Surface Shadow -->
+    <ellipse class="dynamic-shadow" cx="0" cy="12" rx="36" ry="6" fill="#000000"/>
+
+    <!-- Skater Human Body (Tucking, Pumping, Counter-balancing) -->
+    <g class="skater-pose">
+
+      <!-- Back Leg & Foot (Left Foot - Regular Stance) -->
+      <g id="skater-back-leg">
+        <!-- Thigh -->
+        <path d="M -8,-32 L -18,-16" stroke="#1e293b" stroke-width="8" stroke-linecap="round"/>
+        <!-- Calf / Shin -->
+        <path d="M -18,-16 L -20,-4" stroke="#1e293b" stroke-width="7" stroke-linecap="round"/>
+        <!-- Sneaker (Classic skate shoe with white sole) -->
+        <path d="M -26,-2 L -14,-2 L -14,-6 L -24,-6 Z" fill="#0f172a"/>
+        <rect x="-26" y="-2" width="13" height="2.5" rx="1" fill="#ffffff"/>
+      </g>
+
+      <!-- Skater Torso & Clothes -->
+      <g id="skater-torso">
+        <!-- Dynamic Orange Skate Hoodie with folds -->
+        <path d="M -10,-34 L 10,-32 L 6,-62 L -14,-60 Z" fill="#ea580c"/>
+        <path d="M -6,-62 C -2,-56 2,-56 6,-62" stroke="#c2410c" stroke-width="2" fill="none"/>
+        <!-- Belt & Jeans waist -->
+        <rect x="-12" y="-35" width="22" height="5" rx="1.5" fill="#0f172a"/>
+      </g>
+
+      <!-- Front Leg & Foot (Right Foot) -->
+      <g id="skater-front-leg">
+        <!-- Thigh (Bent forward into athletic stance) -->
+        <path d="M 6,-32 L 18,-18" stroke="#334155" stroke-width="8" stroke-linecap="round"/>
+        <!-- Shin -->
+        <path d="M 18,-18 L 16,-4" stroke="#334155" stroke-width="7" stroke-linecap="round"/>
+        <!-- Front Sneaker -->
+        <path d="M 10,-2 L 23,-2 L 22,-6 L 12,-6 Z" fill="#0f172a"/>
+        <rect x="10" y="-2" width="14" height="2.5" rx="1" fill="#ffffff"/>
+      </g>
+
+      <!-- Left Arm (Back Arm - Style & Balance Flared) -->
+      <g id="skater-back-arm">
+        <path d="M -12,-58 L -28,-46 L -36,-56" stroke="#ea580c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Hand / Fingers -->
+        <circle cx="-37" cy="-57" r="3" fill="#fed7aa"/>
+      </g>
+
+      <!-- Head, Helmet / Backwards Cap & Face -->
+      <g id="skater-head">
+        <!-- Neck -->
+        <line x1="-3" y1="-62" x2="-2" y2="-67" stroke="#fed7aa" stroke-width="4"/>
+        <!-- Face Profile -->
+        <circle cx="0" cy="-72" r="7.5" fill="#fed7aa"/>
+        <!-- Focused Eye & Nose Silhouette -->
+        <path d="M 5,-72 L 8,-71 L 5,-69" fill="none" stroke="#9a3412" stroke-width="1.2"/>
+        <!-- Backwards Teal Cap & Bill -->
+        <path d="M -8,-74 C -8,-81 5,-82 8,-74 C 8,-70 -8,-70 -8,-74 Z" fill="#0891b2"/>
+        <path d="M -8,-73 L -16,-72 L -14,-75 Z" fill="#0891b2"/> <!-- Cap visor facing backward -->
+      </g>
+
+      <!-- Right Arm (Front Arm - Tweaking Indy Grab in Aerial) -->
+      <g id="skater-front-arm">
+        <path d="M 4,-58 L 12,-44 L 2,-14" stroke="#c2410c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Hand grabbing board rail -->
+        <circle cx="2" cy="-12" r="3.2" fill="#fed7aa"/>
+      </g>
+    </g>
+
+    <!-- =======================================================================
+         GROUP 4: DETAILED SKATEBOARD (DECK, TRUCKS & SPINNING WHEELS)
+         ======================================================================= -->
+    <g class="board-flip-rotator">
+      <!-- 7-Ply Maple Skateboard Deck Profile with Double Kicktails -->
+      <g id="deck-wood">
+        <!-- Colorful Deck Graphic Wrap (Bottom layer) -->
+        <path d="M -36,0 C -38,-5 -34,-6 -30,-6 
+                 L 30,-6 
+                 C 34,-6 38,-5 36,0 
+                 C 34,-1 28,-1 26,-1 
+                 L -26,-1 
+                 C -28,-1 -34,-1 -36,0 Z" 
+              fill="url(#deckGraphics)"/>
+
+        <!-- Canadian Maple Wood Core Layer -->
+        <path d="M -35,-2 L 35,-2 L 35,-3 L -35,-3 Z" fill="#fef08a"/>
+
+        <!-- Dark Grip Tape (Top Layer) -->
+        <path d="M -36,-3 C -38,-6 -34,-7 -30,-7 
+                 L 30,-7 
+                 C 34,-7 38,-6 36,-3 
+                 C 34,-4 28,-4 26,-4 
+                 L -26,-4 
+                 C -28,-4 -34,-4 -36,-3 Z" 
+              fill="#18181b"/>
+      </g>
+
+      <!-- Front & Rear Aluminium Skateboard Trucks -->
+      <g id="trucks" fill="#94a3b8" stroke="#475569" stroke-width="0.8">
+        <!-- Rear Truck (Left) -->
+        <path d="M -23,-1 L -19,-1 L -18,5 L -24,5 Z"/>
+        <!-- Front Truck (Right) -->
+        <path d="M 19,-1 L 23,-1 L 24,5 L 18,5 Z"/>
+        <!-- Bushings (Polyurethane Red Rings) -->
+        <rect x="-22.5" y="1" width="3" height="2" fill="#ef4444" stroke="none"/>
+        <rect x="19.5" y="1" width="3" height="2" fill="#ef4444" stroke="none"/>
+      </g>
+
+      <!-- High-Performance Skate Wheels (All 4 wheels represented in perspective) -->
+      <g id="wheels">
+        <!-- Back Axle Pair (Foreground & Background) -->
+        <g transform="translate(-21, 6)">
+          <!-- Background Wheel -->
+          <circle cx="-1.5" cy="-2" r="4" fill="#64748b"/>
+          <!-- Foreground Wheel -->
+          <circle cx="0" cy="0" r="4.8" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+          <g class="wheel-spin">
+            <circle cx="0" cy="0" r="2.2" fill="#0284c7"/>
+            <circle cx="0" cy="0" r="1" fill="#0f172a"/>
+          </g>
+        </g>
+
+        <!-- Front Axle Pair (Foreground & Background) -->
+        <g transform="translate(21, 6)">
+          <!-- Background Wheel -->
+          <circle cx="-1.5" cy="-2" r="4" fill="#64748b"/>
+          <!-- Foreground Wheel -->
+          <circle cx="0" cy="0" r="4.8" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+          <g class="wheel-spin">
+            <circle cx="0" cy="0" r="2.2" fill="#0284c7"/>
+            <circle cx="0" cy="0" r="1" fill="#0f172a"/>
+          </g>
+        </g>
+      </g>
+    </g>
+
+  </g>
+</svg>
