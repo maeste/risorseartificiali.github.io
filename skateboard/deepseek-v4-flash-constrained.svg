@@ -1,0 +1,403 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <!-- Sky gradient -->
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#87CEEB"/>
+      <stop offset="100%" stop-color="#E0F0FF"/>
+    </linearGradient>
+    <!-- Ramp gradient -->
+    <linearGradient id="rampSurface" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#999"/>
+      <stop offset="100%" stop-color="#666"/>
+    </linearGradient>
+    <!-- Coping gradient -->
+    <linearGradient id="coping" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#CCC"/>
+      <stop offset="50%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#CCC"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background sky -->
+  <rect width="800" height="600" fill="url(#sky)"/>
+
+  <!-- Ground -->
+  <rect x="0" y="480" width="800" height="120" fill="#555"/>
+
+  <!-- ==================== HALF-PIPE / VERT RAMP ==================== -->
+  <g id="half-pipe">
+    <!-- Left quarter pipe -->
+    <path d="M100,480 Q100,300 200,220 L220,240 Q130,320 130,480 Z" fill="url(#rampSurface)" stroke="#444" stroke-width="2"/>
+    <!-- Right quarter pipe -->
+    <path d="M700,480 Q700,300 600,220 L580,240 Q670,320 670,480 Z" fill="url(#rampSurface)" stroke="#444" stroke-width="2"/>
+    <!-- Flat bottom -->
+    <rect x="130" y="470" width="540" height="10" fill="#777" stroke="#444" stroke-width="1"/>
+    <!-- Left deck/platform -->
+    <rect x="80" y="210" width="130" height="15" rx="3" fill="#888" stroke="#444" stroke-width="2"/>
+    <!-- Right deck/platform -->
+    <rect x="590" y="210" width="130" height="15" rx="3" fill="#888" stroke="#444" stroke-width="2"/>
+    <!-- Left coping pipe -->
+    <rect x="80" y="218" width="130" height="8" rx="4" fill="url(#coping)" stroke="#B8860B" stroke-width="1"/>
+    <!-- Right coping pipe -->
+    <rect x="590" y="218" width="130" height="8" rx="4" fill="url(#coping)" stroke="#B8860B" stroke-width="1"/>
+    <!-- Ramp surface left -->
+    <path d="M100,480 Q100,300 200,225" fill="none" stroke="#666" stroke-width="3"/>
+    <!-- Ramp surface right -->
+    <path d="M700,480 Q700,300 600,225" fill="none" stroke="#666" stroke-width="3"/>
+  </g>
+
+  <!-- ==================== SKATER FIGURE ==================== -->
+  <!-- 
+    The skater follows a pendulum path on the ramp.
+    Animation cycle: 6 seconds
+    - 0-2s: Moving down from left coping to flat bottom
+    - 2-3s: Moving up right quarter pipe, launching from right coping at ~2.5s
+    - 3-4.5s: Aerial trick (kickflip + 180 rotation) above the pipe
+    - 4.5-5s: Landing on left quarter pipe
+    - 5-6s: Moving down left ramp back to start
+  -->
+  <g id="skater-group">
+    <!-- 
+      The skater's position is animated along the ramp path.
+      We use a combination of translation and rotation to simulate
+      realistic pendulum motion.
+    -->
+    <g>
+      <!-- Skater position animation: follows the ramp contour -->
+      <animateTransform attributeName="transform" type="translate" 
+        values="
+          200,240;
+          300,360;
+          450,420;
+          580,300;
+          600,240;
+          590,260;
+          500,380;
+          350,430;
+          220,320;
+          200,240
+        "
+        keyTimes="
+          0;
+          0.15;
+          0.33;
+          0.48;
+          0.5;
+          0.52;
+          0.67;
+          0.83;
+          0.95;
+          1
+        "
+        dur="6s" repeatCount="indefinite" calcMode="linear"/>
+
+      <!-- 
+        Pendulum rotation: skater leans into the ramp curves.
+        Rotates more at the bottom (faster), less at the top (slower).
+      -->
+      <g>
+        <animateTransform attributeName="transform" type="rotate"
+          values="
+            -40,0,0;
+            -20,0,0;
+            0,0,0;
+            15,0,0;
+            25,0,0;
+            20,0,0;
+            0,0,0;
+            -15,0,0;
+            -30,0,0;
+            -40,0,0
+          "
+          keyTimes="
+            0;
+            0.15;
+            0.33;
+            0.48;
+            0.5;
+            0.52;
+            0.67;
+            0.83;
+            0.95;
+            1
+          "
+          dur="6s" repeatCount="indefinite"/>
+
+        <!-- 
+          During the aerial trick (3-4.5s), the skater is in the air.
+          The board does a kickflip (rotation around X) and 180 spin.
+        -->
+        <!-- Skateboard deck -->
+        <g id="skateboard">
+          <!-- 
+            Spin animation: 180 rotation during the trick
+            0-2.5s: no rotation, 2.5-4.5s: 180 spin, 4.5-6s: align back
+          -->
+          <g>
+            <animateTransform attributeName="transform" type="rotate"
+              values="
+                0,0,0;
+                0,0,0;
+                0,0,0;
+                0,0,0;
+                180,0,0;
+                180,0,0;
+                180,0,0;
+                0,0,0;
+                0,0,0
+              "
+              keyTimes="
+                0;
+                0.4;
+                0.42;
+                0.5;
+                0.58;
+                0.7;
+                0.75;
+                0.85;
+                1
+              "
+              dur="6s" repeatCount="indefinite"/>
+
+            <!-- Deck body -->
+            <rect x="-30" y="-4" width="60" height="6" rx="3" fill="#D2691E" stroke="#8B4513" stroke-width="1.5"/>
+            <!-- Deck grip tape -->
+            <rect x="-28" y="-4" width="56" height="2" rx="1" fill="#333"/>
+            <!-- Deck nose/tail curves -->
+            <path d="M-30,-1 Q-35,-4 -30,-6" fill="none" stroke="#8B4513" stroke-width="1.5"/>
+            <path d="M30,-1 Q35,-4 30,-6" fill="none" stroke="#8B4513" stroke-width="1.5"/>
+
+            <!-- Trucks and wheels - left pair -->
+            <g id="truck-left">
+              <!-- Truck axle -->
+              <rect x="-24" y="2" width="12" height="2" rx="1" fill="#888"/>
+              <!-- Truck base -->
+              <rect x="-22" y="3" width="8" height="3" rx="1" fill="#666"/>
+              <!-- Left wheel -->
+              <circle cx="-26" cy="6" r="3" fill="#333" stroke="#555" stroke-width="0.5"/>
+              <!-- Right wheel -->
+              <circle cx="-14" cy="6" r="3" fill="#333" stroke="#555" stroke-width="0.5"/>
+            </g>
+
+            <!-- Trucks and wheels - right pair -->
+            <g id="truck-right">
+              <rect x="12" y="2" width="12" height="2" rx="1" fill="#888"/>
+              <rect x="14" y="3" width="8" height="3" rx="1" fill="#666"/>
+              <circle cx="14" cy="6" r="3" fill="#333" stroke="#555" stroke-width="0.5"/>
+              <circle cx="26" cy="6" r="3" fill="#333" stroke="#555" stroke-width="0.5"/>
+            </g>
+          </g>
+
+          <!-- Kickflip rotation: board flips along the X axis -->
+          <animateTransform attributeName="transform" type="scale"
+            values="
+              1,1;
+              1,1;
+              1,1;
+              1,1;
+              1,0.3;
+              1,-1;
+              1,0.3;
+              1,1;
+              1,1
+            "
+            keyTimes="
+              0;
+              0.42;
+              0.46;
+              0.5;
+              0.52;
+              0.55;
+              0.58;
+              0.62;
+              1
+            "
+            dur="6s" repeatCount="indefinite" additive="sum"/>
+        </g>
+
+        <!-- Skater body - animated with pendulum motion -->
+        <g id="skater-body">
+          <!-- Legs -->
+          <g id="legs">
+            <!-- Left leg -->
+            <line x1="-8" y1="-15" x2="-12" y2="-38" stroke="#2F4F4F" stroke-width="5" stroke-linecap="round">
+              <animate attributeName="x2" 
+                values="-12;-12;-12;-10;-8;-6;-8;-10;-12;-12"
+                keyTimes="0;0.15;0.33;0.48;0.5;0.52;0.67;0.83;0.95;1"
+                dur="6s" repeatCount="indefinite"/>
+              <animate attributeName="y2" 
+                values="-38;-38;-38;-42;-45;-42;-38;-38;-38;-38"
+                keyTimes="0;0.15;0.33;0.48;0.5;0.52;0.67;0.83;0.95;1"
+                dur="6s" repeatCount="indefinite"/>
+            </line>
+            <!-- Right leg -->
+            <line x1="8" y1="-15" x2="12" y2="-38" stroke="#2F4F4F" stroke-width="5" stroke-linecap="round">
+              <animate attributeName="x2" 
+                values="12;12;12;10;8;6;8;10;12;12"
+                keyTimes="0;0.15;0.33;0.48;0.5;0.52;0.67;0.83;0.95;1"
+                dur="6s" repeatCount="indefinite"/>
+              <animate attributeName="y2" 
+                values="-38;-38;-38;-42;-45;-42;-38;-38;-38;-38"
+                keyTimes="0;0.15;0.33;0.48;0.5;0.52;0.67;0.83;0.95;1"
+                dur="6s" repeatCount="indefinite"/>
+            </line>
+          </g>
+
+          <!-- Torso -->
+          <rect x="-10" y="-65" width="20" height="30" rx="5" fill="#E74C3C" stroke="#C0392B" stroke-width="1.5">
+            <animate attributeName="y" 
+              values="-65;-65;-65;-70;-72;-70;-65;-65;-65;-65"
+              keyTimes="0;0.15;0.33;0.48;0.5;0.52;0.67;0.83;0.95;1"
+              dur="6s" repeatCount="indefinite"/>
+          </g>
+
+          <!-- Head -->
+          <circle cx="0" cy="-78" r="10" fill="#FDBCB4" stroke="#D4A0A0" stroke-width="1.5">
+            <animate attributeName="cy" 
+              values="-78;-78;-78;-84;-88;-84;-78;-78;-78;-78"
+              keyTimes="0;0.15;0.33;0.48;0.5;0.52;0.67;0.83;0.95;1"
+              dur="6s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- Hair -->
+          <path d="M-8,-85 Q-10,-92 0,-92 Q10,-92 8,-85" fill="#2C1810" stroke="#1A0F0A" stroke-width="1">
+            <animate attributeName="d" 
+              values="M-8,-85 Q-10,-92 0,-92 Q10,-92 8,-85;M-8,-85 Q-10,-92 0,-92 Q10,-92 8,-85;M-8,-85 Q-10,-92 0,-92 Q10,-92 8,-85;M-8,-88 Q-10,-95 0,-95 Q10,-95 8,-88;M-8,-90 Q-10,-97 0,-97 Q10,-97 8,-90;M-8,-88 Q-10,-95 0,-95 Q10,-95 8,-88;M-8,-85 Q-10,-92 0,-92 Q10,-92 8,-85;M-8,-85 Q-10,-92 0,-92 Q10,-92 8,-85;M-8,-85 Q-10,-92 0,-92 Q10,-92 8,-85;M-8,-85 Q-10,-92 0,-92 Q10,-92 8,-85"
+              keyTimes="0;0.15;0.33;0.48;0.5;0.52;0.67;0.83;0.95;1"
+              dur="6s" repeatCount="indefinite"/>
+          </path>
+
+          <!-- Arms -->
+          <g id="left-arm">
+            <line x1="-10" y1="-60" x2="-25" y2="-50" stroke="#FDBCB4" stroke-width="4" stroke-linecap="round">
+              <animate attributeName="x2" 
+                values="-25;-25;-25;-30;-35;-30;-25;-25;-25;-25"
+                keyTimes="0;0.15;0.33;0.48;0.5;0.52;0.67;0.83;0.95;1"
+                dur="6s" repeatCount="indefinite"/>
+              <animate attributeName="y2" 
+                values="-50;-50;-50;-55;-60;-55;-50;-50;-50;-50"
+                keyTimes="0;0.15;0.33;0.48;0.5;0.52;0.67;0.83;0.95;1"
+                dur="6s" repeatCount="indefinite"/>
+            </line>
+          </g>
+          <g id="right-arm">
+            <line x1="10" y1="-60" x2="25" y2="-50" stroke="#FDBCB4" stroke-width="4" stroke-linecap="round">
+              <animate attributeName="x2" 
+                values="25;25;25;30;35;30;25;25;25;25"
+                keyTimes="0;0.15;0.33;0.48;0.5;0.52;0.67;0.83;0.95;1"
+                dur="6s" repeatCount="indefinite"/>
+              <animate attributeName="y2" 
+                values="-50;-50;-50;-55;-60;-55;-50;-50;-50;-50"
+                keyTimes="0;0.15;0.33;0.48;0.5;0.52;0.67;0.83;0.95;1"
+                dur="6s" repeatCount="indefinite"/>
+            </line>
+          </g>
+
+          <!-- Helmet -->
+          <path d="M-9,-82 Q-10,-73 0,-72 Q10,-73 9,-82" fill="#FFD700" stroke="#DAA520" stroke-width="1.5">
+            <animate attributeName="d" 
+              values="M-9,-82 Q-10,-73 0,-72 Q10,-73 9,-82;M-9,-82 Q-10,-73 0,-72 Q10,-73 9,-82;M-9,-82 Q-10,-73 0,-72 Q10,-73 9,-82;M-9,-85 Q-10,-76 0,-75 Q10,-76 9,-85;M-9,-88 Q-10,-79 0,-78 Q10,-79 9,-88;M-9,-85 Q-10,-76 0,-75 Q10,-76 9,-85;M-9,-82 Q-10,-73 0,-72 Q10,-73 9,-82;M-9,-82 Q-10,-73 0,-72 Q10,-73 9,-82;M-9,-82 Q-10,-73 0,-72 Q10,-73 9,-82;M-9,-82 Q-10,-73 0,-72 Q10,-73 9,-82"
+              keyTimes="0;0.15;0.33;0.48;0.5;0.52;0.67;0.83;0.95;1"
+              dur="6s" repeatCount="indefinite"/>
+          </path>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- ==================== TRICK LABEL ==================== -->
+  <!-- Animated text that appears during the aerial trick -->
+  <g id="trick-label">
+    <text x="400" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#FF4500" stroke="#FFF" stroke-width="2">
+      <animate attributeName="opacity" 
+        values="0;0;0;0;1;1;1;0;0;0"
+        keyTimes="0;0.42;0.48;0.5;0.52;0.58;0.65;0.7;0.75;1"
+        dur="6s" repeatCount="indefinite"/>
+      KICKFLIP 180!
+    </text>
+  </g>
+
+  <!-- ==================== SHADOW ==================== -->
+  <!-- Shadow follows the skater on the ramp surface -->
+  <g id="shadow">
+    <ellipse cx="0" cy="0" rx="20" ry="5" fill="rgba(0,0,0,0.3)">
+      <animateTransform attributeName="transform" type="translate"
+        values="
+          200,470;
+          300,475;
+          450,478;
+          580,470;
+          600,465;
+          590,468;
+          500,475;
+          350,478;
+          220,472;
+          200,470
+        "
+        keyTimes="
+          0;
+          0.15;
+          0.33;
+          0.48;
+          0.5;
+          0.52;
+          0.67;
+          0.83;
+          0.95;
+          1
+        "
+        dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity"
+        values="
+          0.4;
+          0.4;
+          0.4;
+          0.3;
+          0.1;
+          0.3;
+          0.4;
+          0.4;
+          0.4;
+          0.4
+        "
+        keyTimes="
+          0;
+          0.15;
+          0.33;
+          0.48;
+          0.5;
+          0.52;
+          0.67;
+          0.83;
+          0.95;
+          1
+        "
+        dur="6s" repeatCount="indefinite"/>
+    </ellipse>
+  </g>
+
+  <!-- ==================== SPEED LINES ==================== -->
+  <!-- Visual cues for speed variation -->
+  <g id="speed-lines">
+    <line x1="400" y1="460" x2="420" y2="460" stroke="#FFF" stroke-width="2" opacity="0">
+      <animate attributeName="opacity"
+        values="0;0.6;0.8;0.4;0;0;0.6;0.8;0.4;0"
+        keyTimes="0;0.1;0.2;0.3;0.4;0.5;0.6;0.7;0.8;1"
+        dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="x1"
+        values="400;380;360;390;400;400;380;360;390;400"
+        keyTimes="0;0.1;0.2;0.3;0.4;0.5;0.6;0.7;0.8;1"
+        dur="6s" repeatCount="indefinite"/>
+    </line>
+    <line x1="400" y1="465" x2="415" y2="465" stroke="#FFF" stroke-width="1.5" opacity="0">
+      <animate attributeName="opacity"
+        values="0;0.4;0.6;0.3;0;0;0.4;0.6;0.3;0"
+        keyTimes="0;0.1;0.2;0.3;0.4;0.5;0.6;0.7;0.8;1"
+        dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="x1"
+        values="400;385;370;395;400;400;385;370;395;400"
+        keyTimes="0;0.1;0.2;0.3;0.4;0.5;0.6;0.7;0.8;1"
+        dur="6s" repeatCount="indefinite"/>
+    </line>
+  </g>
+</svg>

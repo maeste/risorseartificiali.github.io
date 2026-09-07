@@ -1,0 +1,233 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 800 500"
+     width="800"
+     height="500">
+
+  <title>Skateboarder performing a kickflip in a half-pipe</title>
+  <desc>
+    A skateboarder rides down one side of a half-pipe, crouches,
+    jumps near the center, performs a kickflip, and lands on the opposite side.
+  </desc>
+
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#bde7ff"/>
+      <stop offset="1" stop-color="#f2fbff"/>
+    </linearGradient>
+
+    <linearGradient id="ramp" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#697582"/>
+      <stop offset="1" stop-color="#303943"/>
+    </linearGradient>
+
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+
+    <!-- Smooth path through the half-pipe.
+         The skater slows toward the walls and accelerates toward the center. -->
+    <path id="ridePath"
+      d="
+        M 166,154
+        C 225,242 292,318 390,330
+        C 484,342 566,247 650,154
+
+        C 566,247 484,342 390,330
+        C 292,318 225,242 166,154
+      "/>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="800" height="500" fill="url(#sky)"/>
+
+  <!-- Background -->
+  <circle cx="690" cy="85" r="38" fill="#fff6bd" opacity=".8"/>
+  <path d="M0 185 Q140 130 280 185 T560 180 T800 170 V0 H0Z"
+        fill="#9cd2df" opacity=".3"/>
+
+  <!-- Ground shadow -->
+  <ellipse cx="400" cy="405" rx="310" ry="22"
+           fill="#26313b" opacity=".22" filter="url(#shadow)"/>
+
+  <!-- Half-pipe outer structure -->
+  <path d="
+    M105 112
+    L105 151
+    C145 247 245 351 390 365
+    C535 351 635 247 695 151
+    L695 112
+    C630 226 530 317 390 329
+    C250 317 160 226 105 112Z"
+    fill="#252d35"/>
+
+  <!-- Half-pipe riding surface -->
+  <path d="
+    M120 112
+    C170 224 258 312 390 326
+    C522 312 630 224 680 112
+    L654 112
+    C603 207 518 288 390 302
+    C262 288 197 207 146 112Z"
+    fill="url(#ramp)"/>
+
+  <!-- Center riding surface -->
+  <path d="
+    M146 112
+    C197 207 262 288 390 302
+    C518 288 603 207 654 112"
+    fill="none"
+    stroke="#929eaa"
+    stroke-width="4"
+    opacity=".55"/>
+
+  <!-- Coping pipes -->
+  <path d="M112 112 H153" stroke="#d4dde4" stroke-width="8" stroke-linecap="round"/>
+  <path d="M647 112 H688" stroke="#d4dde4" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Ramp edge highlights -->
+  <path d="M120 112 C170 224 258 312 390 326"
+        fill="none" stroke="#b8c4cc" stroke-width="3" opacity=".5"/>
+  <path d="M390 326 C522 312 630 224 680 112"
+        fill="none" stroke="#b8c4cc" stroke-width="3" opacity=".5"/>
+
+  <!-- Animated skater -->
+  <g>
+    <!-- Motion follows the half-pipe profile.
+         rotate="auto" keeps the rider aligned with the slope. -->
+    <animateMotion
+      dur="10s"
+      repeatCount="indefinite"
+      rotate="auto"
+      calcMode="paced">
+      <mpath xlink:href="#ridePath"/>
+    </animateMotion>
+
+    <!-- Rider shadow -->
+    <ellipse cx="0" cy="13" rx="31" ry="5"
+             fill="#18212a" opacity=".35">
+      <animate attributeName="opacity"
+               values=".4;.15;.05;.15;.4"
+               keyTimes="0;.25;.42;.65;1"
+               dur="10s"
+               repeatCount="indefinite"/>
+      <animateTransform attributeName="transform"
+                        type="scale"
+                        values="1 1;1.1 .7;1.35 .35;1.1 .7;1 1"
+                        dur="10s"
+                        repeatCount="indefinite"/>
+    </ellipse>
+
+    <!-- Skateboard.
+         It remains horizontal during the approach, then rotates once
+         during the airborne portion of the kickflip. -->
+    <g id="board">
+      <animateTransform
+        attributeName="transform"
+        type="rotate"
+        values="0;0;360;360;0"
+        keyTimes="0;.22;.39;.52;1"
+        dur="10s"
+        repeatCount="indefinite"/>
+
+      <rect x="-31" y="-3" width="62" height="6" rx="3"
+            fill="#171d23"/>
+      <path d="M-27 -3 Q0 -9 27 -3"
+            fill="none" stroke="#ef6c45" stroke-width="3"/>
+
+      <g fill="#1c252d" stroke="#10151a" stroke-width="2">
+        <circle cx="-20" cy="7" r="5"/>
+        <circle cx="20" cy="7" r="5"/>
+      </g>
+
+      <g stroke="#b9c4cb" stroke-width="2">
+        <path d="M-20 2 L-20 6"/>
+        <path d="M20 2 L20 6"/>
+      </g>
+    </g>
+
+    <!-- Skater body -->
+    <g id="body"
+       fill="none"
+       stroke="#202a33"
+       stroke-width="7"
+       stroke-linecap="round"
+       stroke-linejoin="round">
+
+      <!-- Crouching animation before and after the jump -->
+      <animateTransform
+        attributeName="transform"
+        type="scale"
+        values="1 1;1 .82;1 .72;1 .9;1 1"
+        keyTimes="0;.18;.30;.52;1"
+        dur="10s"
+        repeatCount="indefinite"/>
+
+      <!-- Rear leg -->
+      <path d="M-5 -12 L-16 -34 L-4 -57"/>
+
+      <!-- Front leg -->
+      <path d="M8 -12 L18 -34 L5 -57"/>
+
+      <!-- Shoes -->
+      <path d="M-22 -10 Q-12 -6 -3 -9"/>
+      <path d="M3 -9 Q14 -6 24 -10"/>
+
+      <!-- Torso -->
+      <path d="M0 -55 L-4 -82"/>
+
+      <!-- Back arm -->
+      <path d="M-2 -76 L-25 -62 L-35 -43"/>
+
+      <!-- Front arm -->
+      <path d="M-3 -76 L20 -63 L33 -48"/>
+
+      <!-- Hands -->
+      <circle cx="-35" cy="-43" r="2.5" fill="#202a33"/>
+      <circle cx="33" cy="-48" r="2.5" fill="#202a33"/>
+    </g>
+
+    <!-- Head -->
+    <g id="head">
+      <circle cx="-5" cy="-99" r="14"
+              fill="#e4a47e"
+              stroke="#202a33"
+              stroke-width="5"/>
+
+      <!-- Hair / helmet -->
+      <path d="M-19 -100 Q-16 -119 -3 -119 Q10 -117 11 -103"
+            fill="#e9c34a"
+            stroke="#202a33"
+            stroke-width="5"
+            stroke-linecap="round"/>
+
+      <!-- Face direction -->
+      <circle cx="1" cy="-99" r="1.8" fill="#202a33"/>
+      <path d="M3 -94 Q7 -92 10 -94"
+            fill="none"
+            stroke="#202a33"
+            stroke-width="2"
+            stroke-linecap="round"/>
+    </g>
+
+    <!-- Small motion lines during the jump -->
+    <g stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0">
+      <path d="M-47 -30 L-61 -38"/>
+      <path d="M42 -29 L57 -37"/>
+      <animate attributeName="opacity"
+               values="0;0;1;0;0"
+               keyTimes="0;.25;.34;.47;1"
+               dur="10s"
+               repeatCount="indefinite"/>
+    </g>
+  </g>
+
+  <!-- Caption -->
+  <text x="400" y="455"
+        text-anchor="middle"
+        font-family="system-ui, sans-serif"
+        font-size="16"
+        fill="#45535e">
+    Half-pipe kickflip
+  </text>
+</svg>

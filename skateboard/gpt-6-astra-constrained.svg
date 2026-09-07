@@ -1,0 +1,245 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="620" viewBox="0 0 960 620" role="img" aria-labelledby="title desc">
+  <title id="title">Vert rider — a seamless skateboard session</title>
+  <desc id="desc">A skater pumps between facing quarter pipes, launches above the right coping, spins his skateboard, and lands back in the transition. His airborne trajectory has constant horizontal velocity and gravitational vertical acceleration.</desc>
+
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1">
+      <stop stop-color="#152a42"/>
+      <stop offset="1" stop-color="#385b70"/>
+    </linearGradient>
+    <linearGradient id="rampFace" x2="0" y2="1">
+      <stop stop-color="#365361"/>
+      <stop offset="1" stop-color="#1c3445"/>
+    </linearGradient>
+    <linearGradient id="ridingSurface" x2="0" y2="1">
+      <stop stop-color="#abc8c4"/>
+      <stop offset="1" stop-color="#709da1"/>
+    </linearGradient>
+    <pattern id="concrete" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="5" cy="9" r=".7" fill="#c4d8d6" opacity=".12"/>
+      <circle cx="21" cy="23" r=".6" fill="#091d30" opacity=".2"/>
+    </pattern>
+    <filter id="softShadow" x="-50%" y="-100%" width="200%" height="300%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+  </defs>
+
+  <!-- Background: evening sky, distant buildings, and park lighting. -->
+  <g id="background">
+    <path fill="url(#sky)" d="M0 0H960V620H0Z"/>
+    <circle cx="148" cy="111" r="38" fill="#ffdc9e"/>
+    <circle cx="148" cy="111" r="52" fill="#ffdc9e" opacity=".05"/>
+    <g fill="#142d40" opacity=".55">
+      <path d="M0 363V305H47V280H86V331H126V300H181V346H230V317H274V354H335V327H378V365Z"/>
+      <path d="M596 370V320H648V295H683V332H736V307H779V340H831V294H880V323H925V286H960V370Z"/>
+    </g>
+    <g fill="#b6d6d7" opacity=".55">
+      <circle cx="340" cy="96" r="1.3"/>
+      <circle cx="564" cy="70" r="1"/>
+      <circle cx="707" cy="112" r="1.4"/>
+      <circle cx="882" cy="81" r="1"/>
+      <circle cx="428" cy="177" r="1"/>
+    </g>
+    <path d="M0 551H960V620H0Z" fill="#192f3e"/>
+    <path d="M0 577H960" stroke="#55757f" opacity=".2"/>
+    <ellipse cx="493" cy="556" rx="406" ry="15" fill="#071a2a" opacity=".55" filter="url(#softShadow)"/>
+
+    <g stroke="#77979d" fill="none" stroke-width="3">
+      <path d="M74 251V185H140M886 251V185H822"/>
+      <path d="M74 203H132M828 203H886" stroke-width="2"/>
+    </g>
+    <g fill="#ffe3aa">
+      <rect x="123" y="181" width="25" height="7" rx="3"/>
+      <rect x="813" y="181" width="25" height="7" rx="3"/>
+    </g>
+  </g>
+
+  <!-- Typography: restrained poster-style scene identification. -->
+  <g font-family="system-ui, sans-serif">
+    <text x="58" y="55" fill="#dfebe6" font-size="16" font-weight="750" letter-spacing="5">AFTER HOURS</text>
+    <text x="59" y="77" fill="#96b4bc" font-size="10" letter-spacing="3">VERT SESSION / 01</text>
+    <text x="902" y="590" text-anchor="end" fill="#83a4ad" font-size="10" letter-spacing="2">PUMP · FLOAT · RETURN</text>
+  </g>
+
+  <!-- Ramp structure: two opposing 200-pixel-radius quarter pipes and a flat bottom. -->
+  <g id="half-pipe">
+    <path d="M110 268H160V288
+             A200 200 0 0 0 360 488H640
+             A200 200 0 0 0 840 288V268H890V552H110Z"
+          fill="url(#rampFace)" stroke="#122c3d" stroke-width="3"/>
+
+    <!-- Structural panel joints on the ramp's visible front face. -->
+    <g fill="none" stroke="#62828a" stroke-width="1.5" opacity=".32">
+      <path d="M183 381V551M232 447V551M293 478V551M360 489V551"/>
+      <path d="M455 489V551M550 489V551M640 489V551"/>
+      <path d="M707 477V551M768 444V551M819 380V551"/>
+      <path d="M111 535H889"/>
+    </g>
+    <g fill="#8ba7a9" opacity=".45">
+      <circle cx="184" cy="521" r="2"/>
+      <circle cx="292" cy="521" r="2"/>
+      <circle cx="455" cy="521" r="2"/>
+      <circle cx="640" cy="521" r="2"/>
+      <circle cx="769" cy="521" r="2"/>
+      <circle cx="856" cy="521" r="2"/>
+    </g>
+
+    <!-- Narrow perspective ribbon: the rideable surface and its near edge. -->
+    <path d="M90 250H140V270
+             A200 200 0 0 0 340 470H620
+             A200 200 0 0 0 820 270V250H870
+             L890 268H840V288
+             A200 200 0 0 1 640 488H360
+             A200 200 0 0 1 160 288V268H110Z"
+          fill="url(#ridingSurface)" stroke="#accac7" stroke-width="1.2"/>
+    <path d="M90 250H140V270
+             A200 200 0 0 0 340 470H620
+             A200 200 0 0 0 820 270V250H870
+             L890 268H840V288
+             A200 200 0 0 1 640 488H360
+             A200 200 0 0 1 160 288V268H110Z"
+          fill="url(#concrete)"/>
+
+    <path d="M140 250V270A200 200 0 0 0 340 470H620A200 200 0 0 0 820 270V250"
+          fill="none" stroke="#d1e1d8" stroke-width="3" stroke-linecap="round"/>
+    <path d="M160 288A200 200 0 0 0 360 488H640A200 200 0 0 0 840 288"
+          fill="none" stroke="#416d79" stroke-width="2"/>
+
+    <!-- Steel coping bars at both lips. -->
+    <g stroke-linecap="round">
+      <path d="M137 249L158 267M817 249L838 267" stroke="#102c3d" stroke-width="8"/>
+      <path d="M137 247L158 265M817 247L838 265" stroke="#e8eee2" stroke-width="4"/>
+    </g>
+
+    <g font-family="system-ui, sans-serif" fill="#a9c4c3">
+      <text x="480" y="534" text-anchor="middle" font-size="18" font-weight="800" letter-spacing="8">NIGHT SHIFT</text>
+      <text x="130" y="294" font-size="9" transform="rotate(90 130 294)" letter-spacing="2">VERT</text>
+    </g>
+    <path d="M854 481l15-24m-15 40 15-24" stroke="#efbc75" stroke-width="4" opacity=".7"/>
+  </g>
+
+  <!--
+    Moving rider: wheel-contact coordinates follow the circular transitions.
+    Timing is deliberately non-uniform: fast on the flat, slow at the left
+    reversal. The rider pumps to replace energy lost on the aerial landing.
+
+    Airborne samples use:
+      x = 820 - 16*t
+      y = 250 - 240*t + 120*t*t
+    with t in seconds, from takeoff until intersection with the right transition.
+    Thus horizontal velocity is constant and downward acceleration is 240 px/s².
+    Fine linear samples approximate this parabola to within about two pixels.
+    The first and final flat-bottom velocities match, making the loop seamless.
+  -->
+  <g id="rider-position">
+    <animateTransform attributeName="transform" type="translate"
+      dur="9s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;.025;.052778;.0675;.0825;.098;.115;.134;.155;.164;.191778;.219556;.247333;.275111;.302889;.330667;.358444;.386222;.414;.438444;.449;.467;.484;.501;.548;.6;.621;.643;.667;.696;.722;.740;.783;.826;.850;.885;.923;.945;.960;.975;.9875;1"
+      values="430 470;520 470;620 470;671.76 463.19;720 443.21;761.42 411.42;793.21 370;813.19 321.76;820 270;820 250;816 197.5;812 160;808 137.5;804 130;800 137.5;796 160;792 197.5;788 250;784 317.5;780.48 389.31;761.42 411.42;720 443.21;671.76 463.19;620 470;480 470;340 470;288.24 463.19;240 443.21;198.58 411.42;166.79 370;152.06 338.4;146.81 321.76;143.04 304.73;146.81 321.76;152.06 338.4;166.79 370;198.58 411.42;240 443.21;288.24 463.19;340 470;385 470;430 470"/>
+
+    <!-- Rider orientation: normal to the riding surface, smoothly prepared for landing. -->
+    <g id="rider-attitude">
+      <animateTransform attributeName="transform" type="rotate"
+        dur="9s" repeatCount="indefinite"
+        keyTimes="0;.052778;.0675;.0825;.098;.115;.134;.155;.164;.22;.29;.36;.414;.438444;.449;.467;.484;.501;.6;.621;.643;.667;.696;.722;.740;.783;.826;.850;.885;.923;.945;.960;.975;1"
+        values="0;0;-15;-30;-45;-60;-75;-90;-90;-82;-68;-56;-53.37;-53.37;-45;-30;-15;0;0;15;30;45;60;70;75;80;75;70;60;45;30;15;0;0"/>
+
+      <!-- Man: articulated trousers, planted shoes, shirt, arms, face, beard, and cap. -->
+      <g id="skater">
+        <path d="M-5-42L-18-29L-17-15M3-42L17-29L17-15"
+              fill="none" stroke="#122e48" stroke-width="10"
+              stroke-linecap="round" stroke-linejoin="round">
+          <animate attributeName="d" dur="9s" repeatCount="indefinite"
+            keyTimes="0;.13;.164;.22;.36;.438444;.49;.60;.783;.90;.96;1"
+            values="M-5-42L-18-29L-17-15M3-42L17-29L17-15;
+                    M-5-36L-22-27L-17-15M3-36L22-26L17-15;
+                    M-5-44L-17-30L-17-15M3-44L16-30L17-15;
+                    M-5-39L-25-29L-17-21M3-39L23-29L17-21;
+                    M-5-39L-25-29L-17-21M3-39L23-29L17-21;
+                    M-5-34L-25-24L-17-15M3-34L25-24L17-15;
+                    M-5-42L-18-29L-17-15M3-42L17-29L17-15;
+                    M-5-42L-18-29L-17-15M3-42L17-29L17-15;
+                    M-5-42L-18-29L-17-15M3-42L17-29L17-15;
+                    M-5-34L-25-24L-17-15M3-34L25-24L17-15;
+                    M-5-43L-18-29L-17-15M3-43L17-29L17-15;
+                    M-5-42L-18-29L-17-15M3-42L17-29L17-15"/>
+        </path>
+        <path d="M-6-41L-18-28M4-41L17-28" fill="none" stroke="#31546d" stroke-width="3" stroke-linecap="round"/>
+
+        <g id="shoes" fill="#e7eee4" stroke="#163047" stroke-width="1.5">
+          <animateTransform attributeName="transform" type="translate" dur="9s" repeatCount="indefinite"
+            keyTimes="0;.18;.22;.36;.414;1" values="0 0;0 0;0 -6;0 -6;0 0;0 0"/>
+          <path d="M-23-19H-14L-9-14Q-9-11-14-11H-25Z"/>
+          <path d="M12-19H20L27-14Q28-11 23-11H11Z"/>
+          <path d="M-24-12H-11M12-12H25" fill="none" stroke="#e5ae65"/>
+        </g>
+
+        <!-- Upper body rises on takeoff and compresses at impact and while pumping. -->
+        <g id="upper-body">
+          <animateTransform attributeName="transform" type="translate" dur="9s" repeatCount="indefinite"
+            keyTimes="0;.13;.164;.22;.36;.438444;.49;.60;.783;.90;.96;1"
+            values="0 0;0 6;0 -2;0 3;0 3;0 8;0 0;0 0;0 0;0 8;0 -1;0 0"/>
+
+          <path d="M-9-62L-22-53L-30-61" fill="none" stroke="#dc9975" stroke-width="6" stroke-linecap="round"/>
+          <path d="M-9-62L-18-55" fill="none" stroke="#dc604d" stroke-width="9" stroke-linecap="round"/>
+          <path d="M-10-65Q1-69 10-61L10-42Q0-37-11-42Z"
+                fill="#f27b58" stroke="#ad493f" stroke-width="1.5"/>
+          <path d="M-8-44Q1-41 9-45" fill="none" stroke="#ffab70" stroke-width="2"/>
+          <path d="M7-61L20-52L31-58" fill="none" stroke="#edb08a" stroke-width="6" stroke-linecap="round"/>
+          <path d="M7-61L15-55" fill="none" stroke="#f27b58" stroke-width="10" stroke-linecap="round"/>
+
+          <path d="M0-66L1-72" stroke="#d89471" stroke-width="7" stroke-linecap="round"/>
+          <path d="M-7-81Q-5-90 4-88Q13-87 12-78L15-75L11-73Q8-66 1-69L-5-73Z"
+                fill="#edb08a" stroke="#b87b64" stroke-width="1"/>
+          <path d="M0-73Q5-69 11-74L9-69Q3-65-1-71Z" fill="#67413b"/>
+          <circle cx="8" cy="-79" r="1.2" fill="#173046"/>
+          <path d="M-9-81Q-10-92 1-93Q12-92 13-83Z" fill="#79c4bf"/>
+          <path d="M3-83H19" stroke="#a9e0cf" stroke-width="4" stroke-linecap="round"/>
+          <path d="M-8-81L-7-75" stroke="#24495c" stroke-width="3" stroke-linecap="round"/>
+        </g>
+      </g>
+
+      <!--
+        Skateboard: one concave deck, two metal trucks, and four separate wheels.
+        The board makes one complete aerial rotation with the feet lifted clear.
+        Its rotation finishes well before contact, restoring the ramp-aligned deck.
+      -->
+      <g id="skateboard">
+        <animateTransform attributeName="transform" type="rotate"
+          dur="9s" repeatCount="indefinite"
+          keyTimes="0;.185;.205;.245;.285;.325;.365;1"
+          values="0 0 -10;0 0 -10;20 0 -10;110 0 -10;200 0 -10;290 0 -10;360 0 -10;360 0 -10"/>
+
+        <!-- Far wheels remain individually visible behind the trucks. -->
+        <g fill="#9cafb1" stroke="#183347" stroke-width="1.4">
+          <circle cx="-23" cy="-5" r="3.5"/>
+          <circle cx="18" cy="-5" r="3.5"/>
+        </g>
+
+        <!-- Two trucks and their axles. -->
+        <g fill="none" stroke="#d6e2df" stroke-width="2.5" stroke-linecap="round">
+          <path d="M-21-10V-5M20-10V-5"/>
+          <path d="M-25-5H-16M16-5H25"/>
+        </g>
+
+        <!-- Warm deck underside with a dark grip-tape upper edge and raised tips. -->
+        <path d="M-35-14Q-30-9-24-10H24Q31-10 35-15
+                 L35-11Q31-6 24-7H-24Q-32-7-35-11Z"
+              fill="#f9c36d" stroke="#173247" stroke-width="1.3"/>
+        <path d="M-34-14Q-29-11-23-12H24Q31-12 34-15"
+              fill="none" stroke="#203846" stroke-width="3" stroke-linecap="round"/>
+        <path d="M-7-9H7" stroke="#e56850" stroke-width="2"/>
+
+        <!-- Near wheels: together with the far pair, four wheels are visible. -->
+        <g fill="#f1ead2" stroke="#183347" stroke-width="1.5">
+          <circle cx="-18" cy="-3.5" r="3.5"/>
+          <circle cx="23" cy="-3.5" r="3.5"/>
+        </g>
+        <g fill="#627982">
+          <circle cx="-18" cy="-3.5" r="1"/>
+          <circle cx="23" cy="-3.5" r="1"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
