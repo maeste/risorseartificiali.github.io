@@ -17,7 +17,36 @@ Open the raw SVG to see the animation live.</p>
   .meta { color:#888; font-size:0.85rem; }
   .err { color:#ff5555; }
   .svgwrap { background:#000; border-radius:8px; overflow:hidden; }
+  details.promptbox { margin:1.5rem 0; background:#1c1c1c; border:1px solid #333;
+          border-radius:12px; padding:0.75rem 1rem; }
+  details.promptbox summary { color:#ffd700; cursor:pointer; font-weight:600; }
+  details.promptbox pre { white-space:pre-wrap; color:#ccc; font-size:0.85rem;
+          margin:0.75rem 0 0; }
 </style>
+<details class="promptbox" open>
+  <summary>Prompt 1: minimal</summary>
+  <pre>Generate an animated SVG of Gandalf duelling the Balrog on the Bridge of Khazad-dûm.</pre>
+</details>
+<details class="promptbox" open>
+  <summary>Prompt 2: constrained</summary>
+  <pre>Generate a single self-contained animated SVG (SMIL or CSS animations, no JavaScript, no external resources) depicting Gandalf duelling the Balrog on the Bridge of Khazad-dûm.
+
+The scene must include:
+- A narrow stone bridge spanning a fiery chasm below
+- Gandalf facing the Balrog, staff in one hand and sword in the other
+- The Balrog with visible wings, horns, and a flaming aura
+
+It must animate for at least two animation loops:
+- Flickering flames and glowing light on the Balrog and in the chasm
+- Gandalf&#x27;s cloak and robe waving
+- A subtle pulsing glow from Gandalf&#x27;s staff
+- Both figures shifting stance as if clashing
+
+Constraints:
+- Single &lt;svg&gt; code block only, no explanation
+- Loop must be seamless (no jumps when the animation restarts)
+- Include XML comments describing what each group represents</pre>
+</details>
 
 <div class="card">
   <h2>claude-fable-5-1-constrained</h2>
