@@ -7,13 +7,14 @@ permalink: /skateboard/
 time on physics: an animated SVG of a man doing skateboard tricks on a pipe,
 prompted verbatim (typos included). The "real physics" constraint tests whether
 the model can encode gravity, momentum and pendulum motion in code.
-Run on <strong>GPT-6 Astra</strong> (reasoning effort: medium) via OpenRouter.</p>
+Models: <strong>GPT-6 Astra</strong> (reasoning medium),
+<strong>GPT-5.6 Luna</strong> and <strong>DeepSeek V4 Flash</strong>. Open the raw SVG to see the animation.</p>
 <style>
   .card { background:#1c1c1c; border:1px solid #333; border-radius:12px;
           padding:1rem; margin-bottom:2rem; }
   .card h2 { color:#ffd700; margin-top:0; font-size:1.1rem; }
   .meta { color:#888; font-size:0.85rem; }
-  .note { color:#ffaa55; font-size:0.9rem; }
+  .err { color:#ff5555; }
   .svgwrap { background:#000; border-radius:8px; overflow:hidden; }
   details.promptbox { margin:1.5rem 0; background:#1c1c1c; border:1px solid #333;
           border-radius:12px; padding:0.75rem 1rem; }
@@ -22,13 +23,69 @@ Run on <strong>GPT-6 Astra</strong> (reasoning effort: medium) via OpenRouter.</
           margin:0.75rem 0 0; }
 </style>
 <details class="promptbox" open>
-  <summary>Prompt (verbatim)</summary>
+  <summary>Prompt 1: minimal (verbatim)</summary>
   <pre>generate an animated svg of a man doing skatevoard tricks on a pipe. Be mindful of the real phisics</pre>
 </details>
+<details class="promptbox" open>
+  <summary>Prompt 2: constrained</summary>
+  <pre>Generate a single self-contained animated SVG (SMIL or CSS animations, no JavaScript, no external resources) of a man doing skateboard tricks on a pipe (half-pipe / vert ramp). Be mindful of real physics.
+
+The scene must include:
+- A half-pipe / vert ramp with two quarter pipes facing each other
+- A skater figure with a recognizable skateboard (deck + 4 trucks/wheels)
+- The skater performing at least one aerial trick above the pipe&#x27;s coping
+
+The animation must respect real physics:
+- Pendulum motion: the skater swings back and forth in the transitions
+- Speed varies with height (slower at the top of the ramp, faster at the bottom)
+- Gravity: airborne tricks follow a parabolic arc and land back on the ramp
+- The board rotates during the trick (e.g. kickflip or 360 spin) and aligns again before landing
+
+Constraints:
+- Single &lt;svg&gt; code block only, no explanation
+- SMIL or CSS animations only, no JavaScript, no external resources
+- Loop must be seamless (the skater ends where the loop restarts)
+- Include XML comments describing what each group represents</pre>
+</details>
+
 <div class="card">
-  <h2>gpt-6-astra (reasoning: medium)</h2>
-  <p class="meta">len=10398 · 5279 tok (? reasoning) · 136.7s · cost=$0.26275</p>
-  <p class="note">Note: with the minimal prompt the model chose <strong>JavaScript inside the SVG</strong> (requestAnimationFrame) instead of SMIL/CSS, so the animation is physics-stepped frame by frame. It runs in the browser like any SVG script.</p>
-  <div class="svgwrap"><iframe src="gpt-6-astra-medium.svg" loading="lazy" style="width:100%;height:520px;border:0;background:#000"></iframe></div>
+  <h2>gpt-6-astra-medium-minimal</h2>
+  <p class="meta">len=10398 · anim=False · tech=SMIL/CSS · 5279 tok · 136.7s · cost=$0.26275</p>
+  <div class="svgwrap"><iframe src="gpt-6-astra-medium.svg" loading="lazy" style="width:100%;height:480px;border:0;background:#000"></iframe></div>
   <p><a href="gpt-6-astra-medium.svg">open raw SVG</a></p>
+</div>
+
+<div class="card">
+  <h2>gpt-6-astra-constrained</h2>
+  <p class="meta">len=12912 · anim=True · tech=SMIL/CSS · 11712 tok · 309.3s · cost=$0.5758</p>
+  <div class="svgwrap"><iframe src="gpt-6-astra-constrained.svg" loading="lazy" style="width:100%;height:480px;border:0;background:#000"></iframe></div>
+  <p><a href="gpt-6-astra-constrained.svg">open raw SVG</a></p>
+</div>
+
+<div class="card">
+  <h2>gpt-5-6-luna-minimal</h2>
+  <p class="meta">len=6635 · anim=True · tech=SMIL/CSS · 4057 tok · 30.1s · cost=$0.0048</p>
+  <div class="svgwrap"><iframe src="gpt-5-6-luna-minimal.svg" loading="lazy" style="width:100%;height:480px;border:0;background:#000"></iframe></div>
+  <p><a href="gpt-5-6-luna-minimal.svg">open raw SVG</a></p>
+</div>
+
+<div class="card">
+  <h2>gpt-5-6-luna-constrained</h2>
+  <p class="meta">len=7078 · anim=True · tech=SMIL/CSS · 4394 tok · 41.1s · cost=$0.0050</p>
+  <div class="svgwrap"><iframe src="gpt-5-6-luna-constrained.svg" loading="lazy" style="width:100%;height:480px;border:0;background:#000"></iframe></div>
+  <p><a href="gpt-5-6-luna-constrained.svg">open raw SVG</a></p>
+</div>
+
+<div class="card">
+  <h2>deepseek-v4-flash-minimal</h2>
+  <p class="meta">len=8123 · anim=True · tech=SMIL/CSS · 3148 tok · 296.2s · cost=$0.0005</p>
+  <div class="svgwrap"><iframe src="deepseek-v4-flash-minimal.svg" loading="lazy" style="width:100%;height:480px;border:0;background:#000"></iframe></div>
+  <p><a href="deepseek-v4-flash-minimal.svg">open raw SVG</a></p>
+</div>
+
+<div class="card">
+  <h2>deepseek-v4-flash-constrained</h2>
+  <p class="meta">len=15024 · anim=True · tech=SMIL/CSS · 5359 tok · 1151.2s · cost=$0.0009</p>
+  <div class="svgwrap"><iframe src="deepseek-v4-flash-constrained.svg" loading="lazy" style="width:100%;height:480px;border:0;background:#000"></iframe></div>
+  <p><a href="deepseek-v4-flash-constrained.svg">open raw SVG</a></p>
 </div>

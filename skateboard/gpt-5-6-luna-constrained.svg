@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <title>Skateboarder performing a kickflip in a half-pipe</title>
+  <desc>A looping, physics-inspired animation with pendulum transitions, variable speed, gravity-driven aerial motion, and a rotating skateboard.</desc>
+
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#182b4a"/>
+      <stop offset="1" stop-color="#536f91"/>
+    </linearGradient>
+    <linearGradient id="ramp" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8e4ee"/>
+      <stop offset="1" stop-color="#8da2b5"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+  </defs>
+
+  <!-- Background and ground -->
+  <g id="background">
+    <rect width="800" height="500" fill="url(#sky)"/>
+    <circle cx="680" cy="86" r="34" fill="#e8f0f5" opacity=".7"/>
+    <path d="M0 432 Q170 416 320 431 T800 424 V500 H0Z" fill="#111923"/>
+    <path d="M0 432 Q170 416 320 431 T800 424" fill="none" stroke="#718394" stroke-width="3"/>
+  </g>
+
+  <!-- Half-pipe made from two opposing quarter pipes -->
+  <g id="half-pipe">
+    <path d="M52 157
+             L116 157
+             C135 238 190 305 264 350
+             C300 372 334 389 400 389
+             C466 389 500 372 536 350
+             C610 305 665 238 684 157
+             L748 157
+             L748 432
+             L52 432 Z"
+          fill="url(#ramp)" stroke="#263746" stroke-width="5"/>
+
+    <!-- darker transition under the riding surface -->
+    <path d="M116 157
+             C135 238 190 305 264 350
+             C300 372 334 389 400 389
+             C466 389 500 372 536 350
+             C610 305 665 238 684 157"
+          fill="none" stroke="#f4f8fb" stroke-width="8"/>
+
+    <!-- left and right copings -->
+    <path d="M47 157 H121" stroke="#f6c85f" stroke-width="9" stroke-linecap="round"/>
+    <path d="M679 157 H753" stroke="#f6c85f" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="116" cy="157" r="7" fill="#fff0ad"/>
+    <circle cx="684" cy="157" r="7" fill="#fff0ad"/>
+
+    <!-- ramp seam and deck details -->
+    <path d="M80 180 H108 M692 180 H720" stroke="#61788d" stroke-width="3"/>
+    <path d="M80 205 H112 M688 205 H720" stroke="#61788d" stroke-width="3"/>
+    <path d="M75 432 H725" stroke="#0c1118" stroke-width="7"/>
+  </g>
+
+  <!-- Soft moving shadow, synchronized with the skater's height -->
+  <g id="air-shadow" opacity=".28">
+    <ellipse cx="400" cy="400" rx="46" ry="8" fill="#05090d" filter="url(#shadow)">
+      <animate attributeName="rx"
+        values="38;54;26;18;26;54;38"
+        keyTimes="0;.18;.35;.5;.65;.82;1"
+        dur="8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity"
+        values=".48;.3;.18;.08;.18;.3;.48"
+        keyTimes="0;.18;.35;.5;.65;.82;1"
+        dur="8s" repeatCount="indefinite"/>
+    </ellipse>
+  </g>
+
+  <!-- The skater travels like a pendulum: slow near coping, fastest through the bowl -->
+  <g id="skater-trajectory">
+    <animateTransform attributeName="transform" type="translate"
+      values="684 224;
+              490 370;
+              116 224;
+              250 104;
+              430 70;
+              620 224;
+              490 370;
+              116 224;
+              684 224"
+      keyTimes="0;.18;.35;.43;.51;.61;.78;.9;1"
+      dur="8s" repeatCount="indefinite"
+      calcMode="spline"
+      keySplines="
+        .72 0 1 1;
+        .15 1 .25 1;
+        .72 0 1 1;
+        .25 0 .55 1;
+        .2 .05 .55 1;
+        .72 0 1 1;
+        .15 1 .25 1;
+        .72 0 1 1"/>
+
+    <!-- body follows the ramp angle, then levels during the aerial -->
+    <g id="skater-pose">
+      <animateTransform attributeName="transform" type="rotate"
+        values="-19;0;19;10;0;-12;0;19;-19"
+        keyTimes="0;.18;.35;.43;.51;.61;.78;.9;1"
+        dur="8s" repeatCount="indefinite"
+        calcMode="spline"
+        keySplines=".6 0 .8 1; .4 0 .6 1; .5 0 .7 1; .4 0 .6 1; .4 0 .6 1; .6 0 .8 1; .4 0 .6 1; .6 0 .8 1"/>
+
+      <!-- Complete skateboard: deck, two trucks, and four wheels -->
+      <g id="skateboard">
+        <animateTransform attributeName="transform" type="rotate"
+          values="0;0;0;180;360;360;360;0"
+          keyTimes="0;.18;.35;.43;.51;.61;.78;1"
+          dur="8s" repeatCount="indefinite"
+          calcMode="spline"
+          keySplines=".5 0 .5 1; .5 0 .5 1; .15 .7 .3 1; .15 .7 .3 1; .4 0 .7 1; .5 0 .5 1; .5 0 .5 1"/>
+
+        <rect x="-48" y="-5" width="96" height="9" rx="4.5"
+              fill="#d64f50" stroke="#17222d" stroke-width="3"/>
+        <path d="M-29 4 L-29 10 M29 4 L29 10"
+              stroke="#17222d" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="-36" cy="13" r="8" fill="#202b35" stroke="#d8e5ed" stroke-width="2"/>
+        <circle cx="-21" cy="13" r="8" fill="#202b35" stroke="#d8e5ed" stroke-width="2"/>
+        <circle cx="21" cy="13" r="8" fill="#202b35" stroke="#d8e5ed" stroke-width="2"/>
+        <circle cx="36" cy="13" r="8" fill="#202b35" stroke="#d8e5ed" stroke-width="2"/>
+        <circle cx="-36" cy="13" r="2.5" fill="#f3c95b"/>
+        <circle cx="-21" cy="13" r="2.5" fill="#f3c95b"/>
+        <circle cx="21" cy="13" r="2.5" fill="#f3c95b"/>
+        <circle cx="36" cy="13" r="2.5" fill="#f3c95b"/>
+      </g>
+
+      <!-- Recognizable airborne skater -->
+      <g id="skater-figure" stroke="#172432" stroke-linecap="round" stroke-linejoin="round">
+        <!-- rear leg -->
+        <path d="M-10 -10 L-23 -35 L-4 -61" fill="none" stroke-width="9"/>
+        <!-- front leg -->
+        <path d="M12 -10 L28 -32 L42 -48" fill="none" stroke-width="9"/>
+        <!-- shoes -->
+        <path d="M-10 -8 Q-25 -5 -34 -1" fill="none" stroke-width="7"/>
+        <path d="M13 -8 Q29 -4 39 1" fill="none" stroke-width="7"/>
+
+        <!-- torso and shirt -->
+        <path d="M-5 -61 Q0 -72 11 -64 L23 -38 L4 -31 L-13 -45 Z"
+              fill="#3273a8" stroke-width="3"/>
+        <!-- back arm -->
+        <path d="M-8 -58 L-30 -72 L-48 -62" fill="none" stroke-width="7"/>
+        <!-- front arm -->
+        <path d="M15 -58 L34 -72 L51 -67" fill="none" stroke-width="7"/>
+
+        <!-- neck and head -->
+        <path d="M2 -67 L3 -77" fill="none" stroke-width="7"/>
+        <circle cx="4" cy="-88" r="14" fill="#d79b72" stroke-width="3"/>
+        <!-- hair and helmet-like cap -->
+        <path d="M-9 -91 Q1 -106 15 -99 Q21 -96 20 -88 Q8 -94 -9 -91Z"
+              fill="#202b38" stroke-width="3"/>
+        <path d="M-13 -92 Q4 -104 20 -94" fill="none" stroke="#f2c65b" stroke-width="4"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Ambient labels and small structural bolts -->
+  <g id="ramp-details" fill="#d9e6ef" opacity=".7">
+    <circle cx="92" cy="157" r="2"/>
+    <circle cx="105" cy="157" r="2"/>
+    <circle cx="695" cy="157" r="2"/>
+    <circle cx="708" cy="157" r="2"/>
+    <text x="400" y="475" text-anchor="middle"
+          font-family="sans-serif" font-size="13" letter-spacing="3">
+      VERT TRANSITION
+    </text>
+  </g>
+</svg>
