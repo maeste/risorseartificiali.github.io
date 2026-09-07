@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7fbfe0"/>
+      <stop offset="1" stop-color="#e8f6ff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background -->
+  <rect width="800" height="500" fill="url(#sky)"/>
+
+  <!-- half-pipe: two 3 m (150 px) quarter-pipes + 8 m flat, decks at coping height -->
+  <path d="M0 270 L50 270 A150 150 0 0 0 200 420 L600 420 A150 150 0 0 0 750 270 L800 270 L800 500 L0 500 Z"
+        fill="#cfc7b8" stroke="#544e46" stroke-width="3" stroke-linejoin="round"/>
+  <!-- plywood seams -->
+  <g stroke="#b3ab9c" stroke-width="1.5" fill="none">
+    <path d="M60 300 A140 140 0 0 0 200 410 L600 410 A140 140 0 0 0 740 300"/>
+    <path d="M78 336 A120 120 0 0 0 200 396 L600 396 A120 120 0 0 0 722 336"/>
+  </g>
+  <!-- coping -->
+  <circle cx="50" cy="270" r="4" fill="#3b3b3b"/>
+  <circle cx="750" cy="270" r="4" fill="#3b3b3b"/>
+
+  <!-- ===================== SKATER ===================== -->
+  <!-- Position: board contact point follows the pipe surface, launches vertically
+       at the coping (v=4.9 m/s ⇒ 1.2 m air), parabolic flight, lands ~1.2 m down
+       the wall, accelerates to 9.1 m/s at the bottom, decelerates back to 4.9 m/s
+       at the far coping. Loop = 6.262 s. -->
+  <g>
+    <animateMotion dur="6.262s" repeatCount="indefinite" calcMode="linear"
+      path="M50 270
+            Q51 245.5 52 230.8 Q53 216.1 54 211.2 Q55 206.3 56 211.2
+            Q57 216.1 58 230.8 Q59 245.5 60 270 Q61 294.5 62 328.8
+            A150 150 0 0 0 93.93 376.07 A150 150 0 0 0 142.6 408.58 A150 150 0 0 0 200 420
+            L600 420
+            A150 150 0 0 0 657.4 408.58 A150 150 0 0 0 706.07 376.07
+            A150 150 0 0 0 738.58 327.4 A150 150 0 0 0 750 270
+            Q749 245.5 748 230.8 Q747 216.1 746 211.2 Q745 206.3 744 211.2
+            Q743 216.1 742 230.8 Q741 245.5 740 270 Q739 294.5 738 328.8
+            A150 150 0 0 1 706.07 376.07 A150 150 0 0 1 657.4 408.58 A150 150 0 0 1 600 420
+            L200 420
+            A150 150 0 0 1 142.6 408.58 A150 150 0 0 1 93.93 376.07
+            A150 150 0 0 1 61.42 327.4 A150 150 0 0 1 50 270"
+      keyPoints="0;0.01977;0.02969;0.03235;0.04228;0.06204;0.09167;0.12055;0.15022;0.17988;0.38134;0.41100;0.44067;0.47034;0.5;0.51977;0.52969;0.53235;0.54228;0.56204;0.59167;0.62055;0.65022;0.67988;0.88134;0.91100;0.94067;0.97034;1"
+      keyTimes="0;0.03194;0.06388;0.09582;0.12775;0.15969;0.19163;0.21607;0.23826;0.25918;0.39955;0.42047;0.44267;0.46790;0.5;0.53194;0.56388;0.59582;0.62775;0.65969;0.69163;0.71607;0.73826;0.75918;0.89955;0.92047;0.94267;0.96790;1"/>
+
+    <!-- Orientation: body stays perpendicular to the surface (angle = θ−90°),
+         tilts back toward upright in the air -->
+    <g>
+      <animateTransform attributeName="transform" type="rotate" dur="6.262s" repeatCount="indefinite" calcMode="linear"
+        values="90;55;66.9;45;22.5;0;0;-22.5;-45;-67.5;-90;-55;-66.9;-45;-22.5;0;0;22.5;45;67.5;90"
+        keyTimes="0;0.07985;0.19163;0.21607;0.23826;0.25918;0.39955;0.42047;0.44267;0.46790;0.5;0.57985;0.69163;0.71607;0.73826;0.75918;0.89955;0.92047;0.94267;0.96790;1"/>
+
+      <!-- 180° yaw in each air (cosine-eased = constant angular velocity, side view) -->
+      <g>
+        <animateTransform attributeName="transform" type="scale" dur="6.262s" repeatCount="indefinite" calcMode="spline"
+          values="-1 1;1 1;1 1;-1 1;-1 1"
+          keyTimes="0;0.19163;0.5;0.69163;1"
+          keySplines="0.42 0 0.58 1;0 0 1 1;0.42 0 0.58 1;0 0 1 1"/>
+
+        <!-- skateboard (0.88 m) -->
+        <circle cx="-14" cy="-4" r="4" fill="#2b2b2b"/>
+        <circle cx="14" cy="-4" r="4" fill="#2b2b2b"/>
+        <line x1="-14" y1="-8" x2="-14" y2="-4" stroke="#888" stroke-width="3"/>
+        <line x1="14" y1="-8" x2="14" y2="-4" stroke="#888" stroke-width="3"/>
+        <path d="M-22 -13 Q-20 -8 -14 -8 L14 -8 Q20 -8 22 -13" fill="none" stroke="#7a4a1e" stroke-width="3.5" stroke-linecap="round"/>
+
+        <!-- legs -->
+        <polyline fill="none" stroke="#1d3557" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"
+          points="-10,-9 -9,-30 0,-50 11,-30 10,-9">
+          <animate attributeName="points" dur="6.262s" repeatCount="indefinite"
+            keyTimes="0;0.0479;0.1437;0.1916;0.2592;0.3513;0.4471;0.5;0.5479;0.6437;0.6916;0.7592;0.8463;0.9422;1"
+            values="-10,-9 -9,-30 0,-50 11,-30 10,-9;
+                    -10,-9 -20,-28 0,-36 20,-28 10,-9;
+                    -10,-9 -20,-28 0,-36 20,-28 10,-9;
+                    -10,-9 -16,-26 0,-38 17,-26 10,-9;
+                    -10,-9 -9,-30 0,-50 11,-30 10,-9;
+                    -10,-9 -16,-26 0,-38 17,-26 10,-9;
+                    -10,-9 -9,-30 0,-50 11,-30 10,-9;
+                    -10,-9 -9,-30 0,-50 11,-30 10,-9;
+                    -10,-9 -20,-28 0,-36 20,-28 10,-9;
+                    -10,-9 -20,-28 0,-36 20,-28 10,-9;
+                    -10,-9 -16,-26 0,-38 17,-26 10,-9;
+                    -10,-9 -9,-30 0,-50 11,-30 10,-9;
+                    -10,-9 -16,-26 0,-38 17,-26 10,-9;
+                    -10,-9 -9,-30 0,-50 11,-30 10,-9;
+                    -10,-9 -9,-30 0,-50 11,-30 10,-9"/>
+        </polyline>
+
+        <!-- torso -->
+        <polyline fill="none" stroke="#e63946" stroke-width="9" stroke-linecap="round" points="0,-50 0,-82">
+          <animate attributeName="points" dur="6.262s" repeatCount="indefinite"
+            keyTimes="0;0.0479;0.1437;0.1916;0.2592;0.3513;0.4471;0.5;0.5479;0.6437;0.6916;0.7592;0.8463;0.9422;1"
+            values="0,-50 0,-82; 0,-36 4,-64; 0,-36 4,-64; 0,-38 0,-68; 0,-50 0,-82; 0,-38 0,-68; 0,-50 0,-82;
+                    0,-50 0,-82; 0,-36 4,-64; 0,-36 4,-64; 0,-38 0,-68; 0,-50 0,-82; 0,-38 0,-68; 0,-50 0,-82; 0,-50 0,-82"/>
+        </polyline>
+
+        <!-- arms (grab the nose in the air) -->
+        <polyline fill="none" stroke="#e63946" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"
+          points="-28,-58 -18,-70 0,-80 18,-70 28,-58">
+          <animate attributeName="points" dur="6.262s" repeatCount="indefinite"
+            keyTimes="0;0.0479;0.1437;0.1916;0.2592;0.3513;0.4471;0.5;0.5479;0.6437;0.6916;0.7592;0.8463;0.9422;1"
+            values="-28,-58 -18,-70 0,-80 18,-70 28,-58;
+                    -20,-13 -16,-40 4,-62 20,-72 30,-84;
+                    -20,-13 -16,-40 4,-62 20,-72 30,-84;
+                    -34,-48 -22,-62 0,-66 22,-62 34,-48;
+                    -28,-58 -18,-70 0,-80 18,-70 28,-58;
+                    -34,-48 -22,-62 0,-66 22,-62 34,-48;
+                    -28,-58 -18,-70 0,-80 18,-70 28,-58;
+                    -28,-58 -18,-70 0,-80 18,-70 28,-58;
+                    -20,-13 -16,-40 4,-62 20,-72 30,-84;
+                    -20,-13 -16,-40 4,-62 20,-72 30,-84;
+                    -34,-48 -22,-62 0,-66 22,-62 34,-48;
+                    -28,-58 -18,-70 0,-80 18,-70 28,-58;
+                    -34,-48 -22,-62 0,-66 22,-62 34,-48;
+                    -28,-58 -18,-70 0,-80 18,-70 28,-58;
+                    -28,-58 -18,-70 0,-80 18,-70 28,-58"/>
+        </polyline>
+
+        <!-- head -->
+        <circle r="9" cx="0" cy="-92" fill="#f1c27d" stroke="#333" stroke-width="1.5">
+          <animate attributeName="cx" dur="6.262s" repeatCount="indefinite"
+            keyTimes="0;0.0479;0.1437;0.1916;0.2592;0.3513;0.4471;0.5;0.5479;0.6437;0.6916;0.7592;0.8463;0.9422;1"
+            values="0;4;4;0;0;0;0;0;4;4;0;0;0;0;0"/>
+          <animate attributeName="cy" dur="6.262s" repeatCount="indefinite"
+            keyTimes="0;0.0479;0.1437;0.1916;0.2592;0.3513;0.4471;0.5;0.5479;0.6437;0.6916;0.7592;0.8463;0.9422;1"
+            values="-92;-74;-74;-78;-92;-78;-92;-92;-74;-74;-78;-92;-78;-92;-92"/>
+        </circle>
+      </g>
+    </g>
+  </g>
+
+  <text x="12" y="488" font-family="sans-serif" font-size="12" fill="#444">
+    Scale 50 px = 1 m · g = 9.8 m/s² · 3 m transitions · v_bottom ≈ 9.1 m/s · v_coping ≈ 4.9 m/s · 1.2 m airs with frontside 180 + nose grab
+  </text>
+</svg>
