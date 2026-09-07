@@ -1,0 +1,265 @@
+The user wants an animated SVG of Gandalf duelling the Balrog on the Bridge of Khazad-dûm. This is a creative coding task. Let me think about how to design this scene and what animations to include.
+
+Key elements of the scene:
+1. **The Bridge of Khazad-dûm** — a narrow stone bridge spanning a chasm. It's an arched stone bridge, narrow, with maybe a slight arch. Dark stone, possibly with cracks. Below is a vast abyss with fiery glow at the bottom (the burning depths of Moria where the Balrog fell — actually the Balrog fell into the abyss and the fire was there).
+2. **Gandalf the Grey** — grey robes/wizard hat, white beard, staff (with a glowing crystal tip, he wields it), and sword Glamdring. He stands at the end of the bridge: "You shall not pass!" pose — staff planted forward, sword raised.
+3. **The Balrog** — a huge shadowy fiery demon with wings of shadow, horns, glowing eyes, wreathed in flames, wielding a flaming sword and a fiery whip. The whip should be animated — lashing/cracking.
+4. **Atmosphere**: dark cavern background, red glow from below, embers floating up, flames flickering, pulsing light effects, the Balrog's fire aura flickering, Gandalf's staff glowing.
+
+Animations to include:
+- Flickering flames on the Balrog (animate opacity/scale of flame shapes)
+- The Balrog's whip lashing (animate a path's `d` attribute or rotate a group)
+- Floating embers rising from the abyss (animate cy/opacity, staggered)
+- Gandalf's cloak/hair subtly moving (maybe a slight skew or sway)
+- The staff crystal glowing (pulsing opacity/radius)
+- Background fire glow pulsing
+- Lightning-ish flicker of the Balrog's body glow
+- Balrog's shadow wings slowly flapping (rotate around shoulder)
+- Sword flames flickering
+- Maybe a slight camera shake? Could be too much. Maybe subtle.
+- Eyes glowing with animation
+
+Let me plan the composition. Canvas: 900×600 or 960×540. Let me use viewBox="0 0 960 540".
+
+Layout:
+- Background: dark cave gradient (dark grey/black at top, hint of deep red near bottom).
+- The abyss: bottom of the canvas with a fiery glow — a gradient from dark red to bright orange at the very bottom, with fire tongues maybe.
+- Distant cave walls: dark silhouettes of pillars/rocks on left and right.
+- The bridge: spans horizontally across the middle-lower area, from left edge to about 70% across. Gandalf stands near the middle-right end of the bridge (at the broken end? Actually in the movie the bridge was intact but Gandalf stood on it; the bridge ends at the far side where the Balrog stands, or the Balrog approaches across the bridge). Classic depiction: Gandalf on the bridge, staff forward, sword up, facing the Balrog who looms at the other end of the bridge or beyond the chasm. Actually in the book/film, the Balrog comes onto the bridge and Gandalf confronts it mid-bridge. The famous "You shall not pass!" moment: Gandalf strikes the bridge, the Balrog falls.
+
+Let me design: The bridge runs from the left side (partially cut off by cave entrance) toward the right, ending in a broken edge or continuing to the right wall. Gandalf stands at about x=430 on the bridge, facing right. The Balrog looms large at x=650–750, on the bridge or rising behind its far end, with wings spread. The Balrog is bigger, taller — filling vertical space.
+
+Composition plan (960×540):
+- Horizon of the abyss at about y=380; below that, the chasm with fire glow at bottom (y 380–540).
+- Bridge: an arched span from x≈120 to x≈840, deck at y≈370 near ends dipping/rising: actually arches up in the middle. The famous bridge is narrow with an arch underneath. Let me draw the bridge as a horizontal deck with a slight arch, supported by a large arch below, and broken end on the right? Hmm.
+
+Simplest good-looking: Bridge deck from x=60 to x=900, deck top around y=350 at edges, arching to y=330 in the middle. Under it, a big arch (semicircular) opening revealing the fiery abyss behind/below. Below the arch, fire glow. The bridge has a parapet? The Khazad-dûm bridge has no railing — it's just a narrow ledge ("a bridge of khazad-dûm... fifty feet long, narrow with no parapet, and the abyss beneath"). So flat stone deck, maybe with slight edge lip.
+
+Actually the film shows the bridge arched with a steep drop. Let me do: deck path from left (x=0,y=330) curving to apex mid (x=480,y=350?) Hmm, arch should go up in middle: deck y=380 at ends, y=345 at center. The underside is a big arch. On the right side, the bridge ends at x≈880 into darkness (cave wall). Gandalf stands near center-right facing left toward the Balrog? Or Balrog on the left? Typically depictions show Gandalf facing right with Balrog ahead. Let me put Gandalf at x≈380 facing right, Balrog at x≈620, both on the bridge. The Balrog is huge (like 3× Gandalf's height), towering with wings that extend above and beyond the bridge, horns, fire.
+
+Depth: Balrog stands slightly behind Gandalf's line but on the same bridge. Its feet at deck level y≈360 near x=650.
+
+Gandalf: about 70–80 px tall. Feet at y≈352 on deck near x=380. Head ~y=275. Grey robe (hat? Gandalf the Grey wears a pointed hat — iconic). Yes include the pointed grey wizard hat. White beard, staff held forward in left hand (pointing toward Balrog) with glowing white crystal, sword raised in right hand. "You shall not pass!" pose.
+
+Balrog: ~200 px tall body plus horns and flame crown. Standing on bridge at x≈650, feet y≈355. Body dark (black/dark red silhouette) with fire cracks (orange glowing lines), horns curving, glowing yellow/orange eyes, mouth aglow, wings spread (dark translucent with animated flap), one arm holding a flaming sword raised, other arm holding a whip that lashes (animate the whip path). Fire aura around shoulders/head — animated flame shapes.
+
+Also add: smoke wisps rising, embers (small orange circles) rising from below with animation, glow pulse on the abyss, flicker of Balrog's body glow, whip lash animation (animate d), sword flame flicker, staff glow pulse, maybe Gandalf's cape sway.
+
+Text? Could add a subtle title "The Bridge of Khazad-dûm" at bottom — optional. Maybe small caption. Might be nice but the user just asked for the scene. I'll skip text or add a tiny one. I think a small caption could be tasteful. Hmm — I'll leave it out to keep it purely pictorial. Or include "YOU SHALL NOT PASS" as a subtle flicker? Might be fun but could clutter. I'll skip; maybe include a tiny caption at the bottom in a muted style. Let me skip text; pure scene.
+
+Let me carefully design each part with coordinates.
+
+Canvas 960×540.
+
+**Defs (gradients):**
+1. `skyGrad` (cave backdrop): linearGradient vertical: #0a0508 (top) → #1a0d0a → #2a0f0a near abyss.
+2. `abyssGrad`: from #1a0503 at top (y=380) to bright #ff6a00/#ffb347 at bottom (y=540) — fiery depths.
+3. `bridgeGrad`: dark stone, vertical: #4a4038 → #241f1b.
+4. `bridgeTop`: lighter worn stone.
+5. `fireGlow` radial for glow behind Balrog and below.
+6. `staffGlow` radial white.
+7. `balrogAura` radial orange with blur.
+8. `flameGrad` for flames: from #ffd54a at base to #ff6d00 → transparent.
+9. Filters: `blurS` (stdDeviation 2), `blurM` (4), `blurL` (10) for glows.
+
+Use `<filter id="blur2"><feGaussianBlur stdDeviation="2"/></filter>` etc.
+
+**Background:**
+- Rect full with skyGrad.
+- Distant cave pillars: dark shapes left and right — tall columns (Moria dwarven architecture): e.g., rectangles with capitals at x≈60–140 and x≈820–900, very dark (#120b09). Also some faint distant arches. Keep simple: a few column silhouettes.
+- Abyss: rect y=380→540 with abyssGrad. Add glow ellipse at bottom center, animated opacity pulse.
+- Fire tongues at the bottom edge: a few wavy shapes animating.
+
+Actually the abyss should be visible below/behind the bridge arch. The bridge spans the chasm; beneath the arch we see the abyss glow. So the abyss fills from the deck level down. Let me set: background rect covers all; abyss gradient rect from y=370 to 540 across full width, drawn behind the bridge. The bridge is drawn on top spanning across.
+
+**Bridge:**
+- Deck: path from (0, 395) quad to (480, 350) to (960, 395)? The bridge should arch upward in the middle. Let me define deck top edge: M 0 400 Q 480 330 960 400 — hmm that's a big arch. Actually the film bridge is quite flat with a hump. Let's do: deck top: M -10 392 Q 480 336 970 392. Thickness ~22–28 px. Bottom edge parallel-ish with a big arch cut underneath: the underside has a large semicircular arch opening from x≈250 to x≈710, revealing the abyss below. So the bridge body: path = deck top curve, then down right edge to y≈430, then leftwards along bottom with an arch cut: from (970, 430) L to (710, 430), then arc up over to (250, 430) (the arch: A 230 90 0 0 0 250 430 — sweeping upward, i.e., the arch opening), then L to (-10, 430), close up to (-10, 392).
+
+Wait, arch opening: we want the stone to be present except the arch opening. Path: start at (-10,392), Q to (970,392) top edge, L (970, 435), L (700,435), then arc to (260,435) passing over the top (arch apex around y≈370? that would poke through the deck). Deck at center is y≈345 (top) with thickness to ~y≈435. Arch apex at y≈370 is fine (below deck top). Use quadratic: from (700,435) Q (480, 355) (260,435). Then L (-10,435), L (-10,392), Z. Good — a smooth arch.
+
+- Deck top highlight: a stroked path along the top edge, lighter stone color (#5a5048), maybe with a few crack lines (dark strokes) and some lighter speckles. Add cracks: small jagged lines near Gandalf's feet (from the "You shall not pass" strike) — a crack radiating from x≈400. Could animate a subtle glow in the crack (orange) — nice touch! The crack from Gandalf's staff strike glows. Add animated opacity.
+
+- Stone texture: a few short lines/blocks on the deck and arch edge (voussoirs). Keep moderate.
+
+**Gandalf (facing right), feet at y≈352? Deck top at x=380: compute Q curve y.** Deck top curve: M -10 392 Q 480 336 970 392. Parametric y at t: y = (1-t)²·392 + 2(1-t)t·336 + t²·392 with x = -10 + 980t approx (quadratic in x too since control x=480 center: x(t) = (1-t)²(-10) + 2(1-t)t·480 + t²·970). At x=380: solve approx t: x(t) ≈ -10 + t·(980) + something... Quadratic Bézier x: (1-t)²(-10)+2t(1-t)(480)+t²(970). At t=0.4: 0.36·(-10)+2·0.4·0.6·480+0.16·970 = -3.6+230.4+155.2=382. Good t≈0.4. y(0.4)=0.36·392+0.48·336+0.16·392 = 141.12+161.28+62.72=365.1. So deck top at x=380 is y≈365. Hmm, that's lower than center apex 336+? Actually apex at t=0.5: y=0.25·392+0.5·336+0.25·392=98+168+98=364. Wait that equals 364? (1-t)²·392 = 0.25·392=98; 2t(1-t)=0.5·336=168; t²·392=98 → 364. And at t=0: 392. So the deck dips from 392 at edges up to 364 at center. Fine — gentle arch, center y≈364.
+
+Gandalf at x=380: deck y≈365. Feet at 365.
+Balrog at x=640: t≈0.66: y = (0.34)²·392 + 2·0.66·0.34·336 + 0.66²·392 = 0.1156·392=45.3 + 0.4488·336=150.8 + 0.4356·392=170.8 → 366.9. So y≈367.
+
+Hmm the arch is subtle. Maybe make it more dramatic: ends y=400, control y=320 → center y=360. Let me recompute: deck top: M -10 400 Q 480 320 970 400 → center y = 0.25·400+0.5·320+0.25·400 = 100+160+100=360. At x=380 (t≈0.4): y=0.36·400+0.48·320+0.16·400 = 144+153.6+64 = 361.6. At x=640 (t≈0.665): y ≈ (0.335)²·400=44.9 + 2·0.665·0.335·320=142.7 + 0.665²·400=176.9 → 364.5. OK: Gandalf feet y≈362, Balrog feet y≈364. Good.
+
+Bridge body bottom: deck bottom edge: similar curve offset +26: M -10 426 Q 480 346 970 426. Arch cut underneath: from (720, 440) Q (480, 370) (240, 440)? The arch opening must be below the deck bottom near center: deck bottom center = 0.25·426+0.5·346+0.25·426 = 106.5+173+106.5=386. Arch apex should be below 386, say apex y≈395–400 at center. Arch from (700, 445) Q (480, 388) (260, 445): apex y = 0.25·445+0.5·388+0.25·445 = 111.25+194+111.25=416.5. Hmm apex 416 > deck bottom 386 means opening is below deck bottom—wait larger y = lower. Apex y=416 is lower than deck bottom at center (386). Then between deck bottom (386) and arch apex there'd be a gap showing background — that's fine actually! The bridge deck is a band from ~360 to ~386 at center, and below is open air (abyss visible), and the arch structure continues below as side supports going down to the chasm walls? Hmm, actually the real bridge is a thin span with a big arch beneath connecting to... it's a natural/constructed stone bridge: deck on top, big arch below, and the arch's ends go down into the chasm walls at each side.
+
+Simpler approach: draw the bridge as one filled shape: top edge (deck), then right end goes down to y≈470 (into the chasm shadow), bottom edge returns left with an arch cut in the middle. The area between deck bottom and arch apex on the sides is stone; in the middle, the arch opening reveals the abyss behind. Let me define:
+
+Bridge path:
+- M -10 400 (left end top)
+- Q 480 320, 970 400 (deck top to right)
+- L 970 500 (right end goes down — the bridge abutment into the right cave wall/shadow)
+- L 760 500 
+- Q 480 352, 200 500 — the arch: from (760,500) curving up to apex ~ y: 0.25·500+0.5·352+0.25·500=125+176+125=426 at center, then down to (200,500). Apex 426 is below deck bottom (~386 center) — so between deck bottom 386 and arch apex 426 there's open space in the center — the arch opening. Good, that reads as an arch.
+- L -10 500
+- Z
+
+The bottom (y 440–500) fades into darkness — add a gradient or overlay dark rect fade so the supports vanish into gloom. The abyss behind shows through the arch opening (center) and around the sides? Actually the sides at x<200 and x>760 below deck are stone abutments — fine, they fade to dark.
+
+Also I should draw the abyss GLOW behind the bridge so it's visible through the arch opening. And embers rising behind the bridge (drawn before bridge) and maybe a couple in front for depth.
+
+Add deck details: 
+- Top edge stroke line (#6b5f52, 2px) along deck top.
+- A second inner line for the walkway edge? The bridge is narrow so we see it mostly edge-on... Actually if we see it side-on (profile view), the deck is just a band. Gandalf and Balrog stand on top. That's the classic composition. Add slight top surface: since it's side view, we can cheat with a thin lighter band on top of the deck representing the walking surface: a path along deck top with 4px lighter fill.
+- Cracks: dark polyline near x=390 radiating, with orange glow animating underneath.
+- Stone joints: small vertical ticks along the band.
+
+**Gandalf** (standing at x≈375, feet y≈362, facing right). Height ~85 px → head top ~y=277.
+
+Components:
+- Robe: grey (#8a8a94 → #55555e gradient). Silhouette: a tall shape from shoulders widening to the feet. Path: M 368 300 (left shoulder) C down to hem: left hem at (358, 362), right hem at (392,362), up to right shoulder (384,300), close via neck. Add slight sway animation: animateTransform rotate ±1.2° around feet, or skewX. A subtle rotate on the whole Gandalf group: values "0;1.5;0;-1;0" dur 6s around (375,362). Keep gentle.
+- Hat: pointed grey hat with wide brim. Brim: ellipse at y≈286, cx=375, rx=20, ry=4.5. Cone: path M 375 252 L 362 286 L 388 286 Z with slight bend (wizard hats droop): M 376 250 Q 372 262 363 286 L 387 286 Q 381 266 379 251 Z. Color slightly darker grey (#6f6f7a).
+- Face: small — mostly beard. Skin: #d8b89a small shape at (375, 292) area. Beard: white/off-white (#e8e6df) shape from face down over chest to y≈330, flowing slightly (animate small sway).
+- Hair: grey sides under hat.
+- Arms: left arm extended forward toward Balrog holding staff: sleeve shape from shoulder (382,305) to hand (415, 318). Right arm raised holding sword: from shoulder (368,303) up-back to hand (352, 272) holding sword angled up-right? Classic pose: sword raised high. Sword Glamdring: silver blade pointing up-right from hand at (352,272): blade line to (368, 235)? Hmm if facing right, sword raised would go up and slightly right above his head. But staff is extended right too. Alternative iconic pose: staff in left hand planted on bridge (Gandalf thrust staff down), sword raised in right. In the film "You shall not pass": staff forward-down, sword pointing at Balrog. Let me do: staff diagonal forward (tip up-forward at 45°) with glowing tip, sword raised back over shoulder. Actually simplest readable: staff held diagonally in front, tip pointing toward Balrog at chest height, glowing white; sword raised above head angled back. 
+
+Let me define:
+- Staff: from hand (412, 320) extending down-forward to bridge (432, 362) and up-forward to tip (448, 268)? That's a long staff: line from (425, 368) to (446, 270)? If he holds it mid-staff. The staff tip (crystal) at top: glowing. Staff slightly tilted right: bottom at (420, 366) touching deck (deck y at x=420: t≈0.439 → y = (0.561)²·400=125.3 + 2·0.439·0.561·320=157.4 + (0.439)²·400=77.1 → 359.8 ≈ 360). So staff bottom (420,360), top (444,266). Stroke #5b4630 width 3.5. Crystal: small diamond/circle at (444,264) white with glow, pulsing (animate r or opacity, plus a radial glow circle r=10 blur).
+- Arm to staff: sleeve path from (381,303) to (414,318), stroke or filled quad shape grey, hand: small skin circle at (414,318) holding staff.
+- Sword raised: right arm from shoulder (369,302) up to hand (356,272). Sword: blade from hand going up-right: from (356,272) to (383, 226)? That would cross over toward the hat. Raise more vertically with slight back-lean: hand at (352,270), blade to (362, 222) — up and slightly right, above his head but behind the hat? Hat apex at (376,250). Blade from (352,270) to (360,220): passes left of hat. Good: blade silver line width 3.5 with lighter core, crossguard at (354.5, 265) small perpendicular line, subtle glow (Glamdring glows blue when orcs near — add faint blue-white shimmer, animate opacity 0.4↔0.8). Pommel dot.
+- Beard animation: slight rotate of beard path around chin, 2°, 3s.
+- Cloak/robe hem sway: I'll animate whole group subtly instead.
+
+Layering Gandalf: staff behind arm? Staff held in front: draw staff, then hand over it. Sword behind body? Sword raised on his right side (viewer's left, since he faces right his right arm is on viewer's left) — draw arm+sword slightly behind torso? Simpler: draw torso, then arms on top.
+
+**Balrog** (at x≈655, feet y≈364, facing left toward Gandalf). Big: ~200 px tall body, plus horns/flames → top around y=120. Wings spread up/out to x 520–800 and top y≈90.
+
+Components (draw order):
+1. **Aura/glow**: large radial orange glow behind body (ellipse cx=660 cy=250 rx=150 ry=170, fill radial gradient orange→transparent, blur). Animate opacity 0.5↔0.85, 3s.
+2. **Wings**: two big wing shapes, dark (#1a0a08, near-black with slight red) semi-translucent (opacity 0.92), with jagged/tattered edges. Left wing (viewer left, extends toward Gandalf side): from shoulder (640,200) sweeping up-left to (520,110), with scalloped bottom edge back to (600,260). Right wing: mirror to (800,120). Animate: slow flap — animateTransform rotate around shoulder point: left wing rotate -6↔4° dur 5s; right wing opposite phase. Wing shape path (left): M 645 210 C 600 150 560 120 515 105 C 540 140 545 150 535 145 C 560 175 570 185 558 182 C 585 210 595 215 585 212 C 610 235 625 245 645 255 Z — jagged membrane. I'll craft carefully below. Wings behind body.
+3. **Body**: massive silhouette: broad shoulders, hunched, legs planted on bridge. Path: M 655 364 (feet area) ... Actually build: torso from hips (655, 330) up to shoulders (655, 205), width ~90 at shoulders. Arms muscular. Head at (645, 175) with horns. Body color: very dark (#160806 / #1d0a07) with inner glow cracks.
+4. **Fire cracks / lava veins**: orange (#ff7a1a) paths on torso with blur, animate opacity flicker (values 0.5;0.9;0.6;1;0.5 dur 2s).
+5. **Head**: hunched forward toward Gandalf (left). Skull shape, open jaw with fire in mouth (bright orange glow), eyes: two glowing yellow-orange dots/slits with strong glow, animate flicker.
+6. **Horns**: two big curved horns from head sweeping back/up: path from (640,165) curving up-back to (610,110) and to (665,160)→(695,105)? Facing left: horns sweep back (to the right). Colors dark grey-bone (#3a2a22) or dark silhouette with rim. I'll do dark with slight highlight.
+7. **Flame crown / mane**: flames rising from shoulders/head: several flame paths (teardrop wavies) with gradient, animate scaleY flicker / opacity, staggered.
+8. **Left arm (toward Gandalf)**: raised holding flaming sword: shoulder (630,215) → elbow (600,185) → hand (585,150)? Sword pointing up-left. Actually dramatic: sword raised high over head ready to strike: hand at (600,150), blade from (600,150) up-left to (555, 60)?? That's very long blade — Balrog's sword is big. Blade length ~100. From (598,148) to (540,55): long dark blade with fire along its edge (orange wavy path alongside, flickering). Handle from hand down. Hmm, but sword over head might overlap horns. Alternative: sword held out toward Gandalf at chest height, pointing left: hand at (585, 210), blade from (585,210) to (480,195) horizontal-ish pointing at Gandalf. That reads well: duelling stance. And whip in other arm. Let me do: sword arm forward, blade pointing toward Gandalf slightly raised: blade from tip (490,170) to hand (588, 205). Flame along blade animated.
+9. **Whip arm** (right, far side): from shoulder (680,220), arm down/back to hand (720, 260) holding whip. Whip: long animated lashing path: from (720,260) curving down and out to the right with a flickering motion. Animate `d` between 2–3 states, plus a glowing ember tip. Whip color: bright orange (#ffb347) stroke width 3 with glow blur, dash? The Balrog's whip is fire: stroke with gradient? Gradients on strokes work. Add small flame at the whip tip. Animate d: values over 2.4s, e.g.:
+   - d1: M 722 258 C 770 280 800 330 780 380 C 765 420 800 450 830 470
+   - d2: M 722 258 C 790 260 830 300 815 350 C 800 395 850 430 870 445
+   - d3: M 722 258 C 760 300 745 340 775 385 C 800 420 790 460 815 480
+   Loop with keyTimes. The tip flame is hard to keep on the path end since it moves; I can animate the tip flame's cx/cy along the same values. Use `<circle>` with animate cx values="830;870;815;830" and cy values="470;445;480;470" same dur/keyTimes. Match endpoints: state1 end (830,470), state2 end (870,445), state3 end (815,480). Loop values: 830;870;815;830 and 470;445;480;470 with keyTimes 0;0.33;0.66;1. And path d values: d1;d2;d3;d1 with same keyTimes. 
+
+But wait — whip going off the bridge to the right over the chasm: fine, it can lash over the abyss. y=470 is below deck (deck top ~366 at x=780: t≈0.8: y=(0.04)·400=16+2·0.8·0.2·320=102.4+0.64·400=256 → 374). So whip hangs over the edge down into the gloom. 
+
+10. **Shadow smoke**: Balrog is "shadow and flame": add wispy black smoke tendrils around it (dark semi-transparent paths with blur, slowly morphing opacity), and rising smoke above shoulders: 2–3 dark wisps translating upward with opacity fade (animateTransform translate 0,0 → 0,-40 + opacity 0.4→0, dur 4s staggered).
+
+**Embers**: ~10 small circles (r 1.5–3, fill #ff9d3a, some #ffd27f) rising from the abyss. Each: animate cy from 520 to 150 with different durs (5–9s) repeatCount indefinite, opacity 0→1→0, slight x drift via animateTransform translate or animate cx. Place them behind bridge except 2 in front. Use `<circle>` with animate cy and animate cx (values "x; x+15; x-10")? animate cx with values list works. Also animate opacity with keyTimes.
+
+**Abyss fire**: at bottom, fire glow: big ellipse cx=480 cy=560 rx=420 ry=120 fill orange blur, animate opacity 0.7↔1. Plus jagged flame tongues along bottom edge (y≈500–540) small flickers: maybe 5 flames with scale flicker. Also distant lava river lines.
+
+**Cave wall / doorway** behind on the right? The bridge leads to a dark tunnel on the right — add a dark arch opening at right edge (x 880–960) darker than background. Also on left, the hall they came from — maybe faint columns. Keep simple: two dark columns on left at x=40 and x=130 with capitals; dark door arch on right edge.
+
+**Light shafts?** No — Moria is dark; skip. 
+
+**Global effects**: 
+- A subtle flicker overlay: full-canvas rect fill orange opacity 0.03–0.08 animating, to simulate firelight dancing. Nice touch.
+- Vignette: radial gradient rect darkening corners.
+
+Order of drawing (paint order):
+1. Background rect (skyGrad)
+2. Distant columns / cave silhouettes (very dark)
+3. Abyss glow rect (y 360–540, abyssGrad) + glow ellipse animated
+4. Distant flames at chasm bottom (behind bridge)
+5. Embers (behind bridge group)
+6. Bridge (body, top surface, cracks with glow, edge details) — but abutment bottoms fade: overlay gradient fade rect over lower area? The bridge fill can use a gradient vertical that goes dark toward y=500.
+7. Balrog group (wings → aura → body → arms/whip/sword → head/horns → flames/smoke)
+8. Gandalf group
+9. Front embers (2–3)
+10. Firelight flicker overlay
+11. Vignette
+
+Wait — Balrog stands on the bridge; feet at deck y≈364. Its glow aura will overlay bridge — fine.
+
+Also Gandalf casts slight shadow on deck: small dark ellipse under each figure.
+
+Let me now write concrete coordinates for everything.
+
+### Detailed geometry
+
+**viewBox 0 0 960 540.**
+
+**Gradients:**
+
+```xml
+<linearGradient id="cave" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#070409"/>
+  <stop offset="0.55" stop-color="#120a0d"/>
+  <stop offset="0.8" stop-color="#1c0d0a"/>
+  <stop offset="1" stop-color="#2b120a"/>
+</linearGradient>
+<linearGradient id="abyss" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#3a0e05" stop-opacity="0"/>
+  <stop offset="0.35" stop-color="#7a2404"/>
+  <stop offset="0.7" stop-color="#c94f0a"/>
+  <stop offset="1" stop-color="#ff9b2e"/>
+</linearGradient>
+<linearGradient id="stone" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#5b5049"/>
+  <stop offset="0.35" stop-color="#3e362f"/>
+  <stop offset="1" stop-color="#15100d"/>
+</linearGradient>
+<radialGradient id="pitGlow" cx="0.5" cy="1" r="0.9">
+  <stop offset="0" stop-color="#ffc25e"/>
+  <stop offset="0.4" stop-color="#ff7a1a" stop-opacity="0.7"/>
+  <stop offset="1" stop-color="#ff7a1a" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="aura" cx="0.5" cy="0.5" r="0.5">
+  <stop offset="0" stop-color="#ff8c1a" stop-opacity="0.55"/>
+  <stop offset="0.6" stop-color="#e6480a" stop-opacity="0.25"/>
+  <stop offset="1" stop-color="#e6480a" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="staffGlow">
+  <stop offset="0" stop-color="#ffffff"/>
+  <stop offset="0.35" stop-color="#dff1ff" stop-opacity="0.9"/>
+  <stop offset="1" stop-color="#9fd0ff" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="robe" x1="0" y1="0" x2="1" y2="0">
+  <stop offset="0" stop-color="#6e6e78"/>
+  <stop offset="0.5" stop-color="#9a9aa4"/>
+  <stop offset="1" stop-color="#4c4c56"/>
+</linearGradient>
+<linearGradient id="flame" x1="0" y1="1" x2="0" y2="0">
+  <stop offset="0" stop-color="#ffd76a"/>
+  <stop offset="0.45" stop-color="#ff8a1e"/>
+  <stop offset="1" stop-color="#ff4d00" stop-opacity="0.1"/>
+</linearGradient>
+<radialGradient id="vign" cx="0.5" cy="0.45" r="0.75">
+  <stop offset="0.55" stop-color="#000" stop-opacity="0"/>
+  <stop offset="1" stop-color="#000" stop-opacity="0.55"/>
+</radialGradient>
+```
+
+Filters: blur2, blur4, blur8: feGaussianBlur stdDeviation 2/4/8. Add filter region attributes to avoid clipping: x="-50%" y="-50%" width="200%" height="200%".
+
+**Background cave columns** (left): two pillars: 
+- Pillar A: rect x=48 y=60 w=34 h=380 fill #0d080b; capital: rect x=38 y=52 w=54 h=16; base rect x=38 y=430 w=54 h=18. fill #0d080b all.
+- Pillar B: rect x=140 y=90 w=24 h=340 fill #0a0609 (further/darker).
+- Right side: dark tunnel arch: path M 880 540 L 880 200 Q 930 150 980 200 L 980 540 Z fill #060406 — the far end of the bridge enters shadow. Actually the bridge deck reaches y≈400 at x=970... the tunnel should be at deck level: arch opening from x=870 to 960, from y=280 down to deck: path M 862 400 Q 870 300 930 300 Q 960 300 962 320 L 962 410 ... hmm. Let me just draw a dark opening: rect x=855 y=0 w=105 h=540 fill #050307 opacity 0.9? That reads as right wall with the bridge disappearing into it. Simpler: path covering right edge: M 850 540 L 850 260 Q 905 225 960 260 L 960 540 Z, fill #070409. The bridge passes "into" it (bridge drawn after? No—bridge drawn after background would cover the wall bottom). I want bridge to end AT the wall: draw wall AFTER bridge? Then wall covers bridge right end — bridge appears to enter the wall. But Balrog is at x=655, fine. But whip goes to x≈870 which would be hidden behind the wall... Whip tip x up to 870 — wall starts at 850. Whip would go behind the wall. Move wall to start at x=880 with left edge wavy, and keep whip tips ≤ 865. Or draw wall before bridge and have the bridge visually end at the wall via its own shape. Simplest: draw right wall structure after the abyss but before the bridge, spanning x 870–960 from y=180 to 540, and the bridge deck ends at x=930 underneath? If the bridge is drawn on top, it would overlap the wall — looks like bridge in front of wall, but then the bridge's right end floats at x=970 (offscreen). That's fine too: bridge extends offscreen right; wall behind it. The bridge continues into the darkness to the right off-screen. Also fine and simpler. I'll draw right wall (with a dark arch doorway shape) before the bridge, spanning full height at x≥890, and let bridge overlap it. Similarly left: bridge extends off-screen left.
+
+Hmm wait, but then the wall behind bridge shows above deck at right: a dark mass with maybe an arched doorway silhouette. OK.
+
+**Abyss**: rect x=0 y=356 w=960 h=184 fill url(#abyss) — top edge at 356 (just below deck top min 360? deck top center 360, so abyss top 356 slightly above deck center top? That would put glow above the deck top in the center background — fine, it's behind, showing depth... actually it would show above the bridge deck line at center behind Gandalf — a glow line behind figures. Could be nice (backlight) but might look odd. Set abyss rect y=372 so its top stays below deck top everywhere? Deck top ranges 360 (center) to 400 (edges). At edges deck top is 400 > 372, so abyss would show above deck at the edges — again fine (the chasm is behind; at the far sides beyond bridge end? the bridge spans full width so the deck top edge IS the horizon... the abyss behind should start below deck top curve. The deck curve: y_deck(x). The abyss region is y > y_deck. To avoid fiddly clipping, I'll just draw the abyss rect from y=360 to 540 BEFORE the bridge; the bridge covers it where the stone is; through the arch opening and beside the supports (below y≈500 it's all dark fade anyway)... wait the bridge fill covers from deck top down to y=500 (with arch cutout). Below y=500 there's nothing (bridge path ends at 500) — so abyss shows from 500–540 at bottom, plus through arch opening between deck-bottom and arch curve. Good. But on the far left/right where deck is lower (y 400) the abyss rect from 360 shows a band above the deck top at edges (background glow at 360–400 near x<200 and x>760). Since gradient top is transparent→dark red, it'll be subtle. Actually could look like distant fire behind — acceptable, even nice. OK: abyss rect y=358 h=182.
+
+- pitGlow ellipse: cx=480 cy=560 rx=430 ry=150 fill url(#pitGlow) with animate opacity values="0.75;1;0.8;1;0.75" dur="4s". 
+- Bottom flames: a group at y≈505–545: several flame paths using url(#flame), each with animateTransform scale flicker around its base. To scale around base point need transform-origin — SMIL animateTransform scale scales around origin (0,0). Workaround: define each flame with base at (0,0) pointing up (negative y), place with translate(x,y) on a group, then inner animateTransform scale on the path. values="1 1;1.15 1.3;0.95 0.9;1.1 1.2;1 1" dur ~1.6s staggered begin offsets.
+
+Flame shape template (base at 0,0, tip up): M -10 0 C -12 -14 -4 -20 -2 -32 C 2 -22 6 -18 4 -10 C 8 -14 10 -8 8 0 Z — I'll hand-make a couple variants.
+
+Distant flames behind the bridge: place at x=180, 300 (behind arch opening, visible through it), 480, 620, 760 — but bridge covers lower area except arch opening (x 200–760 above y≈420–500...). The arch opening region: between deck bottom and arch, roughly y 380–460 in center. Flames at bottom (y 505+) are below the arch apex — hidden by bridge supports? The bridge supports (stone below arch curve, from arch curve down to 500, and below 500 nothing). Under arch curve: open. At x=480: arch curve y≈426; bridge stone exists between deck top(360)/deck bottom(386) and arch curve(426)? Wait no — the bridge path fill: top edge deck, then down at right end to y=500, along bottom to x=760, arch up to (480? apex 426) then down to (200,500), to left end, up. So the filled stone region at x=480 spans y from deck-top(360) to ... the fill covers from top edge down to the arch boundary at 426? The path: top edge at 360 (center), right side down to 500, bottom edge leftward at y=500 to x=760, then arch curve from (760,500) to (200,500) with apex (480,426) — this arch curve is the boundary; the fill is above it (since fill region includes top edge). So at x=480, stone spans y=360→426, and below 426 is the opening (not filled) → abyss visible from 426 down. And from y=500–540 everywhere, abyss visible. So bottom flames at y≈540 base will be visible below y=500 across full width, and through arch from 426 down in the center. 
+
+So place distant flame cluster along y base ≈ 555 (below canvas edge, tips reaching ~500): at x=120, 250, 420, 560, 700, 850. Sizes ry ~35–50.
+
+**Bridge**:
+
+Path `d="M -12 400 Q 480 320 972 400 L 972 500 L 760 500 Q 480 352 200 500 L -12 500 Z"` fill url(#stone).
+
+Check arch: from (760,500) Q(480,352) (200,500): apex y = 0.25·500+0.5·352+0.25·500 = 125+176+125=426. Good.
+
+Deck top surface band: path `M -12 400 Q 480 320 972 400` — draw as stroke? Better: a slightly thinner band above

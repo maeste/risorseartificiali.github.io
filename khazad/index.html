@@ -1,0 +1,106 @@
+---
+layout: single
+title: "Khazad-dûm Benchmark: Gandalf vs Balrog in animated SVG"
+permalink: /khazad/
+---
+<p style="color:#ccc">Inspired by Simon Willison's
+<a href="https://simonwillison.net/2024/Oct/25/pelicans-on-a-bicycle/">pelican
+benchmark</a>: instead of a static pelican on a bicycle, models must generate a
+<strong>self-contained animated SVG</strong> (SMIL/CSS, no JavaScript) of Gandalf
+duelling the Balrog on the Bridge of Khazad-dûm. Two prompt variants per model:
+minimal (one line) and constrained (scene + animation requirements).
+Open the raw SVG to see the animation live.</p>
+<style>
+  .card { background:#1c1c1c; border:1px solid #333; border-radius:12px;
+          padding:1rem; margin-bottom:2rem; }
+  .card h2 { color:#ffd700; margin-top:0; font-size:1.1rem; }
+  .meta { color:#888; font-size:0.85rem; }
+  .err { color:#ff5555; }
+  .svgwrap { background:#000; border-radius:8px; overflow:hidden; }
+</style>
+
+<div class="card">
+  <h2>claude-fable-5-1-constrained</h2>
+  <p class="meta">len=22523 · anim=True · 19498 tok · 236.4s · cost=$0.96254 · api latency=?</p>
+  <div class="svgwrap"><iframe src="claude-fable-5-1-constrained.svg" loading="lazy" style="width:100%;height:420px;border:0;background:#000"></iframe></div>
+  <p><a href="claude-fable-5-1-constrained.svg">open raw SVG</a></p>
+</div>
+
+<div class="card">
+  <h2>claude-fable-5-1-minimal</h2>
+  <p class="meta">len=16602 · anim=True · 13021 tok · 168.9s · cost=$0.64917 · api latency=?</p>
+  <div class="svgwrap"><iframe src="claude-fable-5-1-minimal.svg" loading="lazy" style="width:100%;height:420px;border:0;background:#000"></iframe></div>
+  <p><a href="claude-fable-5-1-minimal.svg">open raw SVG</a></p>
+</div>
+
+<div class="card">
+  <h2>claude-opus-5-constrained</h2>
+  <p class="meta">len=31316 · anim=True · 28340 tok · 344.2s · cost=$0.70236 · api latency=?</p>
+  <div class="svgwrap"><iframe src="claude-opus-5-constrained.svg" loading="lazy" style="width:100%;height:420px;border:0;background:#000"></iframe></div>
+  <p><a href="claude-opus-5-constrained.svg">open raw SVG</a></p>
+</div>
+
+<div class="card">
+  <h2>claude-opus-5-minimal</h2>
+  <p class="meta">len=20197 · anim=True · 21338 tok · 283.9s · cost=$0.53255 · api latency=?</p>
+  <div class="svgwrap"><iframe src="claude-opus-5-minimal.svg" loading="lazy" style="width:100%;height:420px;border:0;background:#000"></iframe></div>
+  <p><a href="claude-opus-5-minimal.svg">open raw SVG</a></p>
+</div>
+
+<div class="card">
+  <h2>gemini-3-8-flash-constrained</h2>
+  <p class="meta">len=24882 · anim=True · 14171 tok · 91.4s · cost=$0.05236 · api latency=?</p>
+  <div class="svgwrap"><iframe src="gemini-3-8-flash-constrained.svg" loading="lazy" style="width:100%;height:420px;border:0;background:#000"></iframe></div>
+  <p><a href="gemini-3-8-flash-constrained.svg">open raw SVG</a></p>
+</div>
+
+<div class="card">
+  <h2>gemini-3-8-flash-minimal</h2>
+  <p class="meta">len=22475 · anim=True · 12746 tok · 69.0s · cost=$0.04769 · api latency=?</p>
+  <div class="svgwrap"><iframe src="gemini-3-8-flash-minimal.svg" loading="lazy" style="width:100%;height:420px;border:0;background:#000"></iframe></div>
+  <p><a href="gemini-3-8-flash-minimal.svg">open raw SVG</a></p>
+</div>
+
+<div class="card">
+  <h2>glm-5-3-flash-constrained</h2>
+  <p class="meta">len=11978 · anim=True · 4910 tok · 95.1s · cost=$0.00119 · api latency=?</p>
+  <div class="svgwrap"><iframe src="glm-5-3-flash-constrained.svg" loading="lazy" style="width:100%;height:420px;border:0;background:#000"></iframe></div>
+  <p><a href="glm-5-3-flash-constrained.svg">open raw SVG</a></p>
+</div>
+
+<div class="card">
+  <h2>glm-5-3-flash-minimal</h2>
+  <p class="meta">len=33872 · anim=True · 8715 tok · 325.6s · cost=$0.00217 · api latency=?</p>
+  <div class="svgwrap"><iframe src="glm-5-3-flash-minimal.svg" loading="lazy" style="width:100%;height:420px;border:0;background:#000"></iframe></div>
+  <p><a href="glm-5-3-flash-minimal.svg">open raw SVG</a></p>
+</div>
+
+<div class="card">
+  <h2>gpt-5-6-luna-constrained</h2>
+  <p class="meta">len=12069 · anim=True · 4783 tok · 35.5s · cost=$0.00548 · api latency=?</p>
+  <div class="svgwrap"><iframe src="gpt-5-6-luna-constrained.svg" loading="lazy" style="width:100%;height:420px;border:0;background:#000"></iframe></div>
+  <p><a href="gpt-5-6-luna-constrained.svg">open raw SVG</a></p>
+</div>
+
+<div class="card">
+  <h2>gpt-5-6-luna-minimal</h2>
+  <p class="meta">len=11331 · anim=True · 4304 tok · 37.8s · cost=$0.00513 · api latency=?</p>
+  <div class="svgwrap"><iframe src="gpt-5-6-luna-minimal.svg" loading="lazy" style="width:100%;height:420px;border:0;background:#000"></iframe></div>
+  <p><a href="gpt-5-6-luna-minimal.svg">open raw SVG</a></p>
+</div>
+
+<div class="card">
+  <h2>gpt-6-astra-constrained</h2>
+  <p class="meta">len=20989 · anim=True · 8418 tok · 196s · cost=$0.4105 · api latency=?</p>
+  <div class="svgwrap"><iframe src="gpt-6-astra-constrained.svg" loading="lazy" style="width:100%;height:420px;border:0;background:#000"></iframe></div>
+  <p><a href="gpt-6-astra-constrained.svg">open raw SVG</a></p>
+</div>
+
+<div class="card">
+  <h2>gpt-6-astra-minimal</h2>
+  <p class="meta">len=16211 · anim=True · 6021 tok · 136s · cost=$0.29965 · api latency=?</p>
+  <div class="svgwrap"><iframe src="gpt-6-astra-minimal.svg" loading="lazy" style="width:100%;height:420px;border:0;background:#000"></iframe></div>
+  <p><a href="gpt-6-astra-minimal.svg">open raw SVG</a></p>
+</div>
+<div class="card"><h2>kimi-k3-constrained</h2><p class="err">ERROR: HTTP 402 Payment Required (insufficient OpenRouter credit for this model)</p></div>
+<div class="card"><h2>kimi-k3-minimal</h2><p class="err">ERROR: HTTP 402 Payment Required (insufficient OpenRouter credit for this model)</p></div>

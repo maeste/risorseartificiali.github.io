@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+  <title>Gandalf duelling the Balrog on the Bridge of Khazad-dûm</title>
+  <desc>A self-contained animated SVG scene with flickering fire, waving garments, pulsing staff light, and shifting combatants.</desc>
+
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#090b18"/>
+      <stop offset="0.55" stop-color="#211326"/>
+      <stop offset="1" stop-color="#5c201a"/>
+    </linearGradient>
+    <linearGradient id="lava" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff39a"/>
+      <stop offset="0.25" stop-color="#ffb52d"/>
+      <stop offset="0.7" stop-color="#e43d13"/>
+      <stop offset="1" stop-color="#410d12"/>
+    </linearGradient>
+    <linearGradient id="stone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#777279"/>
+      <stop offset="0.5" stop-color="#393943"/>
+      <stop offset="1" stop-color="#171923"/>
+    </linearGradient>
+    <linearGradient id="robe" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#aaa6a1"/>
+      <stop offset="0.5" stop-color="#625f66"/>
+      <stop offset="1" stop-color="#24252e"/>
+    </linearGradient>
+    <linearGradient id="balrog" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ffba3a"/>
+      <stop offset="0.24" stop-color="#b9431e"/>
+      <stop offset="0.7" stop-color="#38151a"/>
+      <stop offset="1" stop-color="#0b0c14"/>
+    </linearGradient>
+    <radialGradient id="fireGlow">
+      <stop stop-color="#fff9b0" stop-opacity=".95"/>
+      <stop offset=".35" stop-color="#ff8d22" stop-opacity=".7"/>
+      <stop offset="1" stop-color="#e21e0e" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="12"/></filter>
+    <filter id="smallBlur"><feGaussianBlur stdDeviation="4"/></filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      .fire { animation: flicker 1.15s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center bottom; }
+      .fire2 { animation: flicker2 .82s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center bottom; }
+      .aura { animation: aura 1.6s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center; }
+      .staffGlow { animation: pulse 1.2s ease-in-out infinite alternate; }
+      .gandalf { animation: clashG 2.4s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: 70% 80%; }
+      .cloak { animation: cloak 1.8s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: 80% 20%; }
+      .balrog { animation: clashB 2.4s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: 30% 80%; }
+      .wing { animation: wingbeat 1.7s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: bottom center; }
+      @keyframes flicker { from { opacity:.55; transform:scaleY(.82) translateX(-3px); } to { opacity:1; transform:scaleY(1.18) translateX(3px); } }
+      @keyframes flicker2 { from { opacity:.45; transform:scale(.8) skewX(-4deg); } to { opacity:1; transform:scale(1.15) skewX(5deg); } }
+      @keyframes aura { from { opacity:.48; transform:scale(.88); } to { opacity:.85; transform:scale(1.08); } }
+      @keyframes pulse { from { opacity:.45; } to { opacity:1; } }
+      @keyframes clashG { from { transform:translate(0,0) rotate(-1deg); } to { transform:translate(8px,-3px) rotate(2deg); } }
+      @keyframes clashB { from { transform:translate(0,0) rotate(1deg); } to { transform:translate(-9px,-4px) rotate(-2deg); } }
+      @keyframes cloak { from { transform:rotate(-3deg) skewX(-2deg); } to { transform:rotate(5deg) skewX(4deg); } }
+      @keyframes wingbeat { from { transform:rotate(-3deg) scaleY(.96); } to { transform:rotate(4deg) scaleY(1.04); } }
+    </style>
+  </defs>
+
+  <!-- The cavernous darkness and distant fiery horizon -->
+  <g id="cavern-background">
+    <rect width="900" height="600" fill="url(#sky)"/>
+    <path d="M0 190 Q130 135 250 188 T480 170 T700 185 T900 145 V0H0Z" fill="#050711" opacity=".82"/>
+    <path d="M0 250 Q100 205 205 238 T420 220 T650 245 T900 205 V0H0Z" fill="#0b0c16" opacity=".7"/>
+    <g fill="#9f3420" opacity=".35" filter="url(#blur)">
+      <ellipse cx="170" cy="360" rx="130" ry="90"/>
+      <ellipse cx="735" cy="350" rx="170" ry="105"/>
+      <ellipse cx="450" cy="425" rx="230" ry="85"/>
+    </g>
+  </g>
+
+  <!-- The fiery chasm beneath the bridge -->
+  <g id="fiery-chasm">
+    <path d="M0 405 Q120 365 245 414 T470 398 T700 412 T900 378 V600H0Z" fill="#210d16"/>
+    <path d="M0 470 Q120 415 245 465 T470 448 T700 467 T900 430 V600H0Z" fill="url(#lava)" opacity=".9"/>
+    <path d="M0 510 Q105 473 215 505 T430 490 T650 510 T900 480" fill="none" stroke="#fff08a" stroke-width="9" opacity=".65" filter="url(#smallBlur)"/>
+    <g class="fire" fill="url(#lava)" filter="url(#smallBlur)">
+      <path d="M65 500 Q48 455 75 424 Q72 462 95 443 Q91 480 121 460 Q109 503 130 535H45Z"/>
+      <path d="M240 520 Q218 470 249 437 Q243 477 270 458 Q267 494 294 470 Q286 514 310 545H220Z"/>
+      <path d="M420 515 Q397 460 430 425 Q426 470 450 448 Q449 486 480 461 Q468 508 500 542H390Z"/>
+      <path d="M650 515 Q625 463 659 428 Q655 475 681 450 Q678 493 710 465 Q696 510 725 546H615Z"/>
+      <path d="M805 510 Q790 468 817 440 Q812 479 837 459 Q834 492 861 475 Q850 515 875 540H780Z"/>
+    </g>
+    <g class="fire2" fill="#ffd75a" opacity=".8">
+      <path d="M150 552 Q135 500 158 478 Q158 514 178 494 Q174 532 195 512 L205 570H125Z"/>
+      <path d="M540 550 Q525 505 550 480 Q548 514 570 495 Q566 532 590 510 L600 570H515Z"/>
+      <path d="M745 560 Q730 515 755 486 Q752 522 775 504 Q770 540 795 520 L805 580H720Z"/>
+    </g>
+  </g>
+
+  <!-- The narrow stone bridge spanning the chasm -->
+  <g id="stone-bridge">
+    <path d="M80 382 L820 382 L760 440 L140 440Z" fill="#11131d" opacity=".8"/>
+    <path d="M92 365 L815 365 L760 415 L145 415Z" fill="url(#stone)" stroke="#aaa0a0" stroke-width="3"/>
+    <path d="M145 415 L760 415 L738 435 L163 435Z" fill="#242630"/>
+    <path d="M120 366 L148 415 M210 366 L225 415 M310 366 L320 415 M420 366 L425 415 M530 366 L530 415 M650 366 L640 415 M755 366 L738 415"
+          stroke="#1b1c26" stroke-width="5" opacity=".8"/>
+    <path d="M92 365 Q450 350 815 365" fill="none" stroke="#d0b9a3" stroke-width="3" opacity=".45"/>
+    <path d="M110 348 L150 365 M790 348 L815 365" stroke="#77727a" stroke-width="12"/>
+  </g>
+
+  <!-- Gandalf, his waving cloak, staff, and sword -->
+  <g id="gandalf-group" class="gandalf">
+    <ellipse cx="290" cy="346" rx="78" ry="25" fill="#ff8c26" opacity=".22" filter="url(#smallBlur)"/>
+    <g id="gandalf-cloak" class="cloak">
+      <path d="M270 245 Q230 270 224 330 Q215 365 174 399 Q218 416 284 400 Q325 418 365 395 Q331 350 326 297 Q320 257 300 245Z"
+            fill="url(#robe)" stroke="#14151d" stroke-width="4"/>
+      <path d="M238 294 Q267 319 246 389 M284 275 Q304 330 282 404 M318 297 Q326 347 350 387"
+            fill="none" stroke="#c0bab2" stroke-width="4" opacity=".32"/>
+      <path d="M211 375 Q247 390 274 377 Q310 393 351 377" fill="none" stroke="#d5c7bb" stroke-width="5" opacity=".4"/>
+    </g>
+    <path d="M270 244 Q279 227 298 244 L310 268 L263 268Z" fill="#d0c4ba" stroke="#171821" stroke-width="4"/>
+    <path d="M276 263 Q294 252 310 270 L304 300 L270 300Z" fill="#8b8585" stroke="#181923" stroke-width="4"/>
+    <path d="M273 272 L260 302 M301 270 L316 300" stroke="#c9beb5" stroke-width="9" stroke-linecap="round"/>
+    <path d="M273 290 L258 318 M303 290 L326 318" stroke="#bbb1aa" stroke-width="7" stroke-linecap="round"/>
+    <path d="M258 316 L245 358 M326 316 L340 359" stroke="#969197" stroke-width="10" stroke-linecap="round"/>
+    <path d="M237 358 L257 358 M331 359 L352 359" stroke="#171821" stroke-width="7" stroke-linecap="round"/>
+    <!-- staff in one hand -->
+    <path d="M315 319 L350 174" stroke="#60452f" stroke-width="7"/>
+    <path d="M350 181 Q337 168 350 151 Q368 159 365 177 Q361 190 350 181Z" fill="#fff4a0" filter="url(#glow)"/>
+    <ellipse class="staffGlow" cx="351" cy="170" rx="35" ry="34" fill="url(#fireGlow)" opacity=".6"/>
+    <!-- sword in the other hand -->
+    <path d="M266 311 L192 246" stroke="#292027" stroke-width="8"/>
+    <path d="M188 249 L111 177 L205 237 L195 249Z" fill="#e4e5dc" stroke="#34343e" stroke-width="3"/>
+    <path d="M239 292 L213 317" stroke="#c49a48" stroke-width="7"/>
+    <path d="M226 303 L210 287" stroke="#8d5b2c" stroke-width="5"/>
+    <path d="M253 230 Q278 207 296 221" fill="none" stroke="#fff0a1" stroke-width="4" opacity=".7"/>
+  </g>
+
+  <!-- The Balrog's flaming aura and enormous silhouette -->
+  <g id="balrog-group" class="balrog">
+    <ellipse id="balrog-aura" class="aura" cx="650" cy="275" rx="170" ry="170" fill="url(#fireGlow)" filter="url(#blur)"/>
+    <g id="balrog-wings" class="wing">
+      <path d="M628 238 Q575 133 453 115 Q505 178 487 273 Q542 224 621 282Z" fill="#1a1119" stroke="#b23c20" stroke-width="5"/>
+      <path d="M666 238 Q720 130 842 114 Q787 179 805 275 Q747 225 673 282Z" fill="#171019" stroke="#b23c20" stroke-width="5"/>
+      <path d="M600 225 L492 151 M595 245 L500 205 M699 225 L805 151 M704 245 L796 205"
+            stroke="#db5527" stroke-width="4" opacity=".65"/>
+      <path d="M453 115 Q470 104 489 119 M842 114 Q823 104 805 119" fill="none" stroke="#ff9b32" stroke-width="7"/>
+    </g>
+    <path d="M610 207 Q607 173 634 154 Q660 137 689 159 Q713 180 705 218 L720 285 Q731 329 704 365 Q675 392 634 371 Q603 342 609 294Z"
+          fill="url(#balrog)" stroke="#160e16" stroke-width="6"/>
+    <!-- horns -->
+    <path d="M627 177 Q585 147 590 104 Q614 127 643 143Z" fill="#d5a34d" stroke="#21131b" stroke-width="5"/>
+    <path d="M684 175 Q730 147 725 103 Q700 128 671 144Z" fill="#d5a34d" stroke="#21131b" stroke-width="5"/>
+    <path d="M615 195 Q653 170 700 195 L687 230 L628 230Z" fill="#25141b"/>
+    <circle cx="638" cy="202" r="7" fill="#fff29a" filter="url(#glow)"/>
+    <circle cx="680" cy="202" r="7" fill="#fff29a" filter="url(#glow)"/>
+    <path d="M642 224 Q660 236 682 223" fill="none" stroke="#ff8a2d" stroke-width="6"/>
+    <!-- arms and legs -->
+    <path d="M620 249 L550 309 M697 250 L756 300" stroke="#3a171b" stroke-width="24" stroke-linecap="round"/>
+    <path d="M550 309 L528 331 M756 300 L781 322" stroke="#d85425" stroke-width="7"/>
+    <path d="M635 351 L610 405 M688 350 L714 405" stroke="#2b171c" stroke-width="25" stroke-linecap="round"/>
+    <path d="M598 405 L625 405 M701 405 L731 405" stroke="#11111a" stroke-width="9" stroke-linecap="round"/>
+    <!-- flaming whip -->
+    <path d="M756 300 Q805 260 836 303 Q854 330 820 348 Q787 364 804 392"
+          fill="none" stroke="#ff7122" stroke-width="8" filter="url(#glow)"/>
+    <path d="M804 392 Q818 375 827 392 Q819 410 838 419 Q816 424 804 440 Q793 418 780 416 Q798 405 804 392Z"
+          fill="#ffd34e" class="fire2"/>
+    <path d="M580 260 Q566 240 577 216 Q591 237 600 223 Q604 250 592 273Z" fill="#ff8b25" class="fire"/>
+    <path d="M715 271 Q706 243 722 225 Q728 247 742 239 Q738 264 729 284Z" fill="#ff8b25" class="fire2"/>
+  </g>
+
+  <!-- Sparks crossing the space between the combatants -->
+  <g id="clash-sparks" fill="#ffe873" filter="url(#glow)">
+    <circle cx="432" cy="255" r="4" class="fire"/>
+    <circle cx="470" cy="287" r="3" class="fire2"/>
+    <circle cx="505" cy="239" r="5" class="fire"/>
+    <path d="M450 270 l18 -13 M490 260 l13 16 M530 275 l19 -8" stroke="#ffb52d" stroke-width="4" class="fire2"/>
+  </g>
+
+  <!-- Foreground smoke and ember silhouettes -->
+  <g id="foreground-embers" fill="#ffbd3d">
+    <circle cx="106" cy="315" r="3" class="fire"/>
+    <circle cx="181" cy="278" r="2" class="fire2"/>
+    <circle cx="826" cy="250" r="3" class="fire"/>
+    <circle cx="865" cy="335" r="2" class="fire2"/>
+    <circle cx="388" cy="190" r="2" class="fire"/>
+  </g>
+</svg>

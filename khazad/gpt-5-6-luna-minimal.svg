@@ -1,0 +1,271 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 1000 700"
+     width="1000" height="700"
+     role="img"
+     aria-labelledby="title desc">
+
+  <title id="title">Gandalf duelling the Balrog on the Bridge of Khazad-dûm</title>
+  <desc id="desc">An animated fantasy scene showing a wizard and a fiery demon facing each other above a chasm of lava.</desc>
+
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1">
+      <stop offset="0" stop-color="#090b19"/>
+      <stop offset=".6" stop-color="#211326"/>
+      <stop offset="1" stop-color="#512019"/>
+    </linearGradient>
+
+    <linearGradient id="lava" x2="0" y2="1">
+      <stop stop-color="#ffdf55"/>
+      <stop offset=".28" stop-color="#ff721d"/>
+      <stop offset="1" stop-color="#8d160d"/>
+    </linearGradient>
+
+    <linearGradient id="stone" x2="0" y2="1">
+      <stop stop-color="#777070"/>
+      <stop offset="1" stop-color="#252631"/>
+    </linearGradient>
+
+    <linearGradient id="robe" x2="0" y2="1">
+      <stop stop-color="#e6e4df"/>
+      <stop offset=".7" stop-color="#777984"/>
+      <stop offset="1" stop-color="#292b3b"/>
+    </linearGradient>
+
+    <radialGradient id="fireGlow">
+      <stop stop-color="#fff7a0" stop-opacity=".95"/>
+      <stop offset=".35" stop-color="#ff9c24" stop-opacity=".7"/>
+      <stop offset="1" stop-color="#ff3d16" stop-opacity="0"/>
+    </radialGradient>
+
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="softGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+
+    <pattern id="stones" width="110" height="34" patternUnits="userSpaceOnUse">
+      <rect width="110" height="34" fill="#42434c"/>
+      <path d="M0 2H110M0 31H110M52 0V16M18 16V34M88 16V34"
+            fill="none" stroke="#1d1e27" stroke-width="3"/>
+      <path d="M0 4H110M0 29H110"
+            stroke="#898384" stroke-opacity=".25"/>
+    </pattern>
+
+    <path id="sparkPath" d="M0 0L-18 -34M0 0L19 -28M0 0L35 -7M0 0L-35 -12M0 0L7 -43"/>
+  </defs>
+
+  <!-- Cavern -->
+  <rect width="1000" height="700" fill="url(#sky)"/>
+  <path d="M0 0H1000V180
+           C870 135 820 205 700 160
+           C555 105 480 180 350 142
+           C200 98 130 170 0 130Z"
+        fill="#05060d"/>
+  <path d="M0 180L80 210 45 370 0 415ZM1000 155L920 215 950 400 1000 430Z"
+        fill="#0b0c15"/>
+
+  <!-- Distant fire glow -->
+  <ellipse cx="500" cy="575" rx="470" ry="200" fill="url(#fireGlow)" filter="url(#softGlow)">
+    <animate attributeName="opacity" values=".55;.85;.6;.9;.55" dur="2.3s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <!-- Lava river -->
+  <path d="M0 515
+           C145 475 244 542 365 514
+           C505 481 619 544 735 505
+           C846 468 917 512 1000 488
+           V700H0Z"
+        fill="url(#lava)"/>
+  <path d="M-30 581 C145 536 222 602 370 570
+           S645 598 780 555 S930 590 1030 547"
+        fill="none" stroke="#ffe56b" stroke-width="10" opacity=".8">
+    <animate attributeName="d"
+      values="M-30 581 C145 536 222 602 370 570 S645 598 780 555 S930 590 1030 547;
+              M-30 594 C145 550 222 586 370 585 S645 577 780 570 S930 605 1030 557;
+              M-30 581 C145 536 222 602 370 570 S645 598 780 555 S930 590 1030 547"
+      dur="4s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Falling embers -->
+  <g fill="#ffd66b" filter="url(#glow)">
+    <circle cx="120" cy="290" r="3"><animate attributeName="cy" values="290;510" dur="3s" repeatCount="indefinite"/></circle>
+    <circle cx="210" cy="220" r="2"><animate attributeName="cy" values="220;470" dur="4s" repeatCount="indefinite"/></circle>
+    <circle cx="790" cy="250" r="3"><animate attributeName="cy" values="250;480" dur="3.7s" repeatCount="indefinite"/></circle>
+    <circle cx="870" cy="330" r="2"><animate attributeName="cy" values="330;520" dur="2.8s" repeatCount="indefinite"/></circle>
+    <circle cx="545" cy="170" r="2"><animate attributeName="cy" values="170;430" dur="3.2s" repeatCount="indefinite"/></circle>
+  </g>
+
+  <!-- Bridge supports -->
+  <path d="M60 535V630H250V548ZM750 548V630H940V530Z"
+        fill="#24252d" stroke="#11121a" stroke-width="8"/>
+  <path d="M104 550V622M150 548V622M200 548V622M800 548V622M850 545V622M900 538V622"
+        stroke="#55545a" stroke-width="5"/>
+
+  <!-- Bridge -->
+  <path d="M-40 465
+           L235 454 L470 467 L725 451 L1040 463
+           L1018 544 L735 532 L480 548 L225 535 L-25 548Z"
+        fill="url(#stone)" stroke="#171821" stroke-width="8"/>
+  <path d="M-40 465L235 454L470 467L725 451L1040 463"
+        fill="none" stroke="#aaa09b" stroke-width="7" opacity=".7"/>
+  <path d="M-20 502L245 492L475 507L740 489L1025 501"
+        fill="none" stroke="#15161f" stroke-width="8"/>
+  <path d="M-20 534L225 523L480 538L735 522L1025 533"
+        fill="none" stroke="#8a8280" stroke-opacity=".35" stroke-width="4"/>
+
+  <!-- Balrog fiery aura -->
+  <ellipse cx="285" cy="360" rx="170" ry="210" fill="url(#fireGlow)" opacity=".5" filter="url(#softGlow)">
+    <animate attributeName="rx" values="160;185;160" dur="1.4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values=".35;.65;.35" dur="1.4s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <!-- Balrog -->
+  <g id="balrog">
+    <!-- Wings -->
+    <path d="M300 235
+             C210 137 105 150 48 84
+             C105 210 134 280 238 322
+             L305 300Z"
+          fill="#17131c" stroke="#3b2022" stroke-width="7"/>
+    <path d="M320 238
+             C402 125 493 143 553 76
+             C514 205 458 282 348 322Z"
+          fill="#17131c" stroke="#3b2022" stroke-width="7"/>
+    <path d="M238 294L103 177M252 275L166 171M362 292L474 168M380 267L450 145"
+          stroke="#8e3b26" stroke-width="5" opacity=".7"/>
+
+    <!-- Horns -->
+    <path d="M275 226Q235 157 253 113Q285 161 308 190Z"
+          fill="#d5a242" stroke="#3a211c" stroke-width="7"/>
+    <path d="M328 190Q357 150 351 106Q387 158 355 231Z"
+          fill="#d5a242" stroke="#3a211c" stroke-width="7"/>
+
+    <!-- Body -->
+    <path d="M260 220Q300 185 344 222L382 347L350 458H237L215 346Z"
+          fill="#24151b" stroke="#120f18" stroke-width="8"/>
+    <path d="M250 252Q300 280 360 246L347 408L247 410Z"
+          fill="#4b1d1c" opacity=".8"/>
+
+    <!-- Head -->
+    <path d="M257 184Q299 155 344 185L357 240Q303 272 247 238Z"
+          fill="#32181b" stroke="#120f18" stroke-width="7"/>
+    <path d="M269 217L285 211M319 211L337 217"
+          stroke="#ffcf3e" stroke-width="8" stroke-linecap="round" filter="url(#glow)">
+      <animate attributeName="opacity" values=".45;1;.45" dur="1s" repeatCount="indefinite"/>
+    </path>
+
+    <!-- Arms -->
+    <path d="M245 270L180 353L205 370L283 310Z"
+          fill="#32181b" stroke="#120f18" stroke-width="9"/>
+    <path d="M350 267L419 334L399 359L322 306Z"
+          fill="#32181b" stroke="#120f18" stroke-width="9"/>
+    <path d="M178 350L198 374M420 333L398 365"
+          stroke="#ff6b22" stroke-width="8"/>
+
+    <!-- Flame whip -->
+    <path d="M407 350
+             C488 322 514 370 474 397
+             C446 416 490 433 548 399"
+          fill="none" stroke="#ff5a16" stroke-width="9" filter="url(#glow)">
+      <animate attributeName="d"
+        values="M407 350 C488 322 514 370 474 397 C446 416 490 433 548 399;
+                M407 350 C474 350 530 390 478 410 C440 425 500 450 560 412;
+                M407 350 C488 322 514 370 474 397 C446 416 490 433 548 399"
+        dur="1.1s" repeatCount="indefinite"/>
+    </path>
+
+    <!-- Legs -->
+    <path d="M257 400L224 467L270 472L302 411Z
+             M325 409L350 470L396 467L360 397Z"
+          fill="#1c151b" stroke="#100f15" stroke-width="8"/>
+    <path d="M219 472L275 472M345 472L402 468"
+          stroke="#ff5c1c" stroke-width="8" filter="url(#glow)"/>
+  </g>
+
+  <!-- Gandalf cloak flutter -->
+  <g id="gandalf">
+    <path d="M739 271
+             Q687 310 691 405
+             L635 476Q723 500 819 473
+             L771 405Q782 316 739 271Z"
+          fill="url(#robe)" stroke="#1c1d29" stroke-width="8">
+      <animate attributeName="d"
+        values="M739 271 Q687 310 691 405 L635 476Q723 500 819 473 L771 405Q782 316 739 271Z;
+                M739 271 Q680 320 675 409 L616 474Q718 510 830 470 L773 402Q785 312 739 271Z;
+                M739 271 Q687 310 691 405 L635 476Q723 500 819 473 L771 405Q782 316 739 271Z"
+        dur="2.4s" repeatCount="indefinite"/>
+    </path>
+
+    <!-- Hat -->
+    <path d="M692 257Q739 236 775 258L761 285Q727 295 696 280Z"
+          fill="#aaaab0" stroke="#272735" stroke-width="6"/>
+    <path d="M715 253L744 153L774 255Z"
+          fill="#686b79" stroke="#252634" stroke-width="7"/>
+    <path d="M738 163L763 244"
+          stroke="#c6c4bb" stroke-width="7" opacity=".45"/>
+
+    <!-- Face and beard -->
+    <path d="M709 274Q738 258 763 277L759 326Q735 347 710 322Z"
+          fill="#c5a689" stroke="#2b2630" stroke-width="5"/>
+    <path d="M708 311Q736 329 761 309L756 365L735 386L713 359Z"
+          fill="#e5e1d8" stroke="#55535d" stroke-width="4"/>
+    <circle cx="721" cy="293" r="3" fill="#17151b"/>
+    <circle cx="748" cy="293" r="3" fill="#17151b"/>
+
+    <!-- Staff -->
+    <path d="M806 474L790 183"
+          stroke="#70482e" stroke-width="10" stroke-linecap="round"/>
+    <path d="M790 184Q755 155 783 128Q814 152 790 184Z"
+          fill="none" stroke="#dff6ff" stroke-width="8" filter="url(#glow)">
+      <animate attributeName="stroke-width" values="6;11;6" dur="1.3s" repeatCount="indefinite"/>
+    </path>
+
+    <!-- Sword -->
+    <path d="M700 357L508 329"
+          stroke="#b9d9e8" stroke-width="8" filter="url(#glow)"/>
+    <path d="M700 357L508 329"
+          stroke="#ffffff" stroke-width="3"/>
+    <path d="M683 346L676 373M671 343L665 369"
+          stroke="#d5a752" stroke-width="7"/>
+    <circle cx="505" cy="329" r="9" fill="#eaffff" filter="url(#glow)">
+      <animate attributeName="r" values="6;13;6" dur=".8s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Arm -->
+    <path d="M710 330L665 355L681 375L729 349Z"
+          fill="#aaa7a8" stroke="#292936" stroke-width="7"/>
+  </g>
+
+  <!-- Duel impact sparks -->
+  <g transform="translate(506 329)" stroke="#fff3a2" stroke-width="4"
+     stroke-linecap="round" filter="url(#glow)">
+    <use href="#sparkPath"/>
+    <use href="#sparkPath" transform="rotate(72)"/>
+    <use href="#sparkPath" transform="rotate(144)"/>
+    <use href="#sparkPath" transform="rotate(216)"/>
+    <use href="#sparkPath" transform="rotate(288)"/>
+    <animateTransform attributeName="transform" type="rotate"
+                      from="0" to="360" dur="1.7s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values=".3;1;.3" dur=".8s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- Foreground bridge edge -->
+  <path d="M0 548L225 535L480 548L735 532L1000 544V580
+           L735 568L480 584L225 570L0 583Z"
+        fill="#191a23"/>
+  <path d="M0 548L225 535L480 548L735 532L1000 544"
+        fill="none" stroke="#aaa19a" stroke-width="5" opacity=".6"/>
+
+  <!-- Caption -->
+  <text x="500" y="665" text-anchor="middle"
+        fill="#d8c8aa" font-family="Georgia, serif" font-size="20"
+        letter-spacing="4" opacity=".8">
+    THE BRIDGE OF KHAZAD-DÛM
+  </text>
+</svg>
