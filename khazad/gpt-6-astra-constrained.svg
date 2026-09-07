@@ -1,0 +1,320 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1100" height="760" viewBox="0 0 1100 760" role="img" aria-labelledby="title desc">
+  <title id="title">Gandalf and the Balrog on the Bridge of Khazad-dûm</title>
+  <desc id="desc">In a vast subterranean hall, a grey wizard with sword and shining staff confronts a horned, winged demon on a narrow stone bridge. Fire flickers beneath them, robes ripple, and the combatants shift in an endless clash.</desc>
+
+  <!-- Self-contained paints, lighting filters, and reusable fire shapes. -->
+  <defs>
+    <linearGradient id="cavern" x2="0" y2="1">
+      <stop stop-color="#070a14"/>
+      <stop offset=".58" stop-color="#19151c"/>
+      <stop offset="1" stop-color="#501911"/>
+    </linearGradient>
+    <radialGradient id="abyss">
+      <stop stop-color="#ffe49a"/>
+      <stop offset=".2" stop-color="#ff942c"/>
+      <stop offset=".52" stop-color="#c23814"/>
+      <stop offset="1" stop-color="#431510" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="demonHalo">
+      <stop stop-color="#ffaf37" stop-opacity=".62"/>
+      <stop offset=".5" stop-color="#ff4913" stop-opacity=".2"/>
+      <stop offset="1" stop-color="#ff4913" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="staffHalo">
+      <stop stop-color="#fff"/>
+      <stop offset=".12" stop-color="#e2fbff" stop-opacity=".85"/>
+      <stop offset=".42" stop-color="#87cfff" stop-opacity=".21"/>
+      <stop offset="1" stop-color="#87cfff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="stone" x2=".2" y2="1">
+      <stop stop-color="#615b60"/>
+      <stop offset=".28" stop-color="#35313a"/>
+      <stop offset="1" stop-color="#16151e"/>
+    </linearGradient>
+    <linearGradient id="robe" x1="0" x2="1">
+      <stop stop-color="#343c4a"/>
+      <stop offset=".44" stop-color="#8a98a4"/>
+      <stop offset=".78" stop-color="#c6d0d4"/>
+      <stop offset="1" stop-color="#65717f"/>
+    </linearGradient>
+    <linearGradient id="cloak" x1="0" x2="1" y2=".3">
+      <stop stop-color="#222938"/>
+      <stop offset=".6" stop-color="#526071"/>
+      <stop offset="1" stop-color="#a4b7c4"/>
+    </linearGradient>
+    <linearGradient id="fire" x2="0" y1="1" y2="0">
+      <stop stop-color="#fff3b0"/>
+      <stop offset=".28" stop-color="#ffc14a"/>
+      <stop offset=".65" stop-color="#ff641c"/>
+      <stop offset="1" stop-color="#d82b11" stop-opacity=".15"/>
+    </linearGradient>
+    <linearGradient id="demon" x1="0" x2="1" y2=".5">
+      <stop stop-color="#4f271f"/>
+      <stop offset=".35" stop-color="#130f14"/>
+      <stop offset=".7" stop-color="#25151a"/>
+      <stop offset="1" stop-color="#773020"/>
+    </linearGradient>
+    <linearGradient id="wing" x1="0" y1="0" x2=".5" y2="1">
+      <stop stop-color="#100e16"/>
+      <stop offset=".65" stop-color="#261319"/>
+      <stop offset="1" stop-color="#6b251c"/>
+    </linearGradient>
+    <linearGradient id="steel" x2="1" y2="1">
+      <stop stop-color="#fff"/>
+      <stop offset=".4" stop-color="#d0f1ff"/>
+      <stop offset=".55" stop-color="#8194ae"/>
+      <stop offset="1" stop-color="#eefaff"/>
+    </linearGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-70%" y="-70%" width="240%" height="240%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+    <path id="flame" d="M0 0 C-28-29-18-56-7-76 C-10-51 14-47 7-104 C40-67 22-48 35-60 C47-28 28-11 21 0Z" fill="url(#fire)"/>
+  </defs>
+
+  <!-- Immense cavern, distant pillars, and broken mountain-like walls. -->
+  <g id="cavern-background">
+    <path fill="url(#cavern)" d="M0 0H1100V760H0Z"/>
+    <path fill="#10111b" d="M0 0H160L145 81 163 97 139 121 143 396 102 458 0 503ZM205 0H282L274 107 287 119 268 137 274 410 222 452 231 137 213 111ZM917 0H994L982 145 1000 162 978 185 985 410 933 463 937 173 919 151Z"/>
+    <path fill="#11121b" d="M379 0H425L416 300 397 326ZM794 0H834L827 326 809 359Z"/>
+    <path d="M152 27Q532-118 958 34M158 63Q545-80 948 79" fill="none" stroke="#2b2630" stroke-width="8" opacity=".4"/>
+    <path fill="#0a0c14" d="M0 284L44 319 83 306 112 400 171 441 151 507 0 551ZM1100 248L1051 299 1014 282 987 370 957 411 981 501 1100 546Z"/>
+    <path fill="#25202a" opacity=".65" d="M0 490L71 452 122 466 158 433 190 469 153 551 0 585ZM1100 454L1035 432 1001 466 976 443 917 485 972 550 1100 580Z"/>
+    <path d="M63 0L70 314M248 7L245 344M965 12L958 346" stroke="#51404a" stroke-width="2" opacity=".15"/>
+  </g>
+
+  <!-- Pulsating heat and layered flame tongues deep inside the fiery chasm. -->
+  <g id="fiery-chasm">
+    <ellipse cx="575" cy="724" rx="600" ry="259" fill="url(#abyss)">
+      <animate attributeName="opacity" values=".75;1;.84;.95;.75" dur="4s" repeatCount="indefinite"/>
+    </ellipse>
+    <path d="M104 753Q287 601 458 704T814 696T1130 707" fill="none" stroke="#ff6c20" stroke-width="36" opacity=".5" filter="url(#soft)">
+      <animate attributeName="opacity" values=".35;.7;.44;.35" dur="3s" repeatCount="indefinite"/>
+    </path>
+    <g opacity=".62">
+      <use xlink:href="#flame" transform="translate(190 773) scale(2.1 2.4)"/>
+      <use xlink:href="#flame" transform="translate(822 787) scale(2.6 2.8)"/>
+      <use xlink:href="#flame" transform="translate(460 795) scale(2.5 2.3)"/>
+    </g>
+    <g transform="translate(290 760)">
+      <g>
+        <use xlink:href="#flame" transform="scale(1.9 1.6)"/>
+        <animateTransform attributeName="transform" type="scale" values="1 1;1.12 1.2;.94 .91;1 1" dur="3s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values=".6;1;.73;.6" dur="3s" repeatCount="indefinite"/>
+      </g>
+    </g>
+    <g transform="translate(585 780)">
+      <g>
+        <use xlink:href="#flame" transform="scale(2.8 2.2)"/>
+        <animateTransform attributeName="transform" type="scale" values="1 1;.9 1.15;1.08 .9;1 1" dur="4s" repeatCount="indefinite"/>
+      </g>
+    </g>
+    <g transform="translate(922 781)">
+      <g>
+        <use xlink:href="#flame" transform="scale(1.7 1.9)"/>
+        <animateTransform attributeName="transform" type="skewX" values="-4;7;-8;-4" dur="3s" repeatCount="indefinite"/>
+      </g>
+    </g>
+    <path fill="#120f17" d="M0 585L84 564 123 599 96 664 169 695 188 760H0ZM1100 535L1058 564 1020 611 1050 673 973 735 981 760H1100Z"/>
+    <path d="M0 687L53 655 84 675 100 722M1083 632L1051 670 1062 713" fill="none" stroke="#b74321" stroke-width="3" opacity=".4"/>
+  </g>
+
+  <!-- Thin, weathered stone bridge spanning the abyss with no protective rails. -->
+  <g id="bridge">
+    <path d="M0 530L291 504 506 492 782 496 1100 523V581L802 547 510 539 292 554 0 598Z" fill="url(#stone)"/>
+    <path d="M0 530L284 493 513 483 792 489 1100 516 1100 530 787 506 511 501 286 514 0 548Z" fill="#706363"/>
+    <path d="M0 532L290 499 512 490 788 496 1100 521" fill="none" stroke="#c38b67" stroke-width="2" opacity=".65"/>
+    <path d="M0 584L292 547 510 534 803 542 1100 572" fill="none" stroke="#eb5a25" stroke-width="3" opacity=".45">
+      <animate attributeName="opacity" values=".25;.55;.37;.25" dur="4s" repeatCount="indefinite"/>
+    </path>
+    <path d="M242 508L247 547M324 504L334 542M419 502L422 536M519 501L524 534M622 502L618 537M720 505L727 540M829 512L833 547M933 519L928 558" stroke="#171620" stroke-width="3" fill="none"/>
+    <path d="M541 486L535 500 546 511 537 524M535 500L515 510M757 492L745 502 763 514M327 495L349 507 344 515" fill="none" stroke="#30252b" stroke-width="2"/>
+    <ellipse cx="390" cy="495" rx="64" ry="7" fill="#0b0c15" opacity=".65"/>
+    <ellipse cx="660" cy="499" rx="92" ry="9" fill="#110c12" opacity=".8"/>
+  </g>
+
+  <!-- The Balrog's moving silhouette carries its wings, horns, weapons, and living fire. -->
+  <g id="balrog">
+    <animateTransform attributeName="transform" type="translate" values="0 0;-5 2;0 0;3 -1;0 0" dur="6s" repeatCount="indefinite"/>
+    <ellipse cx="675" cy="318" rx="234" ry="243" fill="url(#demonHalo)">
+      <animate attributeName="opacity" values=".72;1;.68;.9;.72" dur="3s" repeatCount="indefinite"/>
+    </ellipse>
+
+    <!-- Vast ragged wings, with heated spars stretching into the darkness. -->
+    <g id="balrog-wings" stroke="#7b3527" stroke-width="2">
+      <animateTransform attributeName="transform" type="rotate" values="-1 658 284;1.5 658 284;-1 658 284" dur="6s" repeatCount="indefinite"/>
+      <path d="M633 289Q571 177 432 103Q464 162 457 206Q491 187 517 259Q545 237 567 304Q601 282 620 340Z" fill="url(#wing)"/>
+      <path d="M681 285Q751 160 931 101Q890 154 895 208Q852 182 827 266Q792 235 769 315Q720 287 699 347Z" fill="url(#wing)"/>
+      <path d="M634 300Q553 182 432 103M625 296Q546 202 457 206M623 304Q566 255 517 259M681 300Q788 163 931 101M696 296Q803 198 895 208M701 309Q766 256 827 266" fill="none" stroke="#a54729" opacity=".55"/>
+      <path d="M439 110L453 122M919 109L899 125" stroke="#ff8f3a" opacity=".6"/>
+    </g>
+
+    <!-- Flames rise from the demon's shoulders, spine, and massive legs. -->
+    <g id="balrog-flaming-aura" filter="url(#glow)">
+      <g transform="translate(608 309)">
+        <g>
+          <use xlink:href="#flame" transform="scale(1.05 1.35)"/>
+          <animateTransform attributeName="transform" type="skewX" values="-7;6;-3;-7" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values=".75;1;.8;.75" dur="2s" repeatCount="indefinite"/>
+        </g>
+      </g>
+      <g transform="translate(677 308)">
+        <g>
+          <use xlink:href="#flame" transform="scale(1.6 1.7)"/>
+          <animateTransform attributeName="transform" type="scale" values="1 1;.95 1.13;1.04 .92;1 1" dur="3s" repeatCount="indefinite"/>
+        </g>
+      </g>
+      <g transform="translate(715 358)">
+        <g>
+          <use xlink:href="#flame" transform="scale(.8 1.4)"/>
+          <animateTransform attributeName="transform" type="skewX" values="5;-10;9;5" dur="2s" repeatCount="indefinite"/>
+        </g>
+      </g>
+      <use xlink:href="#flame" transform="translate(597 488) scale(.72 1.2)" opacity=".8"/>
+      <use xlink:href="#flame" transform="translate(699 492) scale(.88 1.4)" opacity=".85"/>
+    </g>
+
+    <!-- Obsidian body, cloven feet, heavy arms, and cracks of molten fire. -->
+    <g id="balrog-body" fill="url(#demon)" stroke="#994127" stroke-width="2">
+      <path d="M622 270Q602 273 592 301L606 351 620 373 601 407 587 471 575 491 614 495 632 475 642 422 657 399 678 429 687 475 681 496 724 499 731 489 710 465 711 407 691 362 712 309Q704 277 677 272Z"/>
+      <path d="M612 285Q586 277 572 300L552 314 532 307 521 321 541 343 567 337 609 321Z"/>
+      <path d="M697 282Q719 279 731 306L749 335 772 340 774 360 742 367 719 347 691 321Z"/>
+      <path d="M627 298L648 315 676 297M618 335L641 345 673 335M641 345L653 375M618 384L628 405 613 446M683 376L695 407 697 452" fill="none" stroke="#e45b25" stroke-width="3"/>
+      <path d="M625 300L646 321 640 331M670 348L661 362 668 379M603 454L599 475M704 465L712 484" fill="none" stroke="#ffc461" stroke-width="1.5" filter="url(#glow)">
+        <animate attributeName="opacity" values=".55;1;.6;.9;.55" dur="3s" repeatCount="indefinite"/>
+      </path>
+      <path d="M582 491L590 481 595 494M601 495L608 483M690 495L698 484 704 498M714 498L716 487" fill="none" stroke="#c17d4b"/>
+    </g>
+
+    <!-- Horned bestial head, burning eyes, and a furnace-like mouth. -->
+    <g id="balrog-head">
+      <path d="M632 238Q602 232 591 205Q584 183 597 164Q574 177 576 205Q579 241 620 256ZM676 236Q709 224 714 198Q719 180 707 161Q731 174 730 202Q728 238 685 254Z" fill="#171117" stroke="#a54a2a" stroke-width="3"/>
+      <path d="M619 230L632 214 664 213 685 234 679 268 660 291 635 278 622 257Z" fill="url(#demon)" stroke="#a64d2c" stroke-width="2"/>
+      <path d="M628 234L644 240 641 246 628 242ZM655 240L675 232 672 242 657 247Z" fill="#ffdb76" filter="url(#glow)"/>
+      <path d="M649 242L642 259 654 257M632 265L641 262 648 267 657 261 669 260 655 277 642 275Z" fill="#ff8b33" stroke="#9a351b"/>
+      <path d="M637 265L641 271 645 266M656 266L658 272 663 264" fill="#fff1b3"/>
+      <path d="M638 219L634 204 645 212 651 192 659 212 670 202 667 219" fill="#2c181a" stroke="#ee7431" stroke-width="2"/>
+    </g>
+
+    <!-- A white-hot sword meets Gandalf's blade; a flaming whip curls behind. -->
+    <g id="balrog-weapons">
+      <path d="M548 327L581 296" stroke="#301a17" stroke-width="9" stroke-linecap="round"/>
+      <path d="M548 299L575 327" stroke="#dd853a" stroke-width="5"/>
+      <path d="M558 314L488 377 507 340 547 305Z" fill="#ff6b18" stroke="#ffb746" stroke-width="4" filter="url(#glow)">
+        <animate attributeName="opacity" values=".8;1;.7;1;.8" dur="2s" repeatCount="indefinite"/>
+      </path>
+      <path d="M554 314L491 373 542 316" fill="#fff2ab"/>
+      <path d="M767 348C838 404 947 349 944 282S841 215 830 264S919 307 957 235" fill="none" stroke="#c43e14" stroke-width="9" opacity=".45" filter="url(#glow)"/>
+      <path d="M767 348C838 404 947 349 944 282S841 215 830 264S919 307 957 235" fill="none" stroke="#ffb540" stroke-width="3" filter="url(#glow)">
+        <animate attributeName="d" values="M767 348C838 404 947 349 944 282S841 215 830 264S919 307 957 235;M767 348C838 388 961 363 946 279S850 205 830 258S919 318 957 235;M767 348C838 404 947 349 944 282S841 215 830 264S919 307 957 235" dur="6s" repeatCount="indefinite"/>
+      </path>
+    </g>
+  </g>
+
+  <!-- Gandalf leans into the duel, his staff in one hand and sword in the other. -->
+  <g id="gandalf">
+    <animateTransform attributeName="transform" type="translate" values="0 0;4 -2;0 0;-2 1;0 0" dur="6s" repeatCount="indefinite"/>
+
+    <!-- Wind-tossed grey cloak billowing away from the heat of the Balrog. -->
+    <g id="gandalf-cloak">
+      <path d="M370 341Q348 352 335 390Q313 429 280 465Q315 463 331 479Q347 484 377 472L395 365Z" fill="url(#cloak)" stroke="#a1b1bd" stroke-width="1">
+        <animate attributeName="d" values="M370 341Q348 352 335 390Q313 429 280 465Q315 463 331 479Q347 484 377 472L395 365Z;M370 341Q342 354 330 389Q301 420 270 453Q307 448 326 474Q351 479 377 472L395 365Z;M370 341Q348 352 335 390Q313 429 280 465Q315 463 331 479Q347 484 377 472L395 365Z" dur="3s" repeatCount="indefinite"/>
+      </path>
+      <path d="M359 367Q340 424 303 455M368 387Q350 446 330 467" fill="none" stroke="#8195a7" stroke-width="2" opacity=".5">
+        <animateTransform attributeName="transform" type="skewX" values="0;-1;0" dur="3s" repeatCount="indefinite"/>
+      </path>
+    </g>
+
+    <!-- Boots, flowing robe, belt, and two separately extended sleeves. -->
+    <g id="gandalf-robe">
+      <path d="M352 475L345 489 328 495Q343 502 364 495L372 479M391 477L400 492 421 496Q416 501 391 499L382 482" fill="#27252b" stroke="#87858a" stroke-width="1.5"/>
+      <path d="M363 351Q378 345 392 360L393 404Q393 447 412 481Q392 477 381 490Q365 480 344 489Q354 459 353 432L360 391Z" fill="url(#robe)" stroke="#adbcc5" stroke-width="1">
+        <animate attributeName="d" values="M363 351Q378 345 392 360L393 404Q393 447 412 481Q392 477 381 490Q365 480 344 489Q354 459 353 432L360 391Z;M363 351Q378 345 392 360L393 404Q400 446 419 476Q395 485 382 487Q363 486 338 484Q351 458 353 432L360 391Z;M363 351Q378 345 392 360L393 404Q393 447 412 481Q392 477 381 490Q365 480 344 489Q354 459 353 432L360 391Z" dur="3s" repeatCount="indefinite"/>
+      </path>
+      <path d="M367 409Q361 450 356 477M378 415L379 478M387 422Q390 453 401 476" fill="none" stroke="#414b5c" stroke-width="2" opacity=".65"/>
+      <path d="M358 405L393 401 395 409 357 413Z" fill="#49434a"/>
+      <path d="M374 405L382 404 383 411 375 412Z" fill="none" stroke="#b7ac8c" stroke-width="1.5"/>
+      <path d="M377 353Q390 347 407 333L428 328 433 341 409 350 390 382 377 376Z" fill="url(#robe)" stroke="#afbec5"/>
+      <path d="M386 365Q398 369 410 376L431 371 437 383 413 395 391 388 380 381Z" fill="url(#robe)" stroke="#b4c6cf"/>
+      <path d="M406 378L411 389M420 332L424 344" stroke="#536272" stroke-width="3"/>
+    </g>
+
+    <!-- Silver hair, long beard, weathered face, and the pointed grey hat. -->
+    <g id="gandalf-head">
+      <path d="M366 316Q350 330 361 359L350 373 373 363 386 336Z" fill="#bec9cf"/>
+      <path d="M369 313L390 313 392 325 399 330 390 334 390 346 376 351 365 336Z" fill="#cfb7a3" stroke="#766d70" stroke-width="1"/>
+      <path d="M383 322L390 322" stroke="#35343c" stroke-width="2"/>
+      <path d="M371 334Q384 345 391 337Q391 359 380 384Q378 361 365 358L365 338Z" fill="#e0e5e4"/>
+      <path d="M370 345L379 369M382 348L382 363" fill="none" stroke="#95a4b2" stroke-width="1.5"/>
+      <path d="M350 316Q360 295 359 270L369 278 380 297 391 313Q406 316 407 321Q382 326 346 324L335 321Z" fill="url(#robe)" stroke="#a9bccb" stroke-width="1.5"/>
+      <path d="M352 315Q373 320 392 314" fill="none" stroke="#444c5c" stroke-width="4"/>
+    </g>
+
+    <!-- Gnarled wooden staff with a quietly breathing blue-white radiance. -->
+    <g id="gandalf-staff">
+      <path d="M410 482L431 339 440 286 437 270 444 258 451 270 445 287" fill="none" stroke="#332a28" stroke-width="7" stroke-linecap="round"/>
+      <path d="M409 479L431 339 440 286 440 272 444 263" fill="none" stroke="#b6a68a" stroke-width="2" stroke-linecap="round"/>
+      <path d="M427 328Q435 323 439 329L436 337 427 339Z" fill="#d6c3ad" stroke="#726c69"/>
+      <circle cx="444" cy="266" r="82" fill="url(#staffHalo)">
+        <animate attributeName="opacity" values=".6;.9;.6" dur="4s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="76;87;76" dur="4s" repeatCount="indefinite"/>
+      </circle>
+      <path d="M444 255L448 265 444 276 440 266Z" fill="#f4feff" filter="url(#glow)">
+        <animate attributeName="opacity" values=".8;1;.8" dur="4s" repeatCount="indefinite"/>
+      </path>
+      <path d="M430 266H458M444 252V280" stroke="#e7fbff" stroke-width="1" opacity=".65"/>
+    </g>
+
+    <!-- Gandalf's bright sword thrust toward the Balrog's burning blade. -->
+    <g id="gandalf-sword">
+      <path d="M433 377L519 318 501 340 440 383Z" fill="url(#steel)" stroke="#d1f4ff" stroke-width="1"/>
+      <path d="M443 375L512 324" fill="none" stroke="#fff" stroke-width="1.2"/>
+      <path d="M420 388L440 374" stroke="#424455" stroke-width="6"/>
+      <path d="M429 367Q437 378 447 386" fill="none" stroke="#d2d8df" stroke-width="4" stroke-linecap="round"/>
+      <path d="M422 377Q430 373 433 379L428 387 420 385Z" fill="#d9c5b1" stroke="#6f6662"/>
+      <circle cx="418" cy="390" r="3" fill="#d8e1e9"/>
+    </g>
+  </g>
+
+  <!-- Repeating sparks and a small flash where the opposed swords collide. -->
+  <g id="clash-light" filter="url(#glow)">
+    <circle cx="509" cy="332" r="12" fill="url(#staffHalo)">
+      <animate attributeName="r" values="10;23;10;15;10" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".35;1;.35;.7;.35" dur="6s" repeatCount="indefinite"/>
+    </circle>
+    <path d="M507 332L492 323M513 329L518 315M511 337L524 342M504 337L496 351" stroke="#ffe7ab" stroke-width="1.5">
+      <animate attributeName="opacity" values=".1;1;.1;.6;.1" dur="6s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- Ascending embers fade out before resetting, keeping every loop seamless. -->
+  <g id="drifting-embers" fill="#ffb955" filter="url(#glow)">
+    <circle cx="238" cy="665" r="2">
+      <animate attributeName="cy" values="665;446" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="238;261;247" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;.8;.8;0" keyTimes="0;.2;.7;1" dur="6s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="553" cy="648" r="1.8">
+      <animate attributeName="cy" values="648;401" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="553;535;564" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;.7;0" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="809" cy="567" r="2">
+      <animate attributeName="cy" values="567;350" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="809;828;817" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;.8;1;0" dur="6s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="689" cy="224" r="1.7">
+      <animate attributeName="cy" values="224;115" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="689;672;680" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;.6;0" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="613" cy="239" r="1.5">
+      <animate attributeName="cy" values="239;140" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;.8;.6;0" dur="4s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

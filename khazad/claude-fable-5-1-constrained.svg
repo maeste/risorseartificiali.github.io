@@ -1,0 +1,353 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 800 500" width="800" height="500">
+  <!-- ===== Definitions: gradients, filters, reusable shapes ===== -->
+  <defs>
+    <linearGradient id="cavernSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#040307"/>
+      <stop offset="1" stop-color="#1c0906"/>
+    </linearGradient>
+    <linearGradient id="chasmFire" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1c0906" stop-opacity="0"/>
+      <stop offset="0.45" stop-color="#6a1604" stop-opacity="0.75"/>
+      <stop offset="0.8" stop-color="#d84a08"/>
+      <stop offset="1" stop-color="#ffc233"/>
+    </linearGradient>
+    <linearGradient id="flameGrad" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#fff4b0"/>
+      <stop offset="0.35" stop-color="#ffa21f"/>
+      <stop offset="0.75" stop-color="#ff4a05" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#ff2000" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="chasmGlow" cx="0.5" cy="1" r="0.7">
+      <stop offset="0" stop-color="#ffb030" stop-opacity="0.9"/>
+      <stop offset="0.5" stop-color="#e04a08" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#7a1a05" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="balrogAura" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffd24a" stop-opacity="0.85"/>
+      <stop offset="0.45" stop-color="#ff5a08" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#ff2000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="staffGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="0.3" stop-color="#cdefff" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#7fc8ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gandalfLight" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#dff4ff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#dff4ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="stone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5a5250"/>
+      <stop offset="0.6" stop-color="#3a3332"/>
+      <stop offset="1" stop-color="#2a1e1a"/>
+    </linearGradient>
+    <linearGradient id="fireBlade" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#ff5a00"/>
+      <stop offset="1" stop-color="#ffe680"/>
+    </linearGradient>
+    <filter id="blurSoft" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+    <filter id="blurHard" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <filter id="blurTiny" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+    <!-- Reusable flame tongue; base at origin, rises upward -->
+    <path id="flameShape" d="M0,0 C-14,-18 -12,-40 -5,-52 C-3,-40 4,-34 2,-24 C10,-40 7,-58 0,-72 C8,-56 18,-40 14,-22 C16,-12 9,-4 0,0 Z"/>
+  </defs>
+
+  <!-- ===== Background: dark cavern of Moria ===== -->
+  <rect width="800" height="500" fill="url(#cavernSky)"/>
+
+  <!-- ===== Chasm below the bridge: fiery depths with glowing light and flickering flames ===== -->
+  <g id="chasm">
+    <rect x="0" y="300" width="800" height="200" fill="url(#chasmFire)"/>
+    <!-- Pulsing glow rising from the abyss -->
+    <ellipse cx="400" cy="500" rx="520" ry="220" fill="url(#chasmGlow)">
+      <animate attributeName="opacity" values="0.65;0.95;0.55;0.85;0.65" dur="1.6s" repeatCount="indefinite"/>
+    </ellipse>
+    <!-- Flames licking up from the depths -->
+    <g fill="url(#flameGrad)">
+      <g transform="translate(120,500) scale(2.2)"><g>
+        <animateTransform attributeName="transform" type="scale" values="1 1;1.1 1.35;0.9 0.85;1.05 1.2;1 1" dur="0.9s" begin="-0.2s" repeatCount="indefinite"/>
+        <use xlink:href="#flameShape" opacity="0.9"/></g></g>
+      <g transform="translate(210,500) scale(1.7)"><g>
+        <animateTransform attributeName="transform" type="scale" values="1 1;0.95 0.8;1.1 1.3;0.9 1.05;1 1" dur="1.1s" begin="-0.5s" repeatCount="indefinite"/>
+        <use xlink:href="#flameShape" opacity="0.85"/></g></g>
+      <g transform="translate(300,500) scale(2.6)"><g>
+        <animateTransform attributeName="transform" type="scale" values="1 1;1.08 1.25;0.92 0.9;1.1 1.15;1 1" dur="0.8s" begin="-0.1s" repeatCount="indefinite"/>
+        <use xlink:href="#flameShape" opacity="0.9"/></g></g>
+      <g transform="translate(400,500) scale(2)"><g>
+        <animateTransform attributeName="transform" type="scale" values="1 1;0.9 1.3;1.1 0.85;0.95 1.2;1 1" dur="1s" begin="-0.7s" repeatCount="indefinite"/>
+        <use xlink:href="#flameShape" opacity="0.85"/></g></g>
+      <g transform="translate(490,500) scale(2.8)"><g>
+        <animateTransform attributeName="transform" type="scale" values="1 1;1.12 1.2;0.9 0.95;1.05 1.3;1 1" dur="0.85s" begin="-0.4s" repeatCount="indefinite"/>
+        <use xlink:href="#flameShape" opacity="0.9"/></g></g>
+      <g transform="translate(590,500) scale(1.9)"><g>
+        <animateTransform attributeName="transform" type="scale" values="1 1;0.95 1.35;1.1 0.9;0.9 1.1;1 1" dur="1.05s" begin="-0.3s" repeatCount="indefinite"/>
+        <use xlink:href="#flameShape" opacity="0.85"/></g></g>
+      <g transform="translate(680,500) scale(2.3)"><g>
+        <animateTransform attributeName="transform" type="scale" values="1 1;1.1 1.25;0.9 0.8;1.08 1.2;1 1" dur="0.95s" begin="-0.6s" repeatCount="indefinite"/>
+        <use xlink:href="#flameShape" opacity="0.9"/></g></g>
+      <!-- Faint deeper flames mid-way down -->
+      <g transform="translate(255,440) scale(1.2)" opacity="0.5"><g>
+        <animateTransform attributeName="transform" type="scale" values="1 1;1.1 1.3;0.9 0.9;1 1" dur="0.7s" begin="-0.25s" repeatCount="indefinite"/>
+        <use xlink:href="#flameShape"/></g></g>
+      <g transform="translate(560,450) scale(1.4)" opacity="0.5"><g>
+        <animateTransform attributeName="transform" type="scale" values="1 1;0.9 1.25;1.1 0.85;1 1" dur="0.75s" begin="-0.45s" repeatCount="indefinite"/>
+        <use xlink:href="#flameShape"/></g></g>
+    </g>
+    <!-- Rising embers -->
+    <g fill="#ffb347">
+      <circle cx="180" cy="480" r="2">
+        <animate attributeName="cy" values="480;360" dur="3s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;0.9;0" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="450" cy="490" r="1.6">
+        <animate attributeName="cy" values="490;350" dur="3.6s" begin="-1.2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;0.9;0" dur="3.6s" begin="-1.2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="620" cy="485" r="2.2">
+        <animate attributeName="cy" values="485;340" dur="3.2s" begin="-2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;0.9;0" dur="3.2s" begin="-2s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+  </g>
+
+  <!-- ===== The narrow stone Bridge of Khazad-dum ===== -->
+  <g id="bridge">
+    <!-- Supporting arch beneath the span -->
+    <path d="M30,318 C220,410 580,410 770,318" fill="none" stroke="#3a3231" stroke-width="12" stroke-linecap="round"/>
+    <path d="M30,318 C220,410 580,410 770,318" fill="none" stroke="#7a3a1a" stroke-width="3" opacity="0.5">
+      <animate attributeName="opacity" values="0.4;0.7;0.35;0.6;0.4" dur="1.6s" repeatCount="indefinite"/>
+    </path>
+    <!-- Deck of the bridge -->
+    <path d="M30,302 C250,296 550,296 770,302 L770,318 C550,312 250,312 30,318 Z" fill="url(#stone)"/>
+    <!-- Fire-lit underside edge -->
+    <path d="M30,318 C250,312 550,312 770,318" fill="none" stroke="#c9531a" stroke-width="2" opacity="0.6">
+      <animate attributeName="opacity" values="0.5;0.85;0.45;0.75;0.5" dur="1.3s" repeatCount="indefinite"/>
+    </path>
+    <!-- Stone cracks and joints -->
+    <g stroke="#221c1a" stroke-width="1.5" fill="none">
+      <path d="M120,299 L124,314"/><path d="M200,298 L196,313"/><path d="M330,297 L334,312"/>
+      <path d="M420,297 L416,312"/><path d="M500,297 L504,312"/><path d="M640,299 L636,314"/>
+      <path d="M700,300 L704,315"/><path d="M380,300 L392,306 L386,312"/>
+    </g>
+  </g>
+
+  <!-- ===== Gandalf the Grey: staff raised, sword drawn, facing the Balrog ===== -->
+  <g id="gandalf" transform="translate(270,298)">
+    <!-- Whole-body stance shift as he braces and strikes -->
+    <animateTransform attributeName="transform" type="translate" values="270 298;280 295;272 298;266 299;270 298" dur="2.4s" repeatCount="indefinite"/>
+    <!-- Pale light emanating from the wizard -->
+    <circle cx="0" cy="-95" r="80" fill="url(#gandalfLight)">
+      <animate attributeName="opacity" values="0.6;1;0.7;0.9;0.6" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Cloak trailing behind, waving in the hot wind -->
+    <path fill="#5c5f66" d="M-12,-82 C-28,-60 -42,-30 -40,0 L-18,0 C-22,-30 -18,-60 -12,-82 Z">
+      <animate attributeName="d" dur="1.8s" repeatCount="indefinite"
+        values="M-12,-82 C-28,-60 -42,-30 -40,0 L-18,0 C-22,-30 -18,-60 -12,-82 Z;
+                M-12,-82 C-32,-62 -54,-36 -50,0 L-18,0 C-24,-32 -20,-60 -12,-82 Z;
+                M-12,-82 C-26,-58 -36,-28 -36,0 L-18,0 C-20,-28 -16,-58 -12,-82 Z;
+                M-12,-82 C-30,-64 -48,-34 -46,0 L-18,0 C-23,-32 -19,-61 -12,-82 Z;
+                M-12,-82 C-28,-60 -42,-30 -40,0 L-18,0 C-22,-30 -18,-60 -12,-82 Z"/>
+    </path>
+    <!-- Grey robe, hem swaying -->
+    <path fill="#9a9b9e" d="M-14,-80 C-18,-50 -24,-20 -26,0 L26,0 C22,-20 18,-50 14,-80 Z">
+      <animate attributeName="d" dur="1.8s" begin="-0.4s" repeatCount="indefinite"
+        values="M-14,-80 C-18,-50 -24,-20 -26,0 L26,0 C22,-20 18,-50 14,-80 Z;
+                M-14,-80 C-20,-50 -28,-20 -32,0 L30,0 C24,-20 18,-50 14,-80 Z;
+                M-14,-80 C-17,-50 -22,-20 -24,0 L24,0 C21,-20 17,-50 14,-80 Z;
+                M-14,-80 C-19,-50 -27,-20 -30,0 L28,0 C23,-20 18,-50 14,-80 Z;
+                M-14,-80 C-18,-50 -24,-20 -26,0 L26,0 C22,-20 18,-50 14,-80 Z"/>
+    </path>
+    <!-- Robe folds -->
+    <path d="M-4,-70 C-6,-40 -8,-20 -10,0" fill="none" stroke="#7d7e82" stroke-width="1.5"/>
+    <path d="M8,-70 C10,-40 12,-20 14,0" fill="none" stroke="#7d7e82" stroke-width="1.5"/>
+    <!-- Arms -->
+    <path d="M-4,-78 L2,-64" stroke="#8b8c90" stroke-width="7" stroke-linecap="round"/>
+    <path d="M4,-78 L18,-72" stroke="#8b8c90" stroke-width="7" stroke-linecap="round"/>
+    <!-- Sword Glamdring, thrust toward the Balrog -->
+    <g>
+      <animateTransform attributeName="transform" type="rotate" values="0 2 -64;-14 2 -64;0 2 -64;8 2 -64;0 2 -64" dur="2.4s" repeatCount="indefinite"/>
+      <path d="M2,-64 L62,-98" stroke="#7fd0ff" stroke-width="8" stroke-linecap="round" opacity="0.35" filter="url(#blurTiny)"/>
+      <path d="M2,-64 L62,-98" stroke="#e3ecf4" stroke-width="3" stroke-linecap="round"/>
+      <path d="M8,-72 L16,-58" stroke="#c8a24a" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="2" cy="-64" r="3" fill="#e8c9a0"/>
+    </g>
+    <!-- Staff -->
+    <path d="M18,-72 L38,-168" stroke="#6b4a2a" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="18" cy="-72" r="3" fill="#e8c9a0"/>
+    <!-- Staff crystal with pulsing glow -->
+    <circle cx="38" cy="-168" r="26" fill="url(#staffGlow)">
+      <animate attributeName="r" values="22;32;25;29;22" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.7;1;0.8;0.95;0.7" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="38" cy="-168" r="5" fill="#f4fbff">
+      <animate attributeName="r" values="4.5;6;5;5.5;4.5" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Head, beard, and pointed hat -->
+    <circle cx="0" cy="-96" r="9" fill="#e8c9a0"/>
+    <path d="M-8,-92 C-13,-72 -7,-50 0,-38 C7,-50 13,-72 8,-92 Z" fill="#f2f2f2"/>
+    <path d="M-8,-90 C-4,-86 4,-86 8,-90" fill="none" stroke="#cfcfcf" stroke-width="1.5"/>
+    <ellipse cx="0" cy="-104" rx="22" ry="5" fill="#6a6b70"/>
+    <path d="M-14,-104 L4,-164 L14,-104 Z" fill="#6a6b70"/>
+    <path d="M-2,-118 L12,-118" stroke="#55565b" stroke-width="2"/>
+  </g>
+
+  <!-- ===== The Balrog: winged demon of shadow and flame ===== -->
+  <g id="balrog" transform="translate(560,298)">
+    <!-- Whole-body stance shift as it looms and recoils -->
+    <animateTransform attributeName="transform" type="translate" values="560 298;552 294;558 298;566 300;560 298" dur="2.4s" repeatCount="indefinite"/>
+    <!-- Flaming aura surrounding the Balrog -->
+    <ellipse cx="10" cy="-130" rx="150" ry="170" fill="url(#balrogAura)" filter="url(#blurHard)">
+      <animate attributeName="opacity" values="0.7;1;0.6;0.9;0.7" dur="1.2s" repeatCount="indefinite"/>
+      <animate attributeName="rx" values="150;165;145;160;150" dur="1.2s" repeatCount="indefinite"/>
+    </ellipse>
+    <!-- Wings of shadow -->
+    <g id="wing-left">
+      <animateTransform attributeName="transform" type="rotate" values="0 -20 -150;5 -20 -150;0 -20 -150;-3 -20 -150;0 -20 -150" dur="2.4s" repeatCount="indefinite"/>
+      <path d="M-20,-150 C-60,-215 -130,-235 -175,-190 C-145,-182 -125,-150 -118,-112 C-105,-135 -75,-140 -50,-120 C-42,-140 -30,-150 -20,-150 Z" fill="#0d0405" stroke="#4a1208" stroke-width="1.5" fill-opacity="0.95"/>
+      <path d="M-30,-152 C-70,-200 -120,-215 -170,-190" fill="none" stroke="#7a1a05" stroke-width="2" opacity="0.6"/>
+    </g>
+    <g id="wing-right">
+      <animateTransform attributeName="transform" type="rotate" values="0 20 -150;-5 20 -150;0 20 -150;3 20 -150;0 20 -150" dur="2.4s" repeatCount="indefinite"/>
+      <path d="M20,-150 C70,-225 155,-245 215,-192 C175,-182 150,-150 140,-108 C125,-135 90,-140 60,-120 C48,-140 30,-150 20,-150 Z" fill="#0d0405" stroke="#4a1208" stroke-width="1.5" fill-opacity="0.95"/>
+      <path d="M30,-152 C80,-208 140,-225 210,-192" fill="none" stroke="#7a1a05" stroke-width="2" opacity="0.6"/>
+      <path d="M60,-120 C90,-160 130,-180 160,-180" fill="none" stroke="#5a1408" stroke-width="1.5" opacity="0.6"/>
+    </g>
+    <!-- Legs -->
+    <path d="M-24,-72 L-38,0 L-12,0 L-8,-72 Z" fill="#150807"/>
+    <path d="M8,-72 L14,0 L40,0 L28,-72 Z" fill="#150807"/>
+    <!-- Torso of shadow with molten cracks -->
+    <path d="M-42,-150 C-52,-120 -42,-90 -32,-70 L32,-70 C46,-90 52,-125 42,-156 C22,-172 -22,-172 -42,-150 Z" fill="#1c0908"/>
+    <g fill="none" stroke="#ff6a00" stroke-width="2" stroke-linecap="round">
+      <animate attributeName="stroke-opacity" values="0.6;1;0.5;0.9;0.6" dur="0.9s" repeatCount="indefinite"/>
+      <path d="M-22,-142 L-12,-112 L-26,-90"/>
+      <path d="M12,-152 L22,-120 L10,-94"/>
+      <path d="M-2,-135 L2,-100"/>
+      <path d="M-30,-160 L-20,-150"/>
+    </g>
+    <!-- Whip arm, lashing toward Gandalf -->
+    <path d="M-42,-150 L-72,-136 L-62,-120 L-32,-132 Z" fill="#1c0908"/>
+    <!-- Whip of fire, many-thonged, cracking in the air -->
+    <g fill="none" stroke-linecap="round">
+      <path d="M-62,-128 C-110,-160 -160,-130 -205,-105" stroke="#ff9a1e" stroke-width="10" opacity="0.35" filter="url(#blurSoft)">
+        <animate attributeName="d" dur="2.4s" repeatCount="indefinite"
+          values="M-62,-128 C-110,-160 -160,-130 -205,-105;
+                  M-62,-128 C-100,-180 -170,-150 -215,-112;
+                  M-62,-128 C-115,-145 -150,-115 -200,-98;
+                  M-62,-128 C-105,-170 -165,-140 -212,-108;
+                  M-62,-128 C-110,-160 -160,-130 -205,-105"/>
+      </path>
+      <path d="M-62,-128 C-110,-160 -160,-130 -205,-105" stroke="url(#fireBlade)" stroke-width="3.5">
+        <animate attributeName="d" dur="2.4s" repeatCount="indefinite"
+          values="M-62,-128 C-110,-160 -160,-130 -205,-105;
+                  M-62,-128 C-100,-180 -170,-150 -215,-112;
+                  M-62,-128 C-115,-145 -150,-115 -200,-98;
+                  M-62,-128 C-105,-170 -165,-140 -212,-108;
+                  M-62,-128 C-110,-160 -160,-130 -205,-105"/>
+      </path>
+      <path d="M-62,-128 C-105,-150 -150,-120 -195,-92" stroke="#ffcc44" stroke-width="2" opacity="0.8">
+        <animate attributeName="d" dur="2.4s" repeatCount="indefinite"
+          values="M-62,-128 C-105,-150 -150,-120 -195,-92;
+                  M-62,-128 C-95,-170 -160,-140 -205,-100;
+                  M-62,-128 C-110,-135 -145,-105 -190,-86;
+                  M-62,-128 C-100,-160 -155,-130 -202,-96;
+                  M-62,-128 C-105,-150 -150,-120 -195,-92"/>
+      </path>
+    </g>
+    <!-- Sword arm raised with a blade of flame -->
+    <g>
+      <animateTransform attributeName="transform" type="rotate" values="0 38 -150;12 38 -150;0 38 -150;-8 38 -150;0 38 -150" dur="2.4s" repeatCount="indefinite"/>
+      <path d="M38,-150 L62,-192 L74,-184 L48,-140 Z" fill="#1c0908"/>
+      <path d="M66,-188 L28,-282" stroke="#ff8a10" stroke-width="14" stroke-linecap="round" opacity="0.4" filter="url(#blurSoft)">
+        <animate attributeName="opacity" values="0.35;0.6;0.3;0.5;0.35" dur="0.8s" repeatCount="indefinite"/>
+      </path>
+      <path d="M66,-188 L28,-282" stroke="url(#fireBlade)" stroke-width="6" stroke-linecap="round"/>
+      <!-- Flames trailing off the blade -->
+      <g fill="url(#flameGrad)">
+        <g transform="translate(52,-222) rotate(-20) scale(0.5)"><g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;1.1 1.4;0.9 0.9;1 1" dur="0.6s" repeatCount="indefinite"/>
+          <use xlink:href="#flameShape"/></g></g>
+        <g transform="translate(40,-252) rotate(-25) scale(0.6)"><g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.9 1.3;1.1 0.85;1 1" dur="0.7s" begin="-0.3s" repeatCount="indefinite"/>
+          <use xlink:href="#flameShape"/></g></g>
+      </g>
+    </g>
+    <!-- Head with horns -->
+    <path d="M-22,-172 L-26,-202 L-8,-218 L12,-218 L26,-202 L20,-170 Z" fill="#150807"/>
+    <path d="M-20,-206 C-40,-226 -52,-256 -36,-284" fill="none" stroke="#2b1a16" stroke-width="7" stroke-linecap="round"/>
+    <path d="M20,-206 C40,-226 52,-256 36,-284" fill="none" stroke="#2b1a16" stroke-width="7" stroke-linecap="round"/>
+    <!-- Burning eyes -->
+    <g>
+      <circle cx="-12" cy="-196" r="6" fill="#ffb020" opacity="0.5" filter="url(#blurTiny)"/>
+      <circle cx="8" cy="-196" r="6" fill="#ffb020" opacity="0.5" filter="url(#blurTiny)"/>
+      <circle cx="-12" cy="-196" r="3.2" fill="#ffe66a"/>
+      <circle cx="8" cy="-196" r="3.2" fill="#ffe66a"/>
+      <animate attributeName="opacity" values="1;0.7;1;0.85;1" dur="1.1s" repeatCount="indefinite"/>
+    </g>
+    <!-- Mane of fire on head and shoulders -->
+    <g fill="url(#flameGrad)">
+      <g transform="translate(0,-214) scale(0.9)"><g>
+        <animateTransform attributeName="transform" type="scale" values="1 1;1.1 1.3;0.9 0.9;1.05 1.15;1 1" dur="0.7s" repeatCount="indefinite"/>
+        <use xlink:href="#flameShape"/></g></g>
+      <g transform="translate(-16,-208) rotate(-15) scale(0.7)"><g>
+        <animateTransform attributeName="transform" type="scale" values="1 1;0.9 1.25;1.1 0.85;1 1" dur="0.8s" begin="-0.3s" repeatCount="indefinite"/>
+        <use xlink:href="#flameShape"/></g></g>
+      <g transform="translate(18,-208) rotate(15) scale(0.7)"><g>
+        <animateTransform attributeName="transform" type="scale" values="1 1;1.1 1.2;0.9 0.95;1 1" dur="0.75s" begin="-0.5s" repeatCount="indefinite"/>
+        <use xlink:href="#flameShape"/></g></g>
+      <g transform="translate(-40,-150) rotate(-30) scale(0.8)"><g>
+        <animateTransform attributeName="transform" type="scale" values="1 1;1.05 1.35;0.95 0.9;1 1" dur="0.65s" begin="-0.2s" repeatCount="indefinite"/>
+        <use xlink:href="#flameShape"/></g></g>
+      <g transform="translate(42,-154) rotate(30) scale(0.8)"><g>
+        <animateTransform attributeName="transform" type="scale" values="1 1;0.95 1.3;1.1 0.85;1 1" dur="0.7s" begin="-0.4s" repeatCount="indefinite"/>
+        <use xlink:href="#flameShape"/></g></g>
+    </g>
+  </g>
+
+  <!-- ===== Sparks where sword and whip clash between the two ===== -->
+  <g id="clash-sparks" transform="translate(345,196)">
+    <circle cx="0" cy="0" r="14" fill="#fff0c0" opacity="0.4" filter="url(#blurSoft)">
+      <animate attributeName="opacity" values="0.1;0.7;0.15;0.5;0.1" dur="2.4s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="10;22;12;18;10" dur="2.4s" repeatCount="indefinite"/>
+    </circle>
+    <g fill="#ffe27a">
+      <circle cx="0" cy="0" r="2">
+        <animate attributeName="cx" values="0;18;0" dur="2.4s" repeatCount="indefinite"/>
+        <animate attributeName="cy" values="0;-14;0" dur="2.4s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;1;0" dur="2.4s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="0" cy="0" r="1.6">
+        <animate attributeName="cx" values="0;-12;0" dur="2.4s" begin="-0.3s" repeatCount="indefinite"/>
+        <animate attributeName="cy" values="0;-20;0" dur="2.4s" begin="-0.3s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;1;0" dur="2.4s" begin="-0.3s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="0" cy="0" r="1.8">
+        <animate attributeName="cx" values="0;10;0" dur="2.4s" begin="-1.2s" repeatCount="indefinite"/>
+        <animate attributeName="cy" values="0;16;0" dur="2.4s" begin="-1.2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;1;0" dur="2.4s" begin="-1.2s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+  </g>
+
+  <!-- ===== Cavern walls and stalactites framing the scene ===== -->
+  <g id="cavern-walls" fill="#0a0507">
+    <path d="M0,0 L110,0 L84,120 L124,220 L74,330 L104,500 L0,500 Z"/>
+    <path d="M800,0 L690,0 L716,120 L676,220 L726,330 L696,500 L800,500 Z"/>
+    <path d="M150,0 L170,0 L162,60 Z"/>
+    <path d="M260,0 L290,0 L274,90 Z"/>
+    <path d="M520,0 L545,0 L534,70 Z"/>
+    <path d="M630,0 L648,0 L640,50 Z"/>
+    <!-- Fire-lit rim on the walls -->
+    <path d="M84,120 L124,220 L74,330" fill="none" stroke="#5a1a08" stroke-width="2" opacity="0.6">
+      <animate attributeName="opacity" values="0.4;0.8;0.35;0.7;0.4" dur="1.6s" repeatCount="indefinite"/>
+    </path>
+    <path d="M716,120 L676,220 L726,330" fill="none" stroke="#5a1a08" stroke-width="2" opacity="0.6">
+      <animate attributeName="opacity" values="0.4;0.8;0.35;0.7;0.4" dur="1.6s" begin="-0.8s" repeatCount="indefinite"/>
+    </path>
+  </g>
+</svg>

@@ -1,0 +1,269 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <title>Gandalf vs. the Balrog — Bridge of Khazad-dûm</title>
+  <defs>
+    <linearGradient id="cave" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#040308"/>
+      <stop offset="0.6" stop-color="#120a0a"/>
+      <stop offset="1" stop-color="#2a0c06"/>
+    </linearGradient>
+    <radialGradient id="abyss" cx="0.55" cy="1.1" r="0.9">
+      <stop offset="0" stop-color="#ff6a1a" stop-opacity="0.75"/>
+      <stop offset="0.45" stop-color="#8a2008" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="staffGlow">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.25" stop-color="#d8ecff" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#6fa8ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="flame" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#fff2a0"/>
+      <stop offset="0.35" stop-color="#ff8a1a"/>
+      <stop offset="0.75" stop-color="#d42a08"/>
+      <stop offset="1" stop-color="#6b0a02" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="stone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6a635b"/>
+      <stop offset="0.3" stop-color="#3d3733"/>
+      <stop offset="1" stop-color="#1a1614"/>
+    </linearGradient>
+    <linearGradient id="robe" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b9b9c2"/>
+      <stop offset="1" stop-color="#5d5d6a"/>
+    </linearGradient>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
+    <filter id="softer" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="heat" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.015 0.04" numOctaves="2" seed="3" result="n">
+        <animate attributeName="baseFrequency" values="0.015 0.04;0.02 0.05;0.015 0.04" dur="4s" repeatCount="indefinite"/>
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="18" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+
+    <!-- Reusable flickering flame tongue -->
+    <g id="tongue">
+      <path fill="url(#flame)">
+        <animate attributeName="d" dur="0.55s" repeatCount="indefinite"
+          values="M0 0 C-14 -16,-8 -38,0 -60 C8 -38,14 -16,0 0Z;
+                  M0 0 C-16 -22,-2 -34,5 -68 C10 -32,16 -14,0 0Z;
+                  M0 0 C-12 -14,-12 -40,-3 -62 C6 -42,12 -20,0 0Z;
+                  M0 0 C-14 -16,-8 -38,0 -60 C8 -38,14 -16,0 0Z"/>
+      </path>
+    </g>
+    <g id="tongue2">
+      <path fill="url(#flame)">
+        <animate attributeName="d" dur="0.7s" repeatCount="indefinite"
+          values="M0 0 C-12 -14,-12 -40,-3 -62 C6 -42,12 -20,0 0Z;
+                  M0 0 C-14 -16,-8 -38,0 -60 C8 -38,14 -16,0 0Z;
+                  M0 0 C-16 -22,-2 -34,6 -70 C10 -32,16 -14,0 0Z;
+                  M0 0 C-12 -14,-12 -40,-3 -62 C6 -42,12 -20,0 0Z"/>
+      </path>
+    </g>
+  </defs>
+
+  <!-- Background cavern -->
+  <rect width="800" height="500" fill="url(#cave)"/>
+  <g fill="#0d0a0c" opacity="0.9">
+    <rect x="40" y="0" width="34" height="330"/>
+    <rect x="150" y="0" width="28" height="320"/>
+    <rect x="690" y="0" width="30" height="330"/>
+    <rect x="760" y="0" width="26" height="335"/>
+    <polygon points="0,0 120,0 100,60 0,90"/>
+    <polygon points="800,0 640,0 660,70 800,110"/>
+  </g>
+  <!-- Abyss glow with heat shimmer -->
+  <g filter="url(#heat)">
+    <rect x="-50" y="200" width="900" height="350" fill="url(#abyss)">
+      <animate attributeName="opacity" values="0.85;1;0.8;0.95;0.85" dur="3s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+  <!-- Rising embers -->
+  <g fill="#ffb347">
+    <circle cx="120" cy="480" r="1.6"><animate attributeName="cy" from="500" to="150" dur="7s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" dur="7s" repeatCount="indefinite"/></circle>
+    <circle cx="210" cy="480" r="1.2"><animate attributeName="cy" from="500" to="180" dur="5.5s" begin="1.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" dur="5.5s" begin="1.2s" repeatCount="indefinite"/></circle>
+    <circle cx="470" cy="480" r="1.8"><animate attributeName="cy" from="500" to="120" dur="8s" begin="0.6s" repeatCount="indefinite"/><animate attributeName="cx" values="470;490;465;480" dur="8s" begin="0.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" dur="8s" begin="0.6s" repeatCount="indefinite"/></circle>
+    <circle cx="560" cy="480" r="1.3"><animate attributeName="cy" from="500" to="160" dur="6s" begin="2.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" dur="6s" begin="2.5s" repeatCount="indefinite"/></circle>
+    <circle cx="660" cy="480" r="2"><animate attributeName="cy" from="500" to="100" dur="9s" begin="3.1s" repeatCount="indefinite"/><animate attributeName="cx" values="660;640;670;650" dur="9s" begin="3.1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" dur="9s" begin="3.1s" repeatCount="indefinite"/></circle>
+    <circle cx="740" cy="480" r="1.4"><animate attributeName="cy" from="500" to="200" dur="6.5s" begin="4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" dur="6.5s" begin="4s" repeatCount="indefinite"/></circle>
+    <circle cx="380" cy="480" r="1.2"><animate attributeName="cy" from="500" to="220" dur="5s" begin="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" dur="5s" begin="2s" repeatCount="indefinite"/></circle>
+  </g>
+
+  <!-- The Bridge -->
+  <g>
+    <path d="M-10 355 C 200 322, 600 322, 810 355 L 810 378 C 600 345, 200 345, -10 378 Z" fill="url(#stone)"/>
+    <path d="M-10 355 C 200 322, 600 322, 810 355" fill="none" stroke="#8a827a" stroke-width="2"/>
+    <!-- underside shading -->
+    <path d="M-10 378 C 200 345, 600 345, 810 378 L 810 386 C 600 353, 200 353, -10 386 Z" fill="#0a0807"/>
+    <!-- crack that spreads as Gandalf strikes -->
+    <path d="M345 337 l 8 6 l -5 7 l 9 5 l -4 8 l 7 6" fill="none" stroke="#ffb060" stroke-width="1.6" stroke-linecap="round" filter="url(#glow)"
+          stroke-dasharray="60" stroke-dashoffset="60">
+      <animate attributeName="stroke-dashoffset" values="60;60;0;0;60" keyTimes="0;0.5;0.62;0.9;1" dur="3s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- ================= BALROG ================= -->
+  <g transform="translate(600 335)">
+    <!-- Shadow wings -->
+    <g filter="url(#softer)" fill="#070203">
+      <path d="M-85 -200 C -210 -270, -290 -160, -240 -50 C -180 -120, -130 -150, -70 -165 Z" opacity="0.9">
+        <animate attributeName="opacity" values="0.9;0.6;0.95;0.7;0.9" dur="2.6s" repeatCount="indefinite"/>
+        <animateTransform attributeName="transform" type="rotate" values="0 -85 -200;-4 -85 -200;0 -85 -200;3 -85 -200;0 -85 -200" dur="2.6s" repeatCount="indefinite"/>
+      </path>
+      <path d="M60 -205 C 180 -320, 290 -220, 260 -40 C 190 -120, 130 -150, 60 -150 Z" opacity="0.9">
+        <animate attributeName="opacity" values="0.9;0.7;0.95;0.6;0.9" dur="3.1s" repeatCount="indefinite"/>
+        <animateTransform attributeName="transform" type="rotate" values="0 60 -205;4 60 -205;0 60 -205;-3 60 -205;0 60 -205" dur="3.1s" repeatCount="indefinite"/>
+      </path>
+    </g>
+    <!-- Body heat glow behind -->
+    <ellipse cx="-10" cy="-160" rx="110" ry="140" fill="#ff5a10" opacity="0.18" filter="url(#softer)">
+      <animate attributeName="opacity" values="0.18;0.28;0.15;0.24;0.18" dur="1.4s" repeatCount="indefinite"/>
+    </ellipse>
+
+    <!-- Whole body breathes -->
+    <g>
+      <animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="2.2s" repeatCount="indefinite"/>
+      <!-- Legs -->
+      <polygon points="-55,0 -28,0 -18,-95 -60,-95" fill="#170805"/>
+      <polygon points="8,0 38,0 50,-95 12,-95" fill="#170805"/>
+      <!-- Torso -->
+      <path d="M-75 -90 L 58 -90 L 80 -200 L 45 -235 L -55 -235 L -90 -200 Z" fill="#1c0906"/>
+      <!-- Left arm (whip) -->
+      <path d="M-80 -205 C -130 -200, -140 -170, -112 -150 L -100 -165 C -115 -175, -105 -190, -75 -195 Z" fill="#1c0906"/>
+      <!-- Right arm (sword) raised -->
+      <path d="M55 -210 C 90 -235, 110 -250, 100 -275 L 84 -270 C 88 -255, 75 -240, 45 -222 Z" fill="#1c0906"/>
+      <!-- Head -->
+      <ellipse cx="-8" cy="-258" rx="24" ry="28" fill="#1c0906"/>
+      <!-- Horns -->
+      <path d="M-28 -270 C -55 -280, -70 -320, -55 -350 C -50 -310, -40 -290, -18 -282 Z" fill="#0d0402"/>
+      <path d="M12 -272 C 40 -285, 55 -325, 45 -355 C 40 -315, 30 -292, 4 -284 Z" fill="#0d0402"/>
+      <!-- Eyes -->
+      <g fill="#fff59a" filter="url(#glow)">
+        <ellipse cx="-20" cy="-262" rx="4" ry="2.2"><animate attributeName="opacity" values="1;0.6;1" dur="0.9s" repeatCount="indefinite"/></ellipse>
+        <ellipse cx="0" cy="-262" rx="4" ry="2.2"><animate attributeName="opacity" values="1;0.6;1" dur="0.9s" begin="0.3s" repeatCount="indefinite"/></ellipse>
+      </g>
+      <!-- Molten cracks -->
+      <g fill="none" stroke="#ff7a10" stroke-width="2" stroke-linecap="round" filter="url(#glow)">
+        <path d="M-40 -220 L -30 -190 L -45 -160 L -30 -125 L -40 -100"/>
+        <path d="M10 -225 L 20 -195 L 5 -170 L 25 -140 L 15 -100"/>
+        <path d="M-70 -195 L -55 -175 L -65 -150"/>
+        <path d="M-45 -60 L -38 -30 L -48 -10"/>
+        <path d="M22 -70 L 30 -40 L 24 -8"/>
+        <animate attributeName="opacity" values="1;0.5;0.9;0.6;1" dur="1.1s" repeatCount="indefinite"/>
+      </g>
+      <!-- Mane and shoulder fire -->
+      <use href="#tongue" transform="translate(-8 -280) scale(1.3)"/>
+      <use href="#tongue2" transform="translate(-30 -272) scale(1) rotate(-15)"/>
+      <use href="#tongue" transform="translate(14 -272) scale(0.9) rotate(15)"/>
+      <use href="#tongue2" transform="translate(-70 -215) scale(0.9) rotate(-25)"/>
+      <use href="#tongue" transform="translate(-88 -200) scale(0.6) rotate(-40)"/>
+      <use href="#tongue2" transform="translate(62 -220) scale(0.9) rotate(25)"/>
+      <use href="#tongue" transform="translate(78 -205) scale(0.6) rotate(45)"/>
+      <use href="#tongue2" transform="translate(-40 -100) scale(0.5) rotate(-10)"/>
+      <use href="#tongue" transform="translate(30 -100) scale(0.5) rotate(10)"/>
+      <!-- Flaming sword -->
+      <g transform="translate(96 -275)">
+        <animateTransform attributeName="transform" type="rotate" values="0 96 -275;-12 96 -275;0 96 -275;6 96 -275;0 96 -275" additive="sum" dur="3s" repeatCount="indefinite"/>
+        <path d="M-4 0 L 4 0 L 2 -110 L 0 -125 L -2 -110 Z" fill="#3a1006" stroke="#ff8a20" stroke-width="1.2"/>
+        <use href="#tongue2" transform="translate(0 -20) scale(0.6)"/>
+        <use href="#tongue" transform="translate(0 -60) scale(0.7)"/>
+        <use href="#tongue2" transform="translate(0 -100) scale(0.6)"/>
+      </g>
+    </g>
+
+    <!-- Fire whip lashing toward Gandalf -->
+    <g fill="none" stroke-linecap="round">
+      <path stroke="#ff4a00" stroke-width="12" opacity="0.45" filter="url(#softer)">
+        <animate attributeName="d" dur="2.4s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1"
+          values="M-110 -150 C -140 -240, -200 -260, -250 -190;
+                  M-110 -150 C -140 -60, -200 -80, -262 -160;
+                  M-110 -150 C -160 -210, -230 -130, -240 -110;
+                  M-110 -150 C -140 -240, -200 -260, -250 -190"/>
+      </path>
+      <path stroke="#ffb040" stroke-width="4">
+        <animate attributeName="d" dur="2.4s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1"
+          values="M-110 -150 C -140 -240, -200 -260, -250 -190;
+                  M-110 -150 C -140 -60, -200 -80, -262 -160;
+                  M-110 -150 C -160 -210, -230 -130, -240 -110;
+                  M-110 -150 C -140 -240, -200 -260, -250 -190"/>
+      </path>
+      <path stroke="#fff6c0" stroke-width="1.5">
+        <animate attributeName="d" dur="2.4s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1"
+          values="M-110 -150 C -140 -240, -200 -260, -250 -190;
+                  M-110 -150 C -140 -60, -200 -80, -262 -160;
+                  M-110 -150 C -160 -210, -230 -130, -240 -110;
+                  M-110 -150 C -140 -240, -200 -260, -250 -190"/>
+      </path>
+    </g>
+  </g>
+
+  <!-- ================= GANDALF ================= -->
+  <g transform="translate(300 336)">
+    <!-- Ground light from the staff -->
+    <ellipse cx="0" cy="0" rx="60" ry="8" fill="#9ec4ff" opacity="0.25" filter="url(#soft)">
+      <animate attributeName="opacity" values="0.2;0.35;0.2" dur="3s" repeatCount="indefinite"/>
+    </ellipse>
+    <!-- Cloak (behind), billowing -->
+    <path fill="#4a4a58">
+      <animate attributeName="d" dur="1.8s" repeatCount="indefinite"
+        values="M-10 -95 C -30 -70, -45 -40, -40 0 L -18 0 C -20 -40, -12 -70, -6 -92 Z;
+                M-10 -95 C -34 -72, -55 -35, -48 0 L -18 0 C -20 -40, -12 -70, -6 -92 Z;
+                M-10 -95 C -30 -70, -45 -40, -40 0 L -18 0 C -20 -40, -12 -70, -6 -92 Z"/>
+    </path>
+    <!-- Robe -->
+    <path d="M-16 0 L -12 -95 L 12 -95 L 20 0 Z" fill="url(#robe)"/>
+    <path d="M-12 -95 L 12 -95 L 10 -70 L -8 -70 Z" fill="#8b8b98"/>
+    <!-- Belt -->
+    <rect x="-12" y="-62" width="24" height="4" fill="#3b2f22"/>
+    <!-- Sword arm (left, toward back) with Glamdring -->
+    <g>
+      <animateTransform attributeName="transform" type="rotate" values="0 -8 -85;-8 -8 -85;0 -8 -85" dur="1.8s" repeatCount="indefinite"/>
+      <path d="M-8 -88 L -30 -70 L -34 -62 L -26 -64 L -6 -80 Z" fill="#8b8b98"/>
+      <line x1="-32" y1="-64" x2="-62" y2="-20" stroke="#d6eaff" stroke-width="3" stroke-linecap="round" filter="url(#glow)"/>
+      <line x1="-32" y1="-64" x2="-62" y2="-20" stroke="#ffffff" stroke-width="1"/>
+      <line x1="-36" y1="-70" x2="-27" y2="-58" stroke="#c9a54a" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <!-- Head -->
+    <circle cx="0" cy="-108" r="10" fill="#d9b48f"/>
+    <!-- Beard -->
+    <path d="M-9 -104 C -14 -85, -8 -60, 0 -52 C 8 -60, 14 -85, 9 -104 C 5 -98, -5 -98, -9 -104 Z" fill="#e8e8ec"/>
+    <!-- Hat -->
+    <path d="M-20 -112 L 20 -112 L 4 -170 L -2 -172 Z" fill="#4c4c5a"/>
+    <ellipse cx="0" cy="-112" rx="24" ry="5" fill="#3a3a48"/>
+    <!-- Staff arm + staff (strikes down) -->
+    <g>
+      <animateTransform attributeName="transform" type="rotate" dur="3s" repeatCount="indefinite" calcMode="spline"
+        keySplines="0.4 0 0.6 1;0.7 0 0.9 0.4;0.2 0.6 0.4 1;0.4 0 0.6 1"
+        keyTimes="0;0.45;0.55;0.75;1"
+        values="0 10 -85;-12 10 -85;16 10 -85;14 10 -85;0 10 -85"/>
+      <path d="M8 -88 L 28 -108 L 34 -100 L 14 -80 Z" fill="#8b8b98"/>
+      <line x1="30" y1="-100" x2="30" y2="-2" stroke="#6b5232" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="30" y1="-100" x2="38" y2="-165" stroke="#7a6040" stroke-width="3.5" stroke-linecap="round"/>
+      <!-- Staff light -->
+      <circle cx="38" cy="-168" r="34" fill="url(#staffGlow)" opacity="0.8">
+        <animate attributeName="r" values="30;44;32;40;30" dur="3s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.7;1;0.75;0.9;0.7" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="38" cy="-168" r="5" fill="#ffffff" filter="url(#glow)"/>
+    </g>
+  </g>
+
+  <!-- Flash of the staff striking the bridge -->
+  <rect width="800" height="500" fill="#dff0ff" opacity="0">
+    <animate attributeName="opacity" values="0;0;0.55;0;0" keyTimes="0;0.53;0.56;0.66;1" dur="3s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Caption -->
+  <text x="400" y="52" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="30" letter-spacing="3"
+        fill="#e6f0ff" filter="url(#glow)" opacity="0">
+    YOU CANNOT PASS!
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.5;0.58;0.85;0.95;1" dur="6s" repeatCount="indefinite"/>
+  </text>
+  <text x="400" y="486" text-anchor="middle" font-family="Georgia, serif" font-size="13" fill="#8a7a6a" opacity="0.8">
+    The Bridge of Khazad-dûm
+  </text>
+</svg>

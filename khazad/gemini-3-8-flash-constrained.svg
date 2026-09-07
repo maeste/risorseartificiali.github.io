@@ -1,0 +1,487 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="100%" height="100%">
+  <defs>
+    <!-- Background Chasm Gradients -->
+    <radialGradient id="abyss-glow" cx="50%" cy="100%" r="80%">
+      <stop offset="0%" stop-color="#ff3700" stop-opacity="0.8"/>
+      <stop offset="35%" stop-color="#800e00" stop-opacity="0.6"/>
+      <stop offset="70%" stop-color="#2b0404" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#080205" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="chasm-deep" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#050204"/>
+      <stop offset="60%" stop-color="#110507"/>
+      <stop offset="100%" stop-color="#2a0500"/>
+    </linearGradient>
+
+    <!-- Balrog Lava & Flame Gradients -->
+    <radialGradient id="balrog-core" cx="45%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="20%" stop-color="#fff066"/>
+      <stop offset="45%" stop-color="#ff5900"/>
+      <stop offset="80%" stop-color="#b81400"/>
+      <stop offset="100%" stop-color="#1f0302"/>
+    </radialGradient>
+
+    <radialGradient id="balrog-aura" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#ff6a00" stop-opacity="0.6"/>
+      <stop offset="50%" stop-color="#ff1a00" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="whip-fire" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="25%" stop-color="#ffea75"/>
+      <stop offset="60%" stop-color="#ff4400"/>
+      <stop offset="100%" stop-color="#730900"/>
+    </linearGradient>
+
+    <!-- Gandalf Magic Gradients -->
+    <radialGradient id="staff-blast" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="25%" stop-color="#dffffd"/>
+      <stop offset="55%" stop-color="#6be5ff" stop-opacity="0.7"/>
+      <stop offset="85%" stop-color="#0066ff" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#001144" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="glamdring-glow" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="40%" stop-color="#bfeeff"/>
+      <stop offset="80%" stop-color="#429bdf" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#002255" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Bridge & Stone Shading -->
+    <linearGradient id="bridge-light" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0c0d14"/>
+      <stop offset="25%" stop-color="#283342"/>
+      <stop offset="45%" stop-color="#1d222a"/>
+      <stop offset="70%" stop-color="#4d1b14"/>
+      <stop offset="100%" stop-color="#140504"/>
+    </linearGradient>
+
+    <!-- Blur and Glow Filters -->
+    <filter id="glow-heavy" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="12" result="blur1"/>
+      <feGaussianBlur stdDeviation="24" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="glow-magic" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="blur1"/>
+      <feGaussianBlur stdDeviation="16" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="heat-shimmer" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="turbulence" baseFrequency="0.04 0.08" numOctaves="2" result="turb">
+        <animate attributeName="baseFrequency" dur="6s" values="0.04 0.08; 0.05 0.12; 0.04 0.08" repeatCount="indefinite"/>
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="turb" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+
+    <style>
+      /* CSS Keyframe Animations */
+      .flicker-chasm {
+        animation: pulseChasm 4s ease-in-out infinite alternate;
+      }
+      .flicker-balrog {
+        animation: pulseBalrog 3s ease-in-out infinite alternate;
+      }
+      .shiver-fire {
+        animation: flameTremor 0.25s infinite alternate;
+      }
+      .staff-pulse {
+        animation: pulseStaff 2s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate;
+      }
+      .gandalf-sway {
+        animation: gandalfStance 6s ease-in-out infinite alternate;
+      }
+      .balrog-sway {
+        animation: balrogStance 6s ease-in-out infinite alternate;
+      }
+      .whip-flex {
+        animation: whipMotion 4s ease-in-out infinite alternate;
+        transform-origin: 740px 320px;
+      }
+      .wing-flap-l {
+        animation: flapLeft 6s ease-in-out infinite alternate;
+        transform-origin: 770px 300px;
+      }
+      .wing-flap-r {
+        animation: flapRight 6s ease-in-out infinite alternate;
+        transform-origin: 860px 280px;
+      }
+      .ember-up {
+        animation: riseEmber 4s linear infinite;
+      }
+      .ember-up-fast {
+        animation: riseEmberFast 2.8s linear infinite;
+      }
+
+      @keyframes pulseChasm {
+        0% { opacity: 0.7; transform: scaleY(1); }
+        50% { opacity: 0.95; transform: scaleY(1.08); }
+        100% { opacity: 0.75; transform: scaleY(0.96); }
+      }
+      @keyframes pulseBalrog {
+        0% { opacity: 0.8; filter: drop-shadow(0 0 15px #ff2a00); }
+        50% { opacity: 1; filter: drop-shadow(0 0 35px #ff6600); }
+        100% { opacity: 0.85; filter: drop-shadow(0 0 20px #ff1a00); }
+      }
+      @keyframes flameTremor {
+        0% { transform: scale(1) translate(0, 0); }
+        100% { transform: scale(1.015, 0.985) translate(-1px, 1px); }
+      }
+      @keyframes pulseStaff {
+        0% { transform: scale(0.92); opacity: 0.8; }
+        50% { transform: scale(1.12); opacity: 1; }
+        100% { transform: scale(0.88); opacity: 0.75; }
+      }
+      @keyframes gandalfStance {
+        0% { transform: translate(0, 0) rotate(0deg); }
+        35% { transform: translate(3px, -4px) rotate(0.5deg); }
+        70% { transform: translate(-2px, 2px) rotate(-0.5deg); }
+        100% { transform: translate(0, 0) rotate(0deg); }
+      }
+      @keyframes balrogStance {
+        0% { transform: translate(0, 0) scale(1); }
+        40% { transform: translate(-8px, -6px) scale(1.015); }
+        80% { transform: translate(6px, 4px) scale(0.99); }
+        100% { transform: translate(0, 0) scale(1); }
+      }
+      @keyframes whipMotion {
+        0% { transform: rotate(0deg) scale(1); }
+        50% { transform: rotate(-3deg) scale(1.04, 0.96); }
+        100% { transform: rotate(2deg) scale(0.98, 1.02); }
+      }
+      @keyframes flapLeft {
+        0% { transform: rotate(0deg) scale(1); }
+        50% { transform: rotate(-3deg) scale(1.04, 0.97); }
+        100% { transform: rotate(1deg) scale(0.98, 1.01); }
+      }
+      @keyframes flapRight {
+        0% { transform: rotate(0deg) scale(1); }
+        50% { transform: rotate(4deg) scale(0.97, 1.03); }
+        100% { transform: rotate(-2deg) scale(1.02, 0.99); }
+      }
+      @keyframes riseEmber {
+        0% { transform: translateY(0) translateX(0); opacity: 0; }
+        20% { opacity: 0.9; }
+        80% { opacity: 0.8; }
+        100% { transform: translateY(-380px) translateX(45px); opacity: 0; }
+      }
+      @keyframes riseEmberFast {
+        0% { transform: translateY(0) translateX(0); opacity: 0; }
+        25% { opacity: 1; }
+        75% { opacity: 0.6; }
+        100% { transform: translateY(-480px) translateX(-40px); opacity: 0; }
+      }
+    </style>
+  </defs>
+
+  <!-- ========================================== -->
+  <!-- 1. BACKGROUND: CAVERN ARCHITECTURE & ABYSS -->
+  <!-- ========================================== -->
+  <g id="scene-background">
+    <!-- Deepest Blackness of Moria -->
+    <rect width="1200" height="800" fill="url(#chasm-deep)"/>
+
+    <!-- Colossal Dwarven Foundation Pillars in Background -->
+    <g fill="#0e0709" opacity="0.6">
+      <!-- Far Left Pillar -->
+      <polygon points="40,-50 140,-50 110,650 10,650"/>
+      <!-- Mid-Left Pillar -->
+      <polygon points="220,-50 300,-50 270,550 190,550"/>
+      <!-- Far Right Pillar -->
+      <polygon points="940,-50 1040,-50 1070,600 970,600"/>
+      <!-- Mid-Right Pillar -->
+      <polygon points="1100,-50 1190,-50 1220,650 1130,650"/>
+      <!-- Broken Hanging Vault Arches -->
+      <path d="M 0,160 Q 180,180 260,0 L 220,0 Q 150,140 0,120 Z"/>
+      <path d="M 960,0 Q 1020,190 1200,160 L 1200,120 Q 1060,140 1000,0 Z"/>
+    </g>
+
+    <!-- Glowing Deep Fire Chasm Abyss -->
+    <g class="flicker-chasm" style="transform-origin: 600px 800px;">
+      <rect x="0" y="450" width="1200" height="350" fill="url(#abyss-glow)"/>
+      <ellipse cx="600" cy="780" rx="650" ry="160" fill="#ff2200" opacity="0.35" filter="url(#glow-heavy)"/>
+      <ellipse cx="650" cy="760" rx="400" ry="90" fill="#ff7700" opacity="0.25" filter="url(#glow-heavy)"/>
+    </g>
+
+    <!-- Distant Molten Chasms Walls Light Leak -->
+    <path d="M-20,680 Q 200,640 400,690 T 800,680 T 1220,700 L 1220,800 L -20,800 Z" fill="#1f0302" opacity="0.9"/>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 2. THE BRIDGE OF KHAZAD-DÛM                -->
+  <!-- ========================================== -->
+  <g id="bridge-of-khazad-dum">
+    <!-- Abyss Chasm Shadows Behind the Bridge -->
+    <path d="M 0,550 L 320,530 C 500,528 700,528 880,530 L 1200,550 L 1200,640 L 850,560 C 680,556 520,556 350,560 L 0,640 Z" fill="#040102"/>
+
+    <!-- Slender, Ancient Kerbless Span of Stone -->
+    <path d="M 0,540 L 320,523 C 480,521 720,521 880,523 L 1200,540 L 1200,552 L 870,538 C 710,535 490,535 330,538 L 0,552 Z" fill="url(#bridge-light)"/>
+
+    <!-- Bridge Arch Underside with Volcanic Red Under-rim -->
+    <path d="M 0,552 L 330,538 C 490,535 710,535 870,538 L 1200,552 L 1200,565 C 800,548 400,548 0,565 Z" fill="#501108" opacity="0.6"/>
+
+    <!-- Precipice Break / Damage on the Span -->
+    <polygon points="560,522 575,524 570,534 555,530" fill="#090203"/>
+    <polygon points="630,523 645,523 640,532 625,530" fill="#090203"/>
+
+    <!-- Fiery Chasm Rim Highlight on Bridge Bottom -->
+    <path d="M 0,565 C 400,548 800,548 1200,565" stroke="#ff3700" stroke-width="2" fill="none" opacity="0.4" filter="url(#glow-magic)"/>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 3. GANDALF THE GREY                        -->
+  <!-- ========================================== -->
+  <g id="gandalf" class="gandalf-sway" transform="translate(370, 485)">
+    <!-- Aura of Secret Fire / White Light Buffer -->
+    <circle cx="15" cy="-85" r="95" fill="url(#staff-blast)" opacity="0.3" class="staff-pulse"/>
+
+    <!-- Flowing Cloak (Animated Billowing Wind from Pit) -->
+    <path id="gandalf-cloak" fill="#32353e" opacity="0.95" d="M -12,-85 C -35,-75 -65,-40 -70,2 C -72,25 -50,28 -38,30 C -25,32 -18,10 -10,0 Z">
+      <animate attributeName="d" dur="3s" repeatCount="indefinite" values="
+        M -12,-85 C -35,-75 -65,-40 -70,2 C -72,25 -50,28 -38,30 C -25,32 -18,10 -10,0 Z;
+        M -12,-85 C -42,-70 -80,-30 -85,12 C -80,32 -60,33 -48,27 C -32,20 -22,8 -10,0 Z;
+        M -12,-85 C -30,-80 -55,-50 -60,-5 C -65,18 -42,22 -32,28 C -20,32 -15,12 -10,0 Z;
+        M -12,-85 C -35,-75 -65,-40 -70,2 C -72,25 -50,28 -38,30 C -25,32 -18,10 -10,0 Z"
+      />
+    </path>
+
+    <!-- Billowing Robe Folds -->
+    <path id="gandalf-robe" fill="#585c69" d="M -15,-80 L -30,35 L -10,36 L 5,34 L 18,35 L 8,-80 Z">
+      <animate attributeName="d" dur="4s" repeatCount="indefinite" values="
+        M -15,-80 L -30,35 L -10,36 L 5,34 L 18,35 L 8,-80 Z;
+        M -15,-80 L -36,34 L -15,35 L 7,35 L 20,34 L 8,-80 Z;
+        M -15,-80 L -25,36 L -6,35 L 3,33 L 15,36 L 8,-80 Z;
+        M -15,-80 L -30,35 L -10,36 L 5,34 L 18,35 L 8,-80 Z"
+      />
+    </path>
+
+    <!-- Shadowed Feet Firmly Set on the Narrow Stone -->
+    <polygon points="-28,34 -12,34 -16,40 -32,40" fill="#13151a"/>
+    <polygon points="5,33 22,33 18,39 2,39" fill="#111317"/>
+
+    <!-- Wizard's Flowing Silver Hair and Beard -->
+    <path fill="#e2e8f0" opacity="0.9" d="M -6,-102 C -18,-92 -26,-75 -24,-52 C -20,-40 -12,-30 -8,-25 C -5,-35 -3,-50 -2,-65 Z"/>
+    <path id="gandalf-beard" fill="#f8fafc" d="M -1,-90 C -8,-75 -16,-55 -8,-35 C -3,-20 6,-35 4,-60 C 2,-75 0,-85 -1,-90 Z">
+      <animate attributeName="d" dur="2.5s" repeatCount="indefinite" values="
+        M -1,-90 C -8,-75 -16,-55 -8,-35 C -3,-20 6,-35 4,-60 C 2,-75 0,-85 -1,-90 Z;
+        M -1,-90 C -12,-72 -22,-50 -14,-32 C -7,-18 5,-32 4,-60 C 2,-75 0,-85 -1,-90 Z;
+        M -1,-90 C -5,-75 -10,-55 -4,-36 C 0,-22 7,-35 4,-60 C 2,-75 0,-85 -1,-90 Z;
+        M -1,-90 C -8,-75 -16,-55 -8,-35 C -3,-20 6,-35 4,-60 C 2,-75 0,-85 -1,-90 Z"
+      />
+    </path>
+
+    <!-- Pointed Wizard's Hat (Tilted back defiantly) -->
+    <path d="M -24,-102 C -10,-107 10,-106 20,-99 C 8,-103 -4,-103 -18,-100 Z" fill="#282a32"/>
+    <path d="M -16,-102 L -6,-140 C -10,-130 -18,-122 -32,-118 C -24,-112 -18,-106 -16,-102 Z" fill="#3a3e4a"/>
+    <!-- Hat Brim Accent -->
+    <ellipse cx="-2" cy="-101" rx="18" ry="3.5" fill="#4b5060"/>
+
+    <!-- Left Arm Forward Bracing Glamdring (Elven Sword) -->
+    <!-- Arm -->
+    <path d="M 2,-82 L 24,-76 L 36,-80 L 14,-90 Z" fill="#454a57"/>
+    <!-- Glamdring Hilt & Guard -->
+    <line x1="36" y1="-80" x2="42" y2="-82" stroke="#cbd5e1" stroke-width="2.5"/>
+    <line x1="39" y1="-86" x2="38" y2="-75" stroke="#94a3b8" stroke-width="2"/>
+    <!-- Blade: Pointing upward/forward at the beast -->
+    <path d="M 42,-82 L 95,-130 L 97,-129 L 43,-80 Z" fill="#ffffff" filter="url(#glow-magic)"/>
+    <!-- Cold Blue Glow Aura of Glamdring -->
+    <line x1="42" y1="-82" x2="95" y2="-130" stroke="#7dd3fc" stroke-width="4" opacity="0.6" filter="url(#glow-heavy)"/>
+
+    <!-- Right Arm Extended Thrusting Staff Downward/Forward -->
+    <path d="M -5,-83 L 15,-70 L 26,-66 L 16,-60 L -4,-75 Z" fill="#363a45"/>
+
+    <!-- The Wooden Staff of Power -->
+    <line x1="-1" y1="-128" x2="38" y2="38" stroke="#5c4033" stroke-width="4.5" stroke-linecap="round"/>
+    <line x1="2" y1="-122" x2="36" y2="36" stroke="#2b1a11" stroke-width="2"/>
+
+    <!-- Crown of the Staff (Pulsing Radiant Divine White Light) -->
+    <g transform="translate(-1, -128)">
+      <!-- Vast Soft Radiance Bubble -->
+      <circle cx="0" cy="0" r="140" fill="url(#staff-blast)" class="staff-pulse"/>
+      <!-- Pure White Intense Inner Star Core -->
+      <circle cx="0" cy="0" r="7" fill="#ffffff" filter="url(#glow-magic)"/>
+      <circle cx="0" cy="0" r="3" fill="#ffffff"/>
+      <!-- Crackling Radiance Beams of Secret Fire -->
+      <path d="M -20,0 L 20,0 M 0,-20 L 0,20 M -14,-14 L 14,14 M -14,14 L 14,-14" stroke="#ffffff" stroke-width="1.5" opacity="0.8" class="staff-pulse"/>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 4. THE BALROG OF MORGOTH                   -->
+  <!-- ========================================== -->
+  <g id="balrog" class="balrog-sway" transform="translate(800, 420)">
+    <!-- Tremendous Fiery and Smoky Aura Behind the Demon -->
+    <ellipse cx="0" cy="-140" rx="280" ry="240" fill="url(#balrog-aura)" class="flicker-balrog"/>
+
+    <!-- Left Wing (Demon's Right, Vast Wing of Shadow & Edge Fire) -->
+    <g id="balrog-wing-left" class="wing-flap-l">
+      <!-- Shadow Membrane -->
+      <path d="M -30,-160 C -120,-270 -260,-280 -330,-220 C -310,-160 -250,-110 -220,-80 C -250,-40 -200,20 -150,40 C -110,-40 -60,-100 -20,-120 Z" fill="#0c0406" opacity="0.94"/>
+      <!-- Fiery Wing Struts and Spines -->
+      <path d="M -30,-160 C -140,-240 -250,-260 -325,-215 M -150,-160 C -220,-110 -215,-78 M -110,-100 C -170,-40 -148,35" stroke="#e63900" stroke-width="3" fill="none" opacity="0.75" filter="url(#glow-magic)"/>
+      <!-- Burning Tattered Edges -->
+      <path d="M -330,-220 Q -280,-190 -250,-110 Q -220,-60 -150,40" stroke="#ff9900" stroke-width="1.5" fill="none" opacity="0.8"/>
+    </g>
+
+    <!-- Right Wing (Demon's Left, Reaching into Gloom) -->
+    <g id="balrog-wing-right" class="wing-flap-r">
+      <!-- Shadow Membrane -->
+      <path d="M 60,-170 C 180,-300 320,-310 400,-230 C 370,-170 310,-110 270,-70 C 310,-20 270,40 210,60 C 150,-30 100,-100 40,-130 Z" fill="#0a0305" opacity="0.94"/>
+      <!-- Fiery Struts -->
+      <path d="M 60,-170 C 180,-255 305,-280 395,-225 M 180,-170 C 260,-120 268,-68 M 140,-105 C 210,-35 208,55" stroke="#e63900" stroke-width="3" fill="none" opacity="0.75" filter="url(#glow-magic)"/>
+      <!-- Burning Tattered Edges -->
+      <path d="M 400,-230 Q 340,-185 270,-70 Q 250,-10 210,60" stroke="#ff9900" stroke-width="1.5" fill="none" opacity="0.8"/>
+    </g>
+
+    <!-- Smoldering Claws & Muscular Legs Clamping Bridge -->
+    <g id="balrog-legs">
+      <!-- Left Leg (Forward, planted heavily) -->
+      <path d="M -80,-30 L -120,40 L -95,100 L -135,108 L -145,116 L -75,116 L -65,85 L -50,-20 Z" fill="#130507"/>
+      <!-- Molten Veins in Leg -->
+      <path d="M -75,-10 Q -105,35 -90,95 M -115,70 L -75,105" stroke="#ff4400" stroke-width="2.5" fill="none" opacity="0.9"/>
+
+      <!-- Right Leg (Back Stance Braced) -->
+      <path d="M 30,-30 L 60,35 L 75,98 L 50,116 L 105,116 L 105,102 L 75,30 L 50,-30 Z" fill="#170609"/>
+      <!-- Molten Veins Right Leg -->
+      <path d="M 45,-15 Q 65,40 75,95 M 65,50 L 95,95" stroke="#ff3700" stroke-width="2" fill="none" opacity="0.8"/>
+    </g>
+
+    <!-- Torso: Obsidian Armor with Inner Inferno Bleeding Through Fissures -->
+    <g id="balrog-body">
+      <!-- Shadow Core Silhouette -->
+      <path d="M -75,-60 C -90,-120 -80,-190 -35,-220 C 15,-225 65,-215 85,-180 C 95,-130 80,-70 55,-40 C 30,-10 -55,-10 -75,-60 Z" fill="#180608"/>
+
+      <!-- Molten Chest and Core Fissures (Heart of Fire) -->
+      <ellipse cx="-5" cy="-145" rx="42" ry="55" fill="url(#balrog-core)" opacity="0.85" filter="url(#heat-shimmer)"/>
+
+      <!-- Chthonic Ribs/Obsidian Plates covering Chest -->
+      <path d="M -45,-185 C -25,-165 -25,-150 -45,-130 M -55,-135 C -30,-120 -30,-105 -50,-88" stroke="#0a0203" stroke-width="7" fill="none"/>
+      <path d="M 35,-185 C 15,-165 15,-150 35,-130 M 45,-135 C 20,-120 20,-105 40,-88" stroke="#0a0203" stroke-width="7" fill="none"/>
+      <!-- Central Sternum Line of Shadow -->
+      <path d="M -5,-200 L -8,-160 L -3,-120 L -6,-80" stroke="#090102" stroke-width="6"/>
+
+      <!-- Mane of Fire Spouting Along Spine and Shoulders -->
+      <path fill="#ff9900" opacity="0.9" filter="url(#glow-magic)" d="M -60,-190 C -75,-240 -35,-230 -40,-255 C -25,-235 -20,-250 -10,-270 C -5,-245 10,-260 20,-280 C 25,-250 40,-240 50,-260 C 50,-230 75,-215 65,-185 Z" class="shiver-fire"/>
+      <path fill="#ff2200" opacity="0.75" d="M -50,-185 C -65,-225 -30,-220 -32,-240 C -20,-220 -15,-235 -5,-250 C 0,-230 15,-245 20,-260 C 22,-235 38,-225 45,-240 C 42,-215 60,-200 52,-180 Z"/>
+    </g>
+
+    <!-- Terrifying Demonic Head, Curved Horns & Maw of Flame -->
+    <g id="balrog-head" transform="translate(-10, -215)">
+      <!-- Massive Swept Horns (Like a Great Ram/Beast) -->
+      <!-- Horn Left -->
+      <path d="M -25,-15 C -65,-25 -105,-15 -130,25 C -135,35 -142,55 -138,65 C -132,65 -125,45 -115,30 C -92,0 -60,-5 -22,0 Z" fill="#0d0305"/>
+      <path d="M -25,-15 C -65,-25 -105,-15 -130,25" stroke="#ff3700" stroke-width="1.5" fill="none" opacity="0.6"/>
+
+      <!-- Horn Right -->
+      <path d="M 25,-15 C 65,-30 115,-25 145,10 C 155,25 162,45 158,55 C 152,55 145,35 132,20 C 105,-5 65,-10 22,0 Z" fill="#0a0204"/>
+      <path d="M 25,-15 C 65,-30 115,-25 145,10" stroke="#ff3700" stroke-width="1.5" fill="none" opacity="0.6"/>
+
+      <!-- Snarling Jaw and Face Silhouette -->
+      <polygon points="-28,-20 0,-40 28,-20 32,15 15,35 -15,35 -30,15" fill="#0f0305"/>
+
+      <!-- Burning Eyes of Piercing Yellow Fire -->
+      <polygon points="-18,-8 -8,-12 -12,-5" fill="#ffffff" filter="url(#glow-magic)"/>
+      <polygon points="18,-8 8,-12 12,-5" fill="#ffffff" filter="url(#glow-magic)"/>
+      <circle cx="-13" cy="-8" r="4" fill="#ffea00" filter="url(#glow-magic)"/>
+      <circle cx="13" cy="-8" r="4" fill="#ffea00" filter="url(#glow-magic)"/>
+
+      <!-- Maw / Fangs Roaring Fire -->
+      <path d="M -16,10 Q 0,8 16,10 Q 14,24 0,28 Q -14,24 -16,10 Z" fill="#ff2200"/>
+      <path d="M -12,11 L -9,16 L -6,11 L -3,17 L 0,11 L 3,17 L 6,11 L 9,16 L 12,11" stroke="#ffffff" stroke-width="1.5" fill="none"/>
+      <!-- Tongue of White Heat in Throat -->
+      <ellipse cx="0" cy="18" rx="5" ry="3" fill="#ffffff" filter="url(#glow-magic)"/>
+    </g>
+
+    <!-- Balrog Left Arm (Demon's Right): Sweeping Forward Claws -->
+    <g id="balrog-arm-left">
+      <path d="M -70,-150 L -130,-120 L -175,-70 L -155,-50 L -120,-85 L -65,-115 Z" fill="#130406"/>
+      <!-- Molten Veins -->
+      <path d="M -70,-145 L -125,-115 L -165,-68" stroke="#ff5500" stroke-width="2" fill="none"/>
+      <!-- Razor Claws Reaching for the Wizard -->
+      <path d="M -175,-70 L -195,-65 M -176,-66 L -200,-56 M -173,-60 L -195,-46 M -168,-55 L -186,-38" stroke="#ff8800" stroke-width="2.5" stroke-linecap="round"/>
+    </g>
+
+    <!-- Balrog Right Arm & Fiery Whip / Blade of Flame -->
+    <g id="balrog-arm-right" class="whip-flex">
+      <!-- Upper Arm Drawn Back to Strike -->
+      <path d="M 75,-160 L 140,-185 L 180,-155 L 160,-130 L 125,-145 L 70,-125 Z" fill="#130406"/>
+      <path d="M 75,-155 L 138,-180 L 175,-150" stroke="#ff3700" stroke-width="2.5" fill="none"/>
+
+      <!-- The Fiery Whip of Many Thongs -->
+      <!-- Whip Handle -->
+      <line x1="175" y1="-155" x2="190" y2="-145" stroke="#3d0c04" stroke-width="5" stroke-linecap="round"/>
+
+      <!-- Lashing Flame Strands Striking Across the Cavern toward Gandalf -->
+      <!-- Thong 1 -->
+      <path d="M 188,-148 C 190,-80 130,-30 50,-10 C -40,10 -150,-10 -220,-8" fill="none" stroke="url(#whip-fire)" stroke-width="4.5" stroke-linecap="round" filter="url(#glow-magic)"/>
+      <!-- Thong 2 -->
+      <path d="M 188,-148 C 170,-90 100,-45 20,-25 C -70,-5 -160,-4 -235,-22" fill="none" stroke="url(#whip-fire)" stroke-width="3" stroke-linecap="round" filter="url(#glow-heavy)"/>
+      <!-- Thong 3 -->
+      <path d="M 188,-148 C 210,-70 140,-10 60,15 C -30,40 -120,25 -210,12" fill="none" stroke="#ff2200" stroke-width="2.5" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 5. CLASH POINT: LIGHT VS SHADOW BARRIER    -->
+  <!-- ========================================== -->
+  <g id="clash-effects" transform="translate(540, 420)">
+    <!-- Shockwave Collision where Holy Light repels Hellfire -->
+    <path d="M -15,-180 Q 20,0 -15,130" stroke="#cceeff" stroke-width="3.5" fill="none" opacity="0.8" filter="url(#glow-magic)">
+      <animate attributeName="d" dur="0.8s" repeatCount="indefinite" values="
+        M -15,-180 Q 20,0 -15,130;
+        M -18,-180 Q 30,0 -18,130;
+        M -15,-180 Q 20,0 -15,130"
+      />
+    </path>
+    <path d="M -10,-140 Q 25,0 -10,100" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.95" filter="url(#glow-heavy)"/>
+
+    <!-- Sparks and Deflected Flame Droplets -->
+    <circle cx="5" cy="-40" r="2.5" fill="#ffffff" filter="url(#glow-magic)"/>
+    <circle cx="12" cy="15" r="2" fill="#ffd000"/>
+    <circle cx="2" cy="65" r="3" fill="#ff4400"/>
+    <circle cx="16" cy="-90" r="1.8" fill="#e0f7ff"/>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 6. FOREGROUND: RISING EMBERS & HEAT HAZE   -->
+  <!-- ========================================== -->
+  <g id="embers-foreground">
+    <!-- Rising Embers with varying sizes and speeds -->
+    <g class="ember-up" style="transform-origin: 300px 700px;">
+      <circle cx="280" cy="720" r="2.2" fill="#ffcc00" filter="url(#glow-magic)"/>
+      <circle cx="340" cy="750" r="1.5" fill="#ff4400"/>
+      <circle cx="490" cy="690" r="2.8" fill="#ff8800" filter="url(#glow-magic)"/>
+      <circle cx="680" cy="740" r="2.0" fill="#ff3300"/>
+      <circle cx="820" cy="710" r="3.2" fill="#ffaa00" filter="url(#glow-magic)"/>
+      <circle cx="950" cy="760" r="1.8" fill="#ff5500"/>
+    </g>
+
+    <g class="ember-up-fast" style="transform-origin: 600px 720px; animation-delay: -1.4s;">
+      <circle cx="410" cy="740" r="2.5" fill="#ffdd33" filter="url(#glow-magic)"/>
+      <circle cx="580" cy="730" r="1.7" fill="#ff3300"/>
+      <circle cx="630" cy="710" r="2.3" fill="#ff9900"/>
+      <circle cx="750" cy="760" r="3.0" fill="#ff6600" filter="url(#glow-magic)"/>
+      <circle cx="890" cy="730" r="1.6" fill="#ffcc00"/>
+      <circle cx="1020" cy="750" r="2.4" fill="#ff2200"/>
+    </g>
+
+    <!-- Deep Cavern Frame Silhouettes (Vignette Edges) -->
+    <path d="M 0,0 L 90,0 C 50,160 80,240 0,380 Z" fill="#040102"/>
+    <path d="M 1200,0 L 1110,0 C 1140,180 1120,290 1200,410 Z" fill="#040102"/>
+  </g>
+</svg>
