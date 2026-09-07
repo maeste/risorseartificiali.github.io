@@ -1,0 +1,312 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="900" height="630" viewBox="0 0 800 560"
+     role="img" aria-labelledby="title desc">
+  <title id="title">Halfpipe aerial 180s</title>
+  <desc id="desc">
+    A skateboarder accelerates down a halfpipe, slows while climbing,
+    and performs aerial 180s above each lip before landing.
+  </desc>
+
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1">
+      <stop stop-color="#101b35"/>
+      <stop offset="1" stop-color="#273852"/>
+    </linearGradient>
+    <linearGradient id="ramp" x2="0" y2="1">
+      <stop stop-color="#dbad78"/>
+      <stop offset="1" stop-color="#94603e"/>
+    </linearGradient>
+    <linearGradient id="shirt" x2="1" y2="1">
+      <stop stop-color="#68ead2"/>
+      <stop offset="1" stop-color="#23adad"/>
+    </linearGradient>
+    <pattern id="grain" width="46" height="24"
+             patternUnits="userSpaceOnUse">
+      <path d="M0 12H46" stroke="#593d30"
+            stroke-opacity=".12" fill="none"/>
+    </pattern>
+  </defs>
+
+  <!-- Night skatepark -->
+  <rect width="800" height="560" fill="url(#sky)"/>
+  <circle cx="701" cy="64" r="26" fill="#fff0c9"/>
+  <g fill="#e5ecff" opacity=".55">
+    <circle cx="93" cy="54" r="1.5"/>
+    <circle cx="230" cy="83" r="1"/>
+    <circle cx="414" cy="38" r="1.5"/>
+    <circle cx="559" cy="76" r="1"/>
+    <circle cx="628" cy="30" r="1.5"/>
+  </g>
+
+  <g fill="#12233a" opacity=".75">
+    <path d="M0 302V239H43V212H82V281H114V247H161V302Z"/>
+    <path d="M643 302V253H687V222H737V257H777V232H800V302Z"/>
+  </g>
+
+  <path d="M0 480H800V560H0Z" fill="#152338"/>
+  <ellipse cx="400" cy="491" rx="321" ry="19"
+           fill="#081424" opacity=".45"/>
+
+  <!-- The riding surface is a true circular arc, radius 260. -->
+  <path d="M110 150H140V160
+           A260 260 0 0 0 660 160
+           V150H690V480H110Z"
+        fill="url(#ramp)" stroke="#684932" stroke-width="3"/>
+
+  <path d="M110 150H140V160
+           A260 260 0 0 0 660 160
+           V150H690V480H110Z"
+        fill="url(#grain)"/>
+
+  <path d="M140 160A260 260 0 0 0 660 160"
+        fill="none" stroke="#ffe0ac" stroke-width="5"/>
+
+  <!-- Platforms and coping -->
+  <g stroke="#8998ad" stroke-width="5" stroke-linecap="round">
+    <path d="M77 157H140M660 157H723"/>
+    <path d="M85 160V479M715 160V479" stroke="#43546b"/>
+  </g>
+  <g fill="#e3edf4" stroke="#53667c" stroke-width="2">
+    <circle cx="140" cy="160" r="5"/>
+    <circle cx="660" cy="160" r="5"/>
+  </g>
+
+  <g fill="none" stroke="#704a35" stroke-opacity=".45">
+    <path d="M205 340V480M300 400V480M400 423V480
+             M500 400V480M595 340V480"/>
+    <path d="M111 458H689"/>
+  </g>
+
+  <!-- Surface shadow follows the skater. -->
+  <ellipse id="shadow" cx="0" cy="0" rx="31" ry="4"
+           fill="#352c30" opacity=".24"
+           transform="translate(400 419)"/>
+
+  <!-- Local origin is the wheel-contact plane.
+       Approximate whole-system center of mass: (0,-54). -->
+  <g id="skater" transform="translate(400 419)">
+    <g id="yaw">
+      <!-- Far arm -->
+      <path d="M-7-74L-28-58L-40-68"
+            fill="none" stroke="#c58262" stroke-width="9"
+            stroke-linecap="round" stroke-linejoin="round"/>
+
+      <!-- Legs: bent knees keep a low, stable center of mass. -->
+      <path d="M-9-48L-24-29L-20-14"
+            fill="none" stroke="#18283e" stroke-width="13"
+            stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M6-48L22-31L15-14"
+            fill="none" stroke="#263e58" stroke-width="13"
+            stroke-linecap="round" stroke-linejoin="round"/>
+
+      <!-- Torso -->
+      <path d="M-14-79Q0-85 12-76L15-48
+               Q0-40-17-48Z"
+            fill="url(#shirt)" stroke="#168c99" stroke-width="2"/>
+      <path d="M-11-53L12-53" stroke="#99ffde"
+            stroke-width="3" opacity=".65"/>
+
+      <!-- Neck and head -->
+      <path d="M0-83V-91" stroke="#e7a17b"
+            stroke-width="10" stroke-linecap="round"/>
+      <circle cx="1" cy="-99" r="12" fill="#efb18b"/>
+      <path d="M-12-100Q-12-116 2-116
+               Q16-114 16-101Z"
+            fill="#ffcc62" stroke="#bd853c" stroke-width="2"/>
+      <path d="M-10-99L-4-87L7-87L13-99"
+            fill="none" stroke="#51404a" stroke-width="2"/>
+      <circle cx="9" cy="-99" r="1.5" fill="#243247"/>
+
+      <!-- Near arm -->
+      <path d="M9-74L29-63L40-77"
+            fill="none" stroke="#efb18b" stroke-width="9"
+            stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M9-75L20-69" stroke="#45cfbd"
+            stroke-width="12" stroke-linecap="round"/>
+
+      <!-- Shoes remain over the deck. -->
+      <path d="M-27-17H-15L-9-12H-28Z"
+            fill="#f6f5eb" stroke="#18283e" stroke-width="2"/>
+      <path d="M9-17H20L28-12H8Z"
+            fill="#f6f5eb" stroke="#18283e" stroke-width="2"/>
+
+      <!-- Trucks, wheels, and curved deck -->
+      <g stroke="#bac6cc" stroke-width="3">
+        <path d="M-20-9V-4M20-9V-4"/>
+      </g>
+      <g fill="#fff0bd" stroke="#4a4050" stroke-width="2">
+        <circle cx="-21" cy="-3" r="4"/>
+        <circle cx="21" cy="-3" r="4"/>
+      </g>
+      <path d="M-36-14Q-31-9-24-10H24Q31-9 36-14"
+            fill="none" stroke="#172338" stroke-width="5"
+            stroke-linecap="round"/>
+      <path d="M-34-12Q-29-7-23-8H23Q29-7 34-12"
+            fill="none" stroke="#ff796e" stroke-width="2"
+            stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <g font-family="system-ui, sans-serif" text-anchor="middle">
+    <text x="400" y="513" fill="#e5eef9"
+          font-size="17" font-weight="700" letter-spacing="3">
+      NIGHT SESSION
+    </text>
+    <text x="400" y="536" fill="#91a9c4" font-size="12">
+      gravity-driven carving · aerial 180s
+    </text>
+  </g>
+
+  <script><![CDATA[
+    (() => {
+      const skater = document.getElementById("skater");
+      const yaw = document.getElementById("yaw");
+      const shadow = document.getElementById("shadow");
+
+      const PI = Math.PI;
+      const G = 760;        // Gravity, SVG units / second²
+      const R = 205;        // Center-of-mass riding radius
+      const OFFSET = 54;    // COM-to-wheel-contact distance
+      const AIR_HEIGHT = 80;
+      const LIP_Y = 160;
+      const launchSpeed = Math.sqrt(2 * G * AIR_HEIGHT);
+      const flightTime = 2 * launchSpeed / G;
+
+      let theta = -0.6;
+      let direction = 1;
+      let facing = 1;
+      let side = 1;
+      let airborne = false;
+      let airTime = 0;
+
+      // Conservation of energy on the ramp:
+      // v² = 2g(H + R cos(theta)).
+      // This automatically gives faster motion at the bottom.
+      function speed(a) {
+        return Math.sqrt(
+          2 * G * (AIR_HEIGHT + R * Math.max(0, Math.cos(a)))
+        );
+      }
+
+      function advance(dt) {
+        if (airborne) {
+          airTime += dt;
+
+          if (airTime >= flightTime) {
+            const remainder = airTime - flightTime;
+            airborne = false;
+            theta = side * PI / 2;
+            direction = -side;
+            facing *= -1;
+
+            if (remainder > 0) advance(remainder);
+          }
+          return;
+        }
+
+        // Midpoint integration, with short substeps.
+        const w0 = direction * speed(theta) / R;
+        const midpoint = theta + w0 * dt / 2;
+        const next =
+          theta + direction * speed(midpoint) / R * dt;
+
+        if (Math.abs(next) >= PI / 2) {
+          side = next > 0 ? 1 : -1;
+          const boundary = side * PI / 2;
+          const fraction = Math.max(0, Math.min(
+            1, (boundary - theta) / (next - theta)
+          ));
+
+          theta = boundary;
+          airborne = true;
+          airTime = dt * (1 - fraction);
+        } else {
+          theta = next;
+        }
+      }
+
+      function draw() {
+        let cx, cy, angle, turn;
+        let sx, sy, shadowAngle, shadowOpacity;
+
+        if (airborne) {
+          const u = Math.min(1, airTime / flightTime);
+
+          // The COM follows an actual ballistic trajectory.
+          // A vertical lip means zero horizontal takeoff velocity.
+          cx = 400 + side * R;
+          cy = LIP_Y - launchSpeed * airTime
+                        + 0.5 * G * airTime * airTime;
+
+          // Level the board near the apex, then realign it
+          // with the vertical transition before re-entry.
+          const level = Math.sin(PI * u) ** 2;
+          angle = -side * PI / 2 * (1 - level);
+
+          // Project a half-turn around the rider's local
+          // vertical axis into the side-view illustration.
+          const ease = u * u * (3 - 2 * u);
+          turn = facing * Math.cos(PI * ease);
+
+          sx = 400 + side * 259;
+          sy = LIP_Y;
+          shadowAngle = -side * 90;
+          shadowOpacity = 0.22 - 0.15 * Math.sin(PI * u);
+        } else {
+          cx = 400 + R * Math.sin(theta);
+          cy = LIP_Y + R * Math.cos(theta);
+          angle = -theta;
+          turn = facing;
+
+          sx = 400 + 259 * Math.sin(theta);
+          sy = LIP_Y + 259 * Math.cos(theta);
+          shadowAngle = -theta * 180 / PI;
+          shadowOpacity = 0.24;
+        }
+
+        // Rotate the rider about the COM, not about the wheels:
+        // airborne posture changes must not bend the COM trajectory.
+        const bx = cx - OFFSET * Math.sin(angle);
+        const by = cy + OFFSET * Math.cos(angle);
+
+        skater.setAttribute("transform",
+          `translate(${bx} ${by}) rotate(${angle * 180 / PI})`);
+
+        yaw.setAttribute("transform", `scale(${turn} 1)`);
+
+        shadow.setAttribute("transform",
+          `translate(${sx} ${sy}) rotate(${shadowAngle})`);
+        shadow.setAttribute("opacity", shadowOpacity);
+      }
+
+      draw();
+
+      // Respect reduced-motion preferences with a static pose.
+      if (window.matchMedia &&
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        return;
+      }
+
+      let previous;
+      function frame(now) {
+        if (previous !== undefined) {
+          let remaining = Math.min((now - previous) / 1000, 0.05);
+          while (remaining > 0) {
+            const step = Math.min(remaining, 1 / 240);
+            advance(step);
+            remaining -= step;
+          }
+        }
+        previous = now;
+        draw();
+        requestAnimationFrame(frame);
+      }
+
+      document.addEventListener("visibilitychange", () => {
+        previous = undefined;
+      });
+
+      requestAnimationFrame(frame);
+    })();
+  ]]></script>
+</svg>
