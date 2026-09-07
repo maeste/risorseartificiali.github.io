@@ -1,0 +1,34 @@
+---
+layout: single
+title: "Skateboard Benchmark: man doing tricks on a pipe"
+permalink: /skateboard/
+---
+<p style="color:#ccc">Another <a href="/khazad/">LLM drawing benchmark</a>, this
+time on physics: an animated SVG of a man doing skateboard tricks on a pipe,
+prompted verbatim (typos included). The "real physics" constraint tests whether
+the model can encode gravity, momentum and pendulum motion in code.
+Run on <strong>GPT-6 Astra</strong> (reasoning effort: medium) via OpenRouter.</p>
+<style>
+  .card { background:#1c1c1c; border:1px solid #333; border-radius:12px;
+          padding:1rem; margin-bottom:2rem; }
+  .card h2 { color:#ffd700; margin-top:0; font-size:1.1rem; }
+  .meta { color:#888; font-size:0.85rem; }
+  .note { color:#ffaa55; font-size:0.9rem; }
+  .svgwrap { background:#000; border-radius:8px; overflow:hidden; }
+  details.promptbox { margin:1.5rem 0; background:#1c1c1c; border:1px solid #333;
+          border-radius:12px; padding:0.75rem 1rem; }
+  details.promptbox summary { color:#ffd700; cursor:pointer; font-weight:600; }
+  details.promptbox pre { white-space:pre-wrap; color:#ccc; font-size:0.85rem;
+          margin:0.75rem 0 0; }
+</style>
+<details class="promptbox" open>
+  <summary>Prompt (verbatim)</summary>
+  <pre>generate an animated svg of a man doing skatevoard tricks on a pipe. Be mindful of the real phisics</pre>
+</details>
+<div class="card">
+  <h2>gpt-6-astra (reasoning: medium)</h2>
+  <p class="meta">len=10398 · 5279 tok (? reasoning) · 136.7s · cost=$0.26275</p>
+  <p class="note">Note: with the minimal prompt the model chose <strong>JavaScript inside the SVG</strong> (requestAnimationFrame) instead of SMIL/CSS, so the animation is physics-stepped frame by frame. It runs in the browser like any SVG script.</p>
+  <div class="svgwrap"><iframe src="gpt-6-astra-medium.svg" loading="lazy" style="width:100%;height:520px;border:0;background:#000"></iframe></div>
+  <p><a href="gpt-6-astra-medium.svg">open raw SVG</a></p>
+</div>
