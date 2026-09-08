@@ -156,7 +156,14 @@ Constraints:
   <div class="svgwrap"><iframe src="claude-fable-5-1-constrained.svg" loading="lazy" style="width:100%;height:480px;border:0;background:#000"></iframe></div>
   <p><a href="claude-fable-5-1-constrained.svg">open raw SVG</a></p>
 </div>
-<div class="card"><h2>claude-opus-5-minimal</h2><p class="err">ERROR: no SVG in response (empty content, reasoning loop)</p></div>
-<div class="card"><h2>claude-opus-5-constrained</h2><p class="err">ERROR: no SVG in response (empty content, reasoning loop)</p></div>
+<div class="card"><h2>claude-opus-5-minimal</h2><p class="err">ERROR: no complete SVG: reasoning consumed 56.6k tokens (retry with 64k cap), content truncated by length limit</p></div>
+
+<div class="card">
+  <h2>claude-opus-5-constrained</h2>
+  <p class="meta">len=11398 · anim=True · tech=SMIL/CSS · 51707 tok · 658.1s · cost=$1.28</p>
+  <p class="note">retry with max_tokens=64000 (32k run: all tokens consumed by reasoning, finish=length)</p>
+  <div class="svgwrap"><iframe src="claude-opus-5-constrained.svg" loading="lazy" style="width:100%;height:480px;border:0;background:#000"></iframe></div>
+  <p><a href="claude-opus-5-constrained.svg">open raw SVG</a></p>
+</div>
 <div class="card"><h2>kimi-k3-minimal</h2><p class="err">ERROR: no SVG in response (empty content, reasoning loop)</p></div>
 <div class="card"><h2>kimi-k3-constrained</h2><p class="err">ERROR: no SVG in response (empty content, reasoning loop)</p></div>
