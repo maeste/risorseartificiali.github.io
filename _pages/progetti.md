@@ -27,6 +27,16 @@ Funziona su Linux e macOS. Installazione single-script.
 
 👉 [lince.sh](https://lince.sh) · [Repository su GitHub](https://github.com/RisorseArtificiali/)
 
+## 🧩 Skills
+
+**Il nostro set di skill per agenti di coding, versionato e maintenuto.**
+
+Le skill che usiamo ogni giorno sul nostro harness: skill nostre (`skills/`), fork di skill upstream con licenza MIT che manteniamo localmente (`forked/`), e il workflow che le concatena — brainstorming, grilling, PRD, piani, subagent-driven development, code review avversariale prima di ogni merge. Le skill sono l'unità che rende prevedibile il *processo* di un agente.
+
+Nato per progetti grandi (10+ contributori attivi), adattabile a quelli piccoli. Un principio non scala mai: il ruolo di gestire e orchestrare gli agenti resta umano.
+
+👉 [Repository su GitHub](https://github.com/RisorseArtificiali/skills)
+
 ---
 
 Vuoi contribuire, segnalare un bug o proporre un'integrazione? Le issue sono aperte su [GitHub](https://github.com/RisorseArtificiali/).
