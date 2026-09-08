@@ -1,0 +1,267 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 900 500"
+     width="900"
+     height="500"
+     role="img"
+     aria-labelledby="title description">
+
+  <title id="title">Animated skateboarder performing a 360 on a half-pipe</title>
+  <desc id="description">
+    A skateboarder accelerates down a half-pipe, loses speed while climbing,
+    follows a ballistic arc above the coping, performs a 360, and lands back
+    on the transition.
+  </desc>
+
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#81d4fa"/>
+      <stop offset="1" stop-color="#e8f7ff"/>
+    </linearGradient>
+
+    <linearGradient id="ramp" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#75828f"/>
+      <stop offset="1" stop-color="#303943"/>
+    </linearGradient>
+
+    <filter id="softShadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="500" fill="url(#sky)"/>
+  <circle cx="790" cy="75" r="34" fill="#fff4a8" opacity=".85"/>
+
+  <g fill="#fff" opacity=".65">
+    <ellipse cx="135" cy="75" rx="56" ry="17"/>
+    <ellipse cx="185" cy="75" rx="42" ry="13"/>
+    <ellipse cx="160" cy="61" rx="34" ry="18"/>
+  </g>
+
+  <!-- Ground -->
+  <rect y="430" width="900" height="70" fill="#263238"/>
+
+  <!-- Half-pipe body -->
+  <path d="
+    M120 115
+    H150
+    V140
+    Q180 385 450 385
+    Q720 385 750 140
+    V115
+    H780
+    V430
+    H120 Z"
+    fill="url(#ramp)"/>
+
+  <!-- Riding surface -->
+  <path d="
+    M150 140
+    Q180 385 450 385
+    Q720 385 750 140"
+    fill="none"
+    stroke="#dce4e8"
+    stroke-width="8"
+    stroke-linecap="round"/>
+
+  <!-- Decks -->
+  <path d="M70 115 H151" stroke="#dce4e8" stroke-width="8"/>
+  <path d="M749 115 H830" stroke="#dce4e8" stroke-width="8"/>
+
+  <!-- Coping -->
+  <circle cx="150" cy="137" r="7" fill="#f8fbfc" stroke="#54616b" stroke-width="3"/>
+  <circle cx="750" cy="137" r="7" fill="#f8fbfc" stroke="#54616b" stroke-width="3"/>
+
+  <!-- Decorative ramp panels -->
+  <g fill="none" stroke="#92a0aa" stroke-width="2" opacity=".35">
+    <path d="M150 185 Q205 397 450 397 Q695 397 750 185"/>
+    <path d="M150 225 Q220 410 450 410 Q680 410 750 225"/>
+  </g>
+
+  <!-- Moving skater -->
+  <g id="skater-position">
+    <!--
+      Sampled movement:
+      - Wider distances in shorter intervals near the bottom indicate acceleration.
+      - Smaller distances near the lips indicate deceleration.
+      - Airborne heights are sampled from an approximate parabola.
+    -->
+    <animateTransform
+      attributeName="transform"
+      type="translate"
+      dur="8s"
+      repeatCount="indefinite"
+      calcMode="linear"
+      keyTimes="
+        0;
+        .03;.06;
+        .10;.15;.21;.25;
+        .29;.35;.40;.44;
+        .47;.50;.53;.56;
+        .60;.65;.71;.75;
+        .79;.85;.90;.94;
+        .97;1"
+      values="
+        150 70;
+        150 86;150 132;
+        180 245;240 318;330 362;450 377;
+        570 362;660 318;720 245;750 132;
+        750 86;750 70;750 86;750 132;
+        720 245;660 318;570 362;450 377;
+        330 362;240 318;180 245;150 132;
+        150 86;150 70"/>
+
+    <!-- Board follows the tangent of the ramp -->
+    <g id="ramp-alignment">
+      <animateTransform
+        attributeName="transform"
+        type="rotate"
+        dur="8s"
+        repeatCount="indefinite"
+        calcMode="linear"
+        keyTimes="
+          0;.06;
+          .10;.15;.21;.25;
+          .29;.35;.40;.44;
+          .56;.60;.65;.71;.75;
+          .79;.85;.90;.94;1"
+        values="
+          83;83;
+          63;38;16;0;
+          -16;-38;-63;-83;
+          -83;-63;-38;-16;0;
+          16;38;63;83;83">
+
+        <!-- 360-degree aerial trick on the right wall -->
+        <g id="aerial-spin">
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            dur="8s"
+            repeatCount="indefinite"
+            calcMode="linear"
+            keyTimes="0;.44;.47;.50;.53;.56;1"
+            values="0;0;90;180;270;360;360"/>
+
+          <!-- Skateboard shadow/detail -->
+          <ellipse cx="0" cy="8" rx="34" ry="5"
+                   fill="#000" opacity=".18"
+                   filter="url(#softShadow)"/>
+
+          <!-- Skateboard -->
+          <g>
+            <path d="M-35 0 Q-29 5 0 4 Q29 5 35 0"
+                  fill="none"
+                  stroke="#f4511e"
+                  stroke-width="6"
+                  stroke-linecap="round"/>
+
+            <path d="M-32 -2 Q0 2 32 -2"
+                  fill="none"
+                  stroke="#212121"
+                  stroke-width="3"
+                  stroke-linecap="round"/>
+
+            <g fill="#263238" stroke="#101417" stroke-width="1.5">
+              <circle cx="-24" cy="7" r="4"/>
+              <circle cx="24" cy="7" r="4"/>
+            </g>
+
+            <g stroke="#b0bec5" stroke-width="2">
+              <path d="M-25 2 V7"/>
+              <path d="M25 2 V7"/>
+            </g>
+          </g>
+
+          <!-- Rider -->
+          <g stroke="#20262b"
+             stroke-width="7"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+
+            <!-- Rear leg -->
+            <path d="M-5 -48 L-18 -29 L-21 -7"
+                  fill="none"
+                  stroke="#263c78"/>
+
+            <!-- Front leg -->
+            <path d="M5 -48 L19 -28 L21 -7"
+                  fill="none"
+                  stroke="#34539d"/>
+
+            <!-- Shoes -->
+            <path d="M-27 -7 H-15" stroke="#f5f5f5" stroke-width="6"/>
+            <path d="M15 -7 H27" stroke="#f5f5f5" stroke-width="6"/>
+
+            <!-- Torso -->
+            <path d="M0 -48 L-2 -83"
+                  stroke="#e53935"
+                  stroke-width="19"/>
+
+            <!-- Hoodie highlight -->
+            <path d="M-7 -76 L3 -55"
+                  stroke="#ff6f60"
+                  stroke-width="5"
+                  opacity=".8"/>
+
+            <!-- Arms in a balanced, compact aerial posture -->
+            <path d="M-3 -76 L-24 -67 L-34 -50"
+                  fill="none"
+                  stroke="#e53935"/>
+            <path d="M1 -76 L22 -64 L31 -48"
+                  fill="none"
+                  stroke="#e53935"/>
+
+            <!-- Hands -->
+            <circle cx="-34" cy="-49" r="5"
+                    fill="#b8754d" stroke="none"/>
+            <circle cx="31" cy="-47" r="5"
+                    fill="#b8754d" stroke="none"/>
+
+            <!-- Neck -->
+            <path d="M-1 -86 V-91"
+                  stroke="#b8754d"
+                  stroke-width="8"/>
+
+            <!-- Head -->
+            <circle cx="-1" cy="-103" r="13"
+                    fill="#b8754d"
+                    stroke="#20262b"
+                    stroke-width="3"/>
+
+            <!-- Helmet -->
+            <path d="M-14 -106
+                     Q-10 -121 3 -119
+                     Q13 -116 13 -104
+                     Q3 -109 -14 -106 Z"
+                  fill="#1c252b"
+                  stroke="#101417"
+                  stroke-width="2"/>
+
+            <!-- Helmet highlight -->
+            <path d="M-8 -114 Q0 -118 7 -112"
+                  fill="none"
+                  stroke="#607d8b"
+                  stroke-width="2"/>
+          </g>
+        </g>
+      </animateTransform>
+    </g>
+  </g>
+
+  <!-- Caption -->
+  <g font-family="system-ui, sans-serif" fill="#ffffff">
+    <text x="450" y="462"
+          text-anchor="middle"
+          font-size="18"
+          font-weight="700">
+      HALF-PIPE 360
+    </text>
+    <text x="450" y="483"
+          text-anchor="middle"
+          font-size="12"
+          opacity=".7">
+      acceleration through the transition · ballistic airtime · tangent-aligned landing
+    </text>
+  </g>
+</svg>

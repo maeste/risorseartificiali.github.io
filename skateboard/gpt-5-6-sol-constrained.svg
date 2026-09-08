@@ -1,0 +1,227 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="560" viewBox="0 0 800 560" role="img" aria-labelledby="title desc">
+  <title id="title">Animated skateboarder performing aerial tricks on a half-pipe</title>
+  <desc id="desc">A skateboarder pumps through a vert ramp, launches above both copings, spins the board, and lands back in the transitions.</desc>
+
+  <defs>
+    <!-- Background gradient and reusable visual effects -->
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#63bde8"/>
+      <stop offset="0.72" stop-color="#d9f2f8"/>
+      <stop offset="1" stop-color="#f8d69d"/>
+    </linearGradient>
+    <linearGradient id="rampFace" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#77838c"/>
+      <stop offset="1" stop-color="#303940"/>
+    </linearGradient>
+    <linearGradient id="deckPaint" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffbf21"/>
+      <stop offset="0.5" stop-color="#f05032"/>
+      <stop offset="1" stop-color="#ffbf21"/>
+    </linearGradient>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+  </defs>
+
+  <!-- Sky, sun, and distant scenery -->
+  <g id="background">
+    <rect width="800" height="560" fill="url(#sky)"/>
+    <circle cx="690" cy="84" r="38" fill="#ffe798" opacity="0.9"/>
+    <circle cx="690" cy="84" r="55" fill="#fff2ad" opacity="0.18"/>
+    <path d="M0 350 Q95 280 190 347 T385 343 T575 346 T800 330 V560 H0Z"
+          fill="#789a84" opacity="0.55"/>
+    <path d="M0 382 Q110 325 225 380 T455 374 T670 381 T800 362 V560 H0Z"
+          fill="#526f64" opacity="0.72"/>
+  </g>
+
+  <!-- Ground beneath the half-pipe -->
+  <g id="ground">
+    <rect x="0" y="485" width="800" height="75" fill="#263238"/>
+    <path d="M0 507 H800" stroke="#45545b" stroke-width="3"/>
+    <ellipse cx="400" cy="492" rx="230" ry="18" fill="#11191d" opacity="0.38" filter="url(#softShadow)"/>
+  </g>
+
+  <!-- Half-pipe structure: two opposing quarter pipes joined by a flat bottom -->
+  <g id="halfPipe">
+    <path d="M60 250 H180
+             C180 385 270 485 400 485
+             C530 485 620 385 620 250
+             H740 V520 H60 Z"
+          fill="url(#rampFace)" stroke="#20282d" stroke-width="5" stroke-linejoin="round"/>
+
+    <!-- Riding surface and transition contours -->
+    <path d="M60 250 H180
+             C180 385 270 485 400 485
+             C530 485 620 385 620 250
+             H740"
+          fill="none" stroke="#c8d1d5" stroke-width="9" stroke-linecap="round"/>
+    <path d="M68 259 H174
+             C177 395 270 495 400 495
+             C530 495 623 395 626 259
+             H732"
+          fill="none" stroke="#566269" stroke-width="3" opacity="0.75"/>
+
+    <!-- Coping rails -->
+    <g id="coping" fill="#eaf5f7" stroke="#273238" stroke-width="2">
+      <circle cx="180" cy="250" r="8"/>
+      <circle cx="620" cy="250" r="8"/>
+      <path d="M76 250 H180 M620 250 H724" stroke="#eaf5f7" stroke-width="7" stroke-linecap="round"/>
+    </g>
+
+    <!-- Structural supports and deck markings -->
+    <g id="supports" fill="none" stroke="#1d272c" stroke-width="5" opacity="0.82">
+      <path d="M88 260 V510 M712 260 V510"/>
+      <path d="M88 330 H154 M646 330 H712"/>
+      <path d="M88 407 H210 M590 407 H712"/>
+      <path d="M111 260 L88 330 L154 407"/>
+      <path d="M689 260 L712 330 L646 407"/>
+    </g>
+    <g stroke="#f1c64b" stroke-width="4" opacity="0.85">
+      <path d="M78 236 H126 M674 236 H722"/>
+      <path d="M88 228 L100 244 M108 228 L120 244 M680 228 L692 244 M700 228 L712 244"/>
+    </g>
+  </g>
+
+  <!-- Moving skater: motion follows the ramp transitions and two parabolic aerial arcs -->
+  <g id="movingSkater">
+    <animateMotion
+      dur="8s"
+      repeatCount="indefinite"
+      calcMode="spline"
+      keyTimes="0;0.18;0.32;0.5;0.68;0.82;1"
+      keyPoints="0;0.17;0.33;0.5;0.67;0.83;1"
+      keySplines="0 0 0.58 1;0 0 1 1;0.42 0 1 1;0 0 0.58 1;0 0 1 1;0.42 0 1 1"
+      path="M400 469
+            C530 469 615 375 620 250
+            Q700 25 620 250
+            C615 375 530 469 400 469
+            C270 469 185 375 180 250
+            Q100 25 180 250
+            C185 375 270 469 400 469"/>
+
+    <!-- Whole-body orientation aligns the board with each transition and landing -->
+    <g id="skaterOrientation">
+      <animateTransform
+        attributeName="transform"
+        type="rotate"
+        dur="8s"
+        repeatCount="indefinite"
+        calcMode="spline"
+        keyTimes="0;0.11;0.18;0.25;0.32;0.41;0.5;0.59;0.68;0.75;0.82;0.91;1"
+        values="0;-34;-78;0;78;34;0;34;78;0;-78;-34;0"
+        keySplines="0.3 0 0.7 1;0.3 0 0.7 1;0.3 0 0.7 1;0.3 0 0.7 1;0.3 0 0.7 1;0.3 0 0.7 1;0.3 0 0.7 1;0.3 0 0.7 1;0.3 0 0.7 1;0.3 0 0.7 1;0.3 0 0.7 1;0.3 0 0.7 1"/>
+
+      <!-- Skateboard shadow directly under the rider -->
+      <ellipse cx="0" cy="15" rx="38" ry="6" fill="#101619" opacity="0.22"/>
+
+      <!-- Rider body and protective clothing -->
+      <g id="rider">
+        <!-- Rear arm, animated outward for aerial balance -->
+        <g id="rearArm">
+          <animateTransform attributeName="transform" type="rotate" additive="sum"
+            dur="8s" repeatCount="indefinite"
+            keyTimes="0;0.18;0.25;0.32;0.5;0.68;0.75;0.82;1"
+            values="0 0 -78;-18 0 -78;-58 0 -78;-18 0 -78;0 0 -78;18 0 -78;58 0 -78;18 0 -78;0 0 -78"/>
+          <path d="M0 -78 Q-17 -67 -29 -52" fill="none" stroke="#26384a" stroke-width="11" stroke-linecap="round"/>
+          <path d="M-29 -52 L-38 -39" fill="none" stroke="#d7976f" stroke-width="9" stroke-linecap="round"/>
+          <circle cx="-39" cy="-38" r="5" fill="#d7976f"/>
+        </g>
+
+        <!-- Legs, knees, shoes, and torso -->
+        <path d="M-7 -45 Q-20 -31 -25 -13" fill="none" stroke="#252a3a" stroke-width="13" stroke-linecap="round"/>
+        <path d="M8 -45 Q18 -28 24 -13" fill="none" stroke="#30364a" stroke-width="13" stroke-linecap="round"/>
+        <circle cx="-14" cy="-30" r="6" fill="#151a22"/>
+        <circle cx="15" cy="-29" r="6" fill="#151a22"/>
+        <path d="M-31 -11 H-14 Q-10 -8 -14 -5 H-33Z" fill="#f4f0df" stroke="#171d22" stroke-width="2"/>
+        <path d="M17 -11 H34 Q38 -8 34 -5 H15Z" fill="#f4f0df" stroke="#171d22" stroke-width="2"/>
+
+        <path d="M-17 -88 Q0 -98 17 -88 L13 -48 Q0 -39 -13 -48Z"
+              fill="#e1463f" stroke="#202a31" stroke-width="3"/>
+        <path d="M-11 -72 H11" stroke="#ffcf52" stroke-width="5"/>
+        <path d="M-11 -51 Q0 -44 11 -51" fill="none" stroke="#26303a" stroke-width="4"/>
+
+        <!-- Front arm, counterbalancing the rear arm -->
+        <g id="frontArm">
+          <animateTransform attributeName="transform" type="rotate" additive="sum"
+            dur="8s" repeatCount="indefinite"
+            keyTimes="0;0.18;0.25;0.32;0.5;0.68;0.75;0.82;1"
+            values="0 0 -78;20 0 -78;62 0 -78;20 0 -78;0 0 -78;-20 0 -78;-62 0 -78;-20 0 -78;0 0 -78"/>
+          <path d="M0 -78 Q18 -68 31 -53" fill="none" stroke="#354c64" stroke-width="11" stroke-linecap="round"/>
+          <path d="M31 -53 L42 -41" fill="none" stroke="#e0a07a" stroke-width="9" stroke-linecap="round"/>
+          <circle cx="43" cy="-40" r="5" fill="#e0a07a"/>
+        </g>
+
+        <!-- Head, face, and helmet -->
+        <circle cx="0" cy="-105" r="15" fill="#dfa07a" stroke="#202a31" stroke-width="2"/>
+        <path d="M-15 -108 Q-11 -126 3 -127 Q16 -126 18 -108Z"
+              fill="#26384a" stroke="#151d25" stroke-width="3"/>
+        <path d="M-16 -108 Q0 -115 18 -108" fill="none" stroke="#f3c845" stroke-width="4"/>
+        <circle cx="6" cy="-104" r="1.8" fill="#20252a"/>
+        <path d="M7 -97 Q12 -95 15 -99" fill="none" stroke="#7c493b" stroke-width="1.5"/>
+      </g>
+
+      <!-- Skateboard lift keeps the spinning deck near the rider's feet -->
+      <g id="boardLift">
+        <animateTransform
+          attributeName="transform"
+          type="translate"
+          dur="8s"
+          repeatCount="indefinite"
+          keyTimes="0;0.18;0.25;0.32;0.5;0.68;0.75;0.82;1"
+          values="0 0;0 0;0 8;0 0;0 0;0 0;0 8;0 0;0 0"/>
+
+        <!-- Recognizable skateboard with deck, two trucks, and four wheels -->
+        <g id="skateboard">
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            dur="8s"
+            repeatCount="indefinite"
+            calcMode="linear"
+            keyTimes="0;0.18;0.185;0.315;0.32;0.68;0.685;0.815;0.82;1"
+            values="0;0;0;360;360;360;360;720;720;720"/>
+
+          <!-- Curved wooden deck -->
+          <path d="M-42 -4
+                   Q-38 -11 -31 -8
+                   Q0 -4 31 -8
+                   Q38 -11 42 -4
+                   Q37 2 29 2
+                   H-29 Q-37 2 -42 -4Z"
+                fill="url(#deckPaint)" stroke="#182127" stroke-width="2.5"/>
+          <path d="M-31 -5 Q0 -1 31 -5" fill="none" stroke="#ffe282" stroke-width="2"/>
+
+          <!-- Front and rear trucks -->
+          <g fill="#b9c6ca" stroke="#172027" stroke-width="1.5">
+            <path d="M-27 1 V7 M-34 7 H-19"/>
+            <path d="M27 1 V7 M19 7 H34"/>
+            <circle cx="-27" cy="5" r="3"/>
+            <circle cx="27" cy="5" r="3"/>
+          </g>
+
+          <!-- Four skateboard wheels -->
+          <g fill="#e8f4e9" stroke="#172027" stroke-width="2">
+            <circle cx="-34" cy="10" r="4.5"/>
+            <circle cx="-21" cy="10" r="4.5"/>
+            <circle cx="21" cy="10" r="4.5"/>
+            <circle cx="34" cy="10" r="4.5"/>
+          </g>
+          <g fill="#75858c">
+            <circle cx="-34" cy="10" r="1.3"/>
+            <circle cx="-21" cy="10" r="1.3"/>
+            <circle cx="21" cy="10" r="1.3"/>
+            <circle cx="34" cy="10" r="1.3"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- Foreground ramp edge for added depth -->
+  <g id="foreground">
+    <path d="M58 520 H742" stroke="#12191d" stroke-width="8" stroke-linecap="round"/>
+    <text x="400" y="535" text-anchor="middle"
+          font-family="sans-serif" font-size="14" font-weight="bold"
+          letter-spacing="5" fill="#7e929b">VERT SESSION</text>
+  </g>
+</svg>
