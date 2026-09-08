@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="420" viewBox="0 0 700 420" role="img" aria-label="Animated skateboarder performing a kickflip aerial in a half-pipe">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8ed8ff"/>
+      <stop offset="1" stop-color="#e9f8ff"/>
+    </linearGradient>
+    <linearGradient id="ramp" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4d5965"/>
+      <stop offset="1" stop-color="#1d2730"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+  </defs>
+
+  <!-- Background sky and ground -->
+  <g id="background">
+    <rect width="700" height="420" fill="url(#sky)"/>
+    <circle cx="95" cy="72" r="23" fill="#fff7bd" opacity=".9"/>
+    <path d="M0 352H700V420H0Z" fill="#6b874f"/>
+    <path d="M0 354H700" stroke="#405936" stroke-width="5"/>
+    <path d="M35 105h90M500 110h120M80 130h45" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity=".45"/>
+  </g>
+
+  <!-- Half-pipe structure: two opposing quarter pipes and flat bottom -->
+  <g id="half-pipe">
+    <path d="M72 126
+             L72 154
+             C72 266 163 342 286 342
+             H414
+             C537 342 628 266 628 154
+             L628 126
+             L654 126
+             L654 354
+             H46
+             L46 126Z"
+          fill="#172028"/>
+
+    <path d="M88 151
+             C88 258 171 328 288 328
+             H412
+             C529 328 612 258 612 151
+             L612 126
+             H628
+             L628 154
+             C628 266 537 342 414 342
+             H286
+             C163 342 72 266 72 154
+             L72 126
+             H88Z"
+          fill="url(#ramp)"/>
+
+    <path d="M88 151
+             C88 258 171 328 288 328
+             H412
+             C529 328 612 258 612 151"
+          fill="none"
+          stroke="#93a1aa"
+          stroke-width="5"
+          stroke-linecap="round"/>
+
+    <path d="M88 151
+             C88 258 171 328 288 328
+             H412
+             C529 328 612 258 612 151"
+          fill="none"
+          stroke="#26333c"
+          stroke-width="16"
+          stroke-linecap="round"
+          opacity=".8"/>
+
+    <path d="M88 151
+             C88 258 171 328 288 328
+             H412
+             C529 328 612 258 612 151"
+          fill="none"
+          stroke="#82929d"
+          stroke-width="3"
+          stroke-linecap="round"/>
+
+    <!-- Coping pipes -->
+    <path d="M62 151H108" stroke="#d9e4e8" stroke-width="9" stroke-linecap="round"/>
+    <path d="M592 151H638" stroke="#d9e4e8" stroke-width="9" stroke-linecap="round"/>
+    <path d="M62 151H108M592 151H638" stroke="#60717b" stroke-width="3" stroke-linecap="round"/>
+
+    <path d="M151 252C181 294 227 312 278 316M549 252C519 294 473 312 422 316"
+          fill="none" stroke="#8fa0aa" stroke-width="2" opacity=".24"/>
+  </g>
+
+  <!-- Moving shadow beneath the skater -->
+  <g id="skater-shadow" opacity=".28" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="29" ry="7" fill="#101820">
+      <animate attributeName="cx"
+               values="105;115;150;220;310;420;500;555;575;600;620;600;575;555;500;420;310;220;150;115;105"
+               keyTimes="0;.01;.03;.06;.10;.15;.20;.24;.27;.32;.40;.48;.53;.58;.63;.68;.73;.78;.84;.94;1"
+               dur="8s" repeatCount="indefinite"/>
+      <animate attributeName="cy"
+               values="285;292;307;323;334;334;323;292;270;255;250;255;270;292;323;334;334;323;307;292;285"
+               keyTimes="0;.01;.03;.06;.10;.15;.20;.24;.27;.32;.40;.48;.53;.58;.63;.68;.73;.78;.84;.94;1"
+               dur="8s" repeatCount="indefinite"/>
+      <animate attributeName="rx"
+               values="21;22;25;29;34;35;30;24;18;13;10;13;18;24;30;35;34;29;25;22;21"
+               keyTimes="0;.01;.03;.06;.10;.15;.20;.24;.27;.32;.40;.48;.53;.58;.63;.68;.73;.78;.84;.94;1"
+               dur="8s" repeatCount="indefinite"/>
+    </ellipse>
+  </g>
+
+  <!-- Skater group: translates along ramp, then follows a parabolic aerial arc -->
+  <g id="skater-motion">
+    <animateTransform attributeName="transform" type="translate"
+      values="105 164;115 185;150 245;220 300;310 328;420 328;500 287;555 220;575 164;600 106;620 78;600 106;575 164;555 220;500 287;420 328;310 328;220 300;150 245;115 185;105 164"
+      keyTimes="0;.01;.03;.06;.10;.15;.20;.24;.27;.32;.40;.48;.53;.58;.63;.68;.73;.78;.84;.94;1"
+      dur="8s" repeatCount="indefinite"/>
+
+    <!-- Skater posture follows the changing tangent of the transitions -->
+    <g id="skater-body">
+      <animateTransform attributeName="transform" type="rotate"
+        values="57;54;42;25;0;0;-25;-48;-70;-28;-4;-28;-70;-48;-25;0;0;25;42;54;57"
+        keyTimes="0;.01;.03;.06;.10;.15;.20;.24;.27;.32;.40;.48;.53;.58;.63;.68;.73;.78;.84;.94;1"
+        dur="8s" repeatCount="indefinite"/>
+
+      <!-- Skateboard deck, trucks, and four wheels -->
+      <g id="skateboard">
+        <animateTransform attributeName="transform" type="rotate"
+          values="0;0;0;0;0;0;0;0;0;180;360;540;720;720;720;720;720;720;720;720;720"
+          keyTimes="0;.01;.03;.06;.10;.15;.20;.24;.27;.32;.40;.48;.53;.58;.63;.68;.73;.78;.84;.94;1"
+          dur="8s" repeatCount="indefinite"/>
+
+        <path d="M-38 -4 Q-32 -9 -19 -8 H19 Q32 -9 38 -4 Q32 2 20 3 H-20 Q-32 2 -38 -4Z"
+              fill="#f06737" stroke="#3b1b19" stroke-width="2"/>
+        <path d="M-24 -2H24" stroke="#ffd09a" stroke-width="1.5" opacity=".75"/>
+
+        <path d="M-22 2V8M22 2V8" stroke="#1d2328" stroke-width="4" stroke-linecap="round"/>
+        <path d="M-29 7H-15M15 7H29" stroke="#aeb9bf" stroke-width="3" stroke-linecap="round"/>
+
+        <circle cx="-28" cy="10" r="6" fill="#20252a" stroke="#c8d2d7" stroke-width="1.5"/>
+        <circle cx="-16" cy="10" r="6" fill="#20252a" stroke="#c8d2d7" stroke-width="1.5"/>
+        <circle cx="16" cy="10" r="6" fill="#20252a" stroke="#c8d2d7" stroke-width="1.5"/>
+        <circle cx="28" cy="10" r="6" fill="#20252a" stroke="#c8d2d7" stroke-width="1.5"/>
+      </g>
+
+      <!-- Skater's legs and shoes -->
+      <g id="legs">
+        <path d="M-8 -60 L-27 -35 L-20 -9" fill="none" stroke="#293746" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 -60 L27 -35 L21 -8" fill="none" stroke="#35495c" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M-28 -10H-12Q-10 -5 -17 -3H-31Q-34 -7 -28 -10Z" fill="#f4f5ed" stroke="#252a2e" stroke-width="2"/>
+        <path d="M13 -9H29Q34 -6 31 -2H16Q10 -4 13 -9Z" fill="#f4f5ed" stroke="#252a2e" stroke-width="2"/>
+      </g>
+
+      <!-- Skater torso, arms, head, and helmet -->
+      <g id="upper-body">
+        <path d="M-17 -104 Q0 -114 18 -103 L14 -57 Q0 -51 -13 -59Z"
+              fill="#e5483d" stroke="#70221f" stroke-width="2"/>
+        <path d="M-13 -96 L-42 -78 L-57 -98" fill="none" stroke="#d59a72" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M14 -96 L39 -118 L54 -101" fill="none" stroke="#d59a72" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="-58" cy="-99" r="5" fill="#d59a72"/>
+        <circle cx="55" cy="-100" r="5" fill="#d59a72"/>
+
+        <path d="M-6 -112 Q0 -121 8 -112 L7 -102 L-6 -102Z" fill="#d59a72"/>
+        <circle cx="1" cy="-128" r="15" fill="#d59a72" stroke="#59392f" stroke-width="1.5"/>
+        <path d="M-15 -130 Q-10 -148 3 -147 Q17 -145 18 -131 L13 -126 Q0 -132 -13 -126Z"
+              fill="#27313b" stroke="#151c22" stroke-width="2"/>
+        <path d="M-13 -128Q0 -133 14 -128" fill="none" stroke="#91a4b0" stroke-width="2"/>
+        <circle cx="7" cy="-128" r="1.7" fill="#202020"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Trick label -->
+  <g id="caption" font-family="Arial, sans-serif" text-anchor="middle">
+    <text x="350" y="390" font-size="18" font-weight="700" fill="#ffffff" stroke="#263b2b" stroke-width="4" paint-order="stroke">
+      VERT KICKFLIP
+    </text>
+  </g>
+</svg>

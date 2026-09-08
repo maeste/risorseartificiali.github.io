@@ -1,0 +1,232 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="900" height="500" role="img"
+     aria-labelledby="title desc">
+  <title id="title">Skateboarder ollies over a pipe</title>
+  <desc id="desc">
+    A skateboarder rolls in, compresses, ollies over a round pipe with a ballistic
+    arc, then lands and rolls away. The board pitches upward during takeoff and
+    levels before landing.
+  </desc>
+
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#bce9ff"/>
+      <stop offset="1" stop-color="#f7fcff"/>
+    </linearGradient>
+
+    <linearGradient id="pipe" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e9f5f8"/>
+      <stop offset=".28" stop-color="#6f8d98"/>
+      <stop offset=".55" stop-color="#29444e"/>
+      <stop offset=".82" stop-color="#14252c"/>
+      <stop offset="1" stop-color="#091217"/>
+    </linearGradient>
+
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+
+    <style>
+      .ink { stroke: #15232a; stroke-linecap: round; stroke-linejoin: round; }
+      .skin { fill: #b9704f; }
+      .shirt { fill: #f15d4a; }
+      .pants { fill: #253c73; }
+      .shoe { fill: #f3f5f5; stroke: #15232a; stroke-width: 2; }
+      .motion-label { font: 600 13px system-ui, sans-serif; fill: #38515d; letter-spacing: .04em; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="500" fill="url(#sky)"/>
+  <circle cx="754" cy="74" r="34" fill="#fff5b5" opacity=".9"/>
+
+  <path d="M0 285 C135 245 220 305 342 273 S570 230 700 278 S824 301 900 266 V402 H0Z"
+        fill="#9ac7bd" opacity=".42"/>
+  <path d="M0 337 C147 302 238 347 378 319 S668 309 900 336 V402 H0Z"
+        fill="#70a99d" opacity=".3"/>
+
+  <!-- Ground -->
+  <rect y="402" width="900" height="98" fill="#c9d0d1"/>
+  <path d="M0 402 H900" stroke="#53646a" stroke-width="4"/>
+  <path d="M0 435 H900 M0 477 H900" stroke="#aab4b6" stroke-width="2" opacity=".65"/>
+
+  <!-- Pipe obstacle -->
+  <ellipse cx="446" cy="407" rx="58" ry="11" fill="#26343a" opacity=".28" filter="url(#shadow)"/>
+  <path d="M403 393 L414 365 M489 393 L478 365"
+        stroke="#263940" stroke-width="10" stroke-linecap="round"/>
+  <path d="M403 393 L414 365 M489 393 L478 365"
+        stroke="#92aab2" stroke-width="3" stroke-linecap="round"/>
+  <rect x="388" y="336" width="116" height="58" rx="29" fill="url(#pipe)" stroke="#152b33" stroke-width="3"/>
+  <path d="M399 351 C427 337 466 337 494 351" fill="none" stroke="#d9f6ff" stroke-width="4" opacity=".72"/>
+  <text x="446" y="430" text-anchor="middle" class="motion-label">PIPE</text>
+
+  <!-- Landing shadow -->
+  <ellipse cx="380" cy="402" rx="49" ry="8" fill="#26343a" opacity=".22" filter="url(#shadow)">
+    <animate attributeName="cx"
+             values="105;210;270;330;400;470;540;585;690;795"
+             keyTimes="0;.16;.24;.34;.44;.54;.64;.76;.9;1"
+             dur="5s" repeatCount="indefinite"/>
+    <animate attributeName="rx"
+             values="47;47;32;17;10;17;32;50;50;50"
+             keyTimes="0;.16;.24;.34;.44;.54;.64;.76;.9;1"
+             dur="5s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <!-- Entire skater. Positions sample a near-parabolic airborne trajectory. -->
+  <g id="skater">
+    <animateTransform attributeName="transform" type="translate"
+      values="
+        90 386;
+        220 386;
+        260 392;
+        270 382;
+        330 306;
+        400 276;
+        470 306;
+        540 382;
+        560 392;
+        590 386;
+        780 386"
+      keyTimes="0;.16;.20;.24;.34;.44;.54;.64;.70;.76;1"
+      calcMode="linear" dur="5s" repeatCount="indefinite"/>
+
+    <!-- Hide the instant reset at the end of each loop -->
+    <animate attributeName="opacity"
+      values="1;1;1;1;1;1;1;1;1;1;1;0;0;1"
+      keyTimes="0;.16;.20;.24;.34;.44;.54;.64;.70;.76;.88;.89;.98;1"
+      dur="5s" repeatCount="indefinite"/>
+
+    <!-- Board: nose rises from the pop, then flattens before wheel contact -->
+    <g id="board">
+      <animateTransform attributeName="transform" type="rotate"
+        values="0 0 0;0 0 0;-2 0 0;-14 0 0;-7 0 0;2 0 0;6 0 0;0 0 0;0 0 0"
+        keyTimes="0;.16;.20;.24;.34;.44;.54;.64;.76"
+        dur="5s" repeatCount="indefinite"/>
+
+      <path d="M-54 -5 Q-47 -11 -35 -8 H35 Q47 -11 54 -5
+               Q48 2 36 2 H-36 Q-49 2 -54 -5Z"
+            fill="#c88332" stroke="#15232a" stroke-width="3"/>
+      <path d="M-40 -4 H40" stroke="#f2bd58" stroke-width="2" opacity=".8"/>
+
+      <g fill="#27343a" stroke="#15232a" stroke-width="2">
+        <circle cx="-35" cy="9" r="7"/>
+        <circle cx="35" cy="9" r="7"/>
+      </g>
+      <g stroke="#dbe7e8" stroke-width="1.5">
+        <path d="M-40 9 H-30 M-35 4 V14"/>
+        <path d="M30 9 H40 M35 4 V14"/>
+      </g>
+    </g>
+
+    <!-- Legs: compression, extension, airborne tuck, then landing compression -->
+    <g class="ink" fill="none" stroke-width="13">
+      <path stroke="#253c73">
+        <animate attributeName="d"
+          values="
+          M-10 -66 L-27 -37 L-38 -8;
+          M-10 -66 L-27 -37 L-38 -8;
+          M-10 -48 L-42 -43 L-37 -8;
+          M-10 -62 L-23 -34 L-38 -8;
+          M-10 -66 L-13 -31 L-34 -8;
+          M-10 -66 L-4 -28 L-28 -8;
+          M-10 -66 L-14 -32 L-34 -8;
+          M-10 -62 L-25 -36 L-38 -8;
+          M-10 -48 L-42 -43 L-37 -8;
+          M-10 -66 L-27 -37 L-38 -8;
+          M-10 -66 L-27 -37 L-38 -8"
+          keyTimes="0;.16;.20;.24;.34;.44;.54;.64;.70;.76;1"
+          dur="5s" repeatCount="indefinite"/>
+      </path>
+
+      <path stroke="#304b8d">
+        <animate attributeName="d"
+          values="
+          M10 -66 L27 -37 L38 -8;
+          M10 -66 L27 -37 L38 -8;
+          M10 -48 L40 -43 L37 -8;
+          M10 -62 L23 -34 L38 -8;
+          M10 -66 L28 -31 L35 -8;
+          M10 -66 L31 -29 L30 -8;
+          M10 -66 L25 -32 L35 -8;
+          M10 -62 L25 -36 L38 -8;
+          M10 -48 L40 -43 L37 -8;
+          M10 -66 L27 -37 L38 -8;
+          M10 -66 L27 -37 L38 -8"
+          keyTimes="0;.16;.20;.24;.34;.44;.54;.64;.70;.76;1"
+          dur="5s" repeatCount="indefinite"/>
+      </path>
+    </g>
+
+    <!-- Shoes -->
+    <path class="shoe" d="M-46 -12 Q-35 -17 -25 -10 L-22 -4 H-47Z"/>
+    <path class="shoe" d="M24 -12 Q35 -17 47 -10 L49 -4 H24Z"/>
+
+    <!-- Upper body -->
+    <g id="upper-body">
+      <animateTransform attributeName="transform" type="translate"
+        values="0 0;0 0;0 18;0 5;0 0;0 0;0 0;0 5;0 18;0 0;0 0"
+        keyTimes="0;.16;.20;.24;.34;.44;.54;.64;.70;.76;1"
+        dur="5s" repeatCount="indefinite"/>
+
+      <!-- torso -->
+      <path d="M-19 -116 Q0 -126 19 -116 L17 -65 Q0 -58 -17 -65Z"
+            class="shirt ink" stroke-width="3"/>
+
+      <!-- arms balance against angular momentum -->
+      <g class="ink" fill="none" stroke-width="10">
+        <path stroke="#b9704f">
+          <animate attributeName="d"
+            values="
+            M-16 -109 L-43 -83 L-57 -60;
+            M-16 -109 L-43 -83 L-57 -60;
+            M-16 -102 L-47 -82 L-61 -66;
+            M-16 -109 L-47 -79 L-68 -70;
+            M-16 -109 L-48 -84 L-71 -83;
+            M-16 -109 L-50 -93 L-76 -87;
+            M-16 -109 L-47 -87 L-69 -78;
+            M-16 -109 L-44 -82 L-62 -66;
+            M-16 -102 L-47 -82 L-61 -66;
+            M-16 -109 L-43 -83 L-57 -60;
+            M-16 -109 L-43 -83 L-57 -60"
+            keyTimes="0;.16;.20;.24;.34;.44;.54;.64;.70;.76;1"
+            dur="5s" repeatCount="indefinite"/>
+        </path>
+        <path stroke="#b9704f">
+          <animate attributeName="d"
+            values="
+            M16 -109 L42 -94 L55 -72;
+            M16 -109 L42 -94 L55 -72;
+            M16 -102 L45 -87 L59 -69;
+            M16 -109 L43 -91 L66 -81;
+            M16 -109 L47 -99 L69 -95;
+            M16 -109 L50 -106 L75 -98;
+            M16 -109 L46 -98 L69 -87;
+            M16 -109 L42 -91 L62 -75;
+            M16 -102 L45 -87 L59 -69;
+            M16 -109 L42 -94 L55 -72;
+            M16 -109 L42 -94 L55 -72"
+            keyTimes="0;.16;.20;.24;.34;.44;.54;.64;.70;.76;1"
+            dur="5s" repeatCount="indefinite"/>
+        </path>
+      </g>
+
+      <!-- neck and head -->
+      <path d="M-7 -123 V-133 H7 V-123" class="skin ink" stroke-width="2"/>
+      <circle cx="0" cy="-148" r="19" class="skin ink" stroke-width="3"/>
+      <path d="M-18 -151 Q-11 -173 8 -166 Q19 -160 18 -146
+               Q7 -155 -4 -153 Q-12 -150 -18 -144Z"
+            fill="#242225"/>
+      <path d="M7 -142 Q11 -139 15 -142" fill="none" class="ink" stroke-width="2"/>
+    </g>
+  </g>
+
+  <!-- Educational annotation -->
+  <g opacity=".84">
+    <path d="M292 190 C350 128 462 128 520 190" fill="none"
+          stroke="#486b76" stroke-width="2.5" stroke-dasharray="7 8"/>
+    <path d="M516 184 l7 7 -10 2" fill="none" stroke="#486b76" stroke-width="2.5"/>
+    <text x="406" y="119" text-anchor="middle" class="motion-label">BALLISTIC FLIGHT ARC</text>
+    <text x="406" y="139" text-anchor="middle" class="motion-label" style="font-size:11px;font-weight:500">
+      crouch → pop → airtime → wheel compression
+    </text>
+  </g>
+</svg>
