@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%">
+  <defs>
+    <!-- Sky gradient used for the backdrop -->
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0d1524"/>
+      <stop offset="1" stop-color="#2c3e57"/>
+    </linearGradient>
+    <!-- Wood fill for the ramp shell -->
+    <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c79a5e"/>
+      <stop offset="1" stop-color="#8a6236"/>
+    </linearGradient>
+    <!-- Metal fill for the coping pipes -->
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7d8793"/>
+      <stop offset="0.5" stop-color="#e8eef5"/>
+      <stop offset="1" stop-color="#7d8793"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ============ BACKGROUND ============ -->
+  <rect width="600" height="400" fill="url(#sky)"/>
+  <ellipse cx="300" cy="250" rx="280" ry="160" fill="#3d5a80" opacity="0.22"/>
+
+  <!-- ============ GROUND ============ -->
+  <rect x="0" y="354" width="600" height="46" fill="#0b1119"/>
+  <line x1="0" y1="354" x2="600" y2="354" stroke="#243448" stroke-width="2"/>
+
+  <!-- ============ HALF-PIPE / VERT RAMP ============
+       Two quarter pipes facing each other (radius 120, centres at
+       (250,220) and (350,220)) joined by a flat bottom at y=340. -->
+  <g id="ramp">
+    <!-- Ramp shell (outer frame of the two transitions + flat) -->
+    <path d="M 116,220 A 134,134 0 0 0 250,354 L 350,354 A 134,134 0 0 0 484,220
+             L 470,220 A 120,120 0 0 1 350,340 L 250,340 A 120,120 0 0 1 130,220 Z"
+          fill="url(#wood)" stroke="#5d4123" stroke-width="1.5"/>
+    <!-- Riding surface (the arc the wheels travel on) -->
+    <path d="M 130,220 A 120,120 0 0 0 250,340 L 350,340 A 120,120 0 0 0 470,220"
+          fill="none" stroke="#e3c191" stroke-width="3"/>
+    <!-- Support struts under both transitions -->
+    <path d="M145,303 V354 M180,334 V354 M215,349 V354
+             M455,303 V354 M420,334 V354 M385,349 V354"
+          stroke="#6b4a28" stroke-width="4" stroke-linecap="round"/>
+    <!-- Steel coping at each lip -->
+    <circle cx="130" cy="220" r="5" fill="url(#metal)"/>
+    <circle cx="470" cy="220" r="5" fill="url(#metal)"/>
+  </g>
+
+  <!-- ============ SKATER ============
+       Outer group moves the contact point along the physically
+       computed path (pendulum arc on the transition + parabola in the air).
+       Inner group rotates the whole rider to stay perpendicular to the
+       surface while rolling, and to align for the landing while airborne. -->
+  <g id="skater-position">
+    <animateTransform attributeName="transform" type="translate"
+      dur="4.162s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.0240;0.0481;0.0721;0.0841;0.0995;0.1081;0.1201;0.1442;0.1682;
+                0.1922;0.2162;0.2403;0.2485;0.2643;0.2763;0.2883;0.3003;0.3121;0.3244;
+                0.3484;0.3672;0.3844;0.4085;0.4325;0.4565;0.4805;0.5061;0.5302;0.5542;
+                0.5782;0.5919;0.6023;0.6263;0.6503;0.6743;0.6984;0.7224;0.7299;0.7448;
+                0.7689;0.7881;0.7980;0.8169;0.8409;0.8540;0.8770;0.9010;0.9250;0.9491;
+                0.9731;1"
+      values="470,220;467.5,194.5;465,176;462.5,164.5;461.3,161.4;459.6,159.9;458.8,160.4;
+              457.5,162.5;455,172;452.5,188.5;450,212;447.5,242.5;445,280;444.1,294.6;
+              427.1,311.9;410.7,323.5;391.8,332.5;371.3,338.1;350,340;327.8,340;
+              284.2,340;250,340;219.3,336;181.7,318.7;154.4,292.6;138.7,264.8;131.7,240;
+              130,220;132.5,198.5;135,184;137.5,176.5;138.9,175.4;140,176;142.5,182.5;
+              145,196;147.5,216.5;150,244;152.5,278.5;153.3,290.8;168,307.6;200.4,329.3;
+              232.5,338.7;250,340;283.8,340;326.6,340;350,340;389.7,333.3;424.7,313.9;
+              448.9,288;462.8,261;468.6,238.6;470,220"/>
+
+    <g id="skater-orientation">
+      <!-- Body angle: -phi on the right wall, +phi on the left wall,
+           smoothly rotating to the landing angle while airborne. -->
+      <animateTransform attributeName="transform" type="rotate"
+        dur="4.162s" repeatCount="indefinite" calcMode="linear"
+        keyTimes="0;0.0481;0.0995;0.1442;0.1922;0.2162;0.2403;0.2485;0.2643;0.2763;
+                  0.2883;0.3003;0.3121;0.3484;0.3672;0.3844;0.4085;0.4325;0.4565;0.4805;
+                  0.5061;0.5542;0.5782;0.6263;0.6743;0.6984;0.7224;0.7299;0.7448;0.7689;
+                  0.7881;0.7980;0.8409;0.8540;0.8770;0.9010;0.9250;0.9491;0.9731;1"
+        values="-90;-88;-86;-84;-80;-74;-62;-51.6;-40;-30.4;-20.4;-10.2;0;0;0;14.8;34.7;
+                52.8;68.1;80.4;90;88;86;84;80;74;62;53.7;43.1;24.4;8.4;0;0;0;-19.3;-38.5;
+                -55.5;-70;-81.1;-90"/>
+
+      <!-- ============ SKATER FIGURE (local origin = wheel contact patch) ============ -->
+      <g id="skater-art">
+
+        <!-- ----- SKATEBOARD: deck + 4 wheels, spins 360° during each air ----- -->
+        <g id="board">
+          <animateTransform attributeName="transform" type="rotate"
+            dur="4.162s" repeatCount="indefinite" calcMode="linear"
+            keyTimes="0;0.0240;0.2283;0.5303;0.7105;1"
+            values="0 0 -8; 0 0 -8; 360 0 -8; 360 0 -8; 720 0 -8; 720 0 -8"/>
+          <!-- far (rear) pair of wheels -->
+          <circle cx="-10.5" cy="-4.2" r="2.2" fill="#161616"/>
+          <circle cx="10.5" cy="-4.2" r="2.2" fill="#161616"/>
+          <!-- trucks -->
+          <rect x="-14.5" y="-7.6" width="8" height="3" rx="1" fill="#8c98a8"/>
+          <rect x="6.5" y="-7.6" width="8" height="3" rx="1" fill="#8c98a8"/>
+          <!-- deck -->
+          <rect x="-19" y="-11" width="38" height="4.6" rx="2.2" fill="#e0b330"/>
+          <!-- grip tape on top of the deck -->
+          <rect x="-17" y="-11" width="34" height="1.3" rx="0.65" fill="#232323"/>
+          <!-- near (front) pair of wheels -->
+          <circle cx="-13.5" cy="-2.5" r="2.5" fill="#333333"/>
+          <circle cx="13.5" cy="-2.5" r="2.5" fill="#333333"/>
+        </g>
+
+        <!-- ----- LEGS ----- -->
+        <path d="M -2,-36 L -9,-23 L -6.5,-13"
+              fill="none" stroke="#33506e" stroke-width="6"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 2,-36 L 8.5,-22 L 6.5,-13"
+              fill="none" stroke="#2b4359" stroke-width="6"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- ----- SHOES ----- -->
+        <rect x="-11" y="-14.5" width="8" height="3.7" rx="1.6" fill="#eaeaea"/>
+        <rect x="3" y="-14.5" width="8" height="3.7" rx="1.6" fill="#eaeaea"/>
+
+        <!-- ----- TORSO ----- -->
+        <path d="M -6,-34 L -7.5,-51 Q 0,-56.5 7.5,-51 L 6,-34 Z" fill="#d94f3d"/>
+        <!-- ----- ARMS (balance pose) ----- -->
+        <path d="M -6,-49 Q -15,-45 -12.5,-37"
+              fill="none" stroke="#c04434" stroke-width="4.6" stroke-linecap="round"/>
+        <path d="M 6,-49 Q 15,-45 12.5,-37"
+              fill="none" stroke="#d94f3d" stroke-width="4.6" stroke-linecap="round"/>
+
+        <!-- ----- HEAD ----- -->
+        <circle cx="0.5" cy="-60" r="7" fill="#f2c49b"/>
+        <path d="M -6.5,-62 Q 0.5,-70.5 7.5,-62 Q 7.5,-64.5 0.5,-64.5 Q -6.5,-64.5 -6.5,-62 Z"
+              fill="#1b1b1b"/>
+      </g>
+    </g>
+  </g>
+</svg>
