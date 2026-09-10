@@ -1,0 +1,197 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <!-- Sky gradient -->
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="60%" stop-color="#16213e"/>
+      <stop offset="100%" stop-color="#0f3460"/>
+    </linearGradient>
+    
+    <!-- Pipe/ramp gradient -->
+    <linearGradient id="pipeGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4a4a4a"/>
+      <stop offset="50%" stop-color="#6a6a6a"/>
+      <stop offset="100%" stop-color="#4a4a4a"/>
+    </linearGradient>
+    
+    <!-- Ground -->
+    <linearGradient id="groundGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2d2d2d"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+
+    <!-- Stars -->
+    <radialGradient id="star" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#sky)"/>
+  
+  <!-- Stars -->
+  <circle cx="120" cy="60" r="1.5" fill="white" opacity="0.7">
+    <animate attributeName="opacity" values="0.7;0.2;0.7" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="300" cy="40" r="1" fill="white" opacity="0.5">
+    <animate attributeName="opacity" values="0.5;0.1;0.5" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="550" cy="80" r="1.5" fill="white" opacity="0.6">
+    <animate attributeName="opacity" values="0.6;0.15;0.6" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="680" cy="50" r="1" fill="white" opacity="0.4"/>
+  <circle cx="450" cy="30" r="1.2" fill="white" opacity="0.5"/>
+  <circle cx="200" cy="100" r="0.8" fill="white" opacity="0.3"/>
+  <circle cx="620" cy="120" r="1" fill="white" opacity="0.4"/>
+
+  <!-- Half-pipe / Ramp shape -->
+  <path d="M0,500 L0,350 Q100,350 150,350 Q250,350 300,300 Q350,250 400,250 Q450,250 500,300 Q550,350 650,350 Q700,350 800,350 L800,500 Z" fill="url(#pipeGrad)" stroke="#555" stroke-width="2"/>
+  
+  <!-- Pipe highlight edges -->
+  <path d="M0,350 Q100,350 150,350 Q250,350 300,300 Q350,250 400,250 Q450,250 500,300 Q550,350 650,350 Q700,350 800,350" fill="none" stroke="#888" stroke-width="3"/>
+  
+  <!-- Ground -->
+  <rect x="0" y="480" width="800" height="20" fill="url(#groundGrad)"/>
+  
+  <!-- Coping (metal pipe edges) -->
+  <circle cx="150" cy="350" r="6" fill="#aaa" stroke="#888" stroke-width="1"/>
+  <circle cx="650" cy="350" r="6" fill="#aaa" stroke="#888" stroke-width="1"/>
+
+  <!-- Skater group - animated along the pipe -->
+  <g>
+    <!-- Main movement: follows the pipe contour with proper physics (gravity, momentum) -->
+    <animateTransform attributeName="transform" type="translate" 
+      values="
+        0,0;
+        100,-10;
+        180,-30;
+        260,-70;
+        320,-110;
+        360,-130;
+        400,-135;
+        440,-130;
+        480,-110;
+        540,-70;
+        620,-30;
+        700,-10;
+        800,0
+      " 
+      dur="4s" repeatCount="indefinite"/>
+    
+    <!-- Skater body group -->
+    <g>
+      <!-- Board -->
+      <g>
+        <animateTransform attributeName="transform" type="rotate"
+          values="
+            0,0,0;
+            -5,0,0;
+            -10,0,0;
+            -15,0,0;
+            -20,0,0;
+            -25,0,0;
+            -25,0,0;
+            -20,0,0;
+            -15,0,0;
+            -10,0,0;
+            -5,0,0;
+            0,0,0;
+            0,0,0
+          "
+          dur="4s" repeatCount="indefinite"/>
+        
+        <rect x="-25" y="20" width="50" height="5" rx="3" fill="#e63946" stroke="#c1121f" stroke-width="1"/>
+        <!-- Wheels -->
+        <circle cx="-15" cy="27" r="4" fill="#333" stroke="#555" stroke-width="1"/>
+        <circle cx="15" cy="27" r="4" fill="#333" stroke="#555" stroke-width="1"/>
+      </g>
+      
+      <!-- Legs -->
+      <g>
+        <!-- Back leg -->
+        <line x1="-8" y1="5" x2="-12" y2="20" stroke="#2b2d42" stroke-width="4" stroke-linecap="round"/>
+        <!-- Front leg -->
+        <line x1="8" y1="5" x2="10" y2="20" stroke="#2b2d42" stroke-width="4" stroke-linecap="round"/>
+      </g>
+      
+      <!-- Torso -->
+      <g>
+        <animateTransform attributeName="transform" type="rotate"
+          values="
+            0,0,-10;
+            0,0,-15;
+            0,0,-20;
+            0,0,-25;
+            0,0,-30;
+            0,0,-35;
+            0,0,-35;
+            0,0,-30;
+            0,0,-25;
+            0,0,-20;
+            0,0,-15;
+            0,0,-10;
+            0,0,-10
+          "
+          dur="4s" repeatCount="indefinite"/>
+        
+        <!-- Body -->
+        <rect x="-8" y="-25" width="16" height="30" rx="5" fill="#e63946"/>
+        
+        <!-- Head -->
+        <circle cx="0" cy="-35" r="10" fill="#ffd166"/>
+        <!-- Hair -->
+        <path d="M-10,-38 Q-12,-48 0,-48 Q12,-48 10,-38" fill="#2b2d42"/>
+        <!-- Eye -->
+        <circle cx="4" cy="-36" r="1.5" fill="#2b2d42"/>
+        
+        <!-- Arms -->
+        <!-- Back arm -->
+        <line x1="-7" y1="-20" x2="-22" y2="-35" stroke="#2b2d42" stroke-width="3" stroke-linecap="round">
+          <animate attributeName="x2" values="-22;-28;-32;-35;-32;-28;-22;-22" dur="4s" repeatCount="indefinite"/>
+          <animate attributeName="y2" values="-35;-40;-45;-50;-45;-40;-35;-35" dur="4s" repeatCount="indefinite"/>
+        </line>
+        
+        <!-- Front arm -->
+        <line x1="7" y1="-20" x2="22" y2="-30" stroke="#2b2d42" stroke-width="3" stroke-linecap="round">
+          <animate attributeName="x2" values="22;28;32;35;32;28;22;22" dur="4s" repeatCount="indefinite"/>
+          <animate attributeName="y2" values="-30;-35;-40;-45;-40;-35;-30;-30" dur="4s" repeatCount="indefinite"/>
+        </line>
+      </g>
+    </g>
+  </g>
+
+  <!-- Speed lines / motion trail -->
+  <g opacity="0.3">
+    <line x1="50" y1="340" x2="80" y2="340" stroke="#ffd166" stroke-width="2">
+      <animate attributeName="opacity" values="0.3;0;0.3" dur="0.5s" repeatCount="indefinite"/>
+    </line>
+    <line x1="30" y1="345" x2="70" y2="345" stroke="#ffd166" stroke-width="1.5">
+      <animate attributeName="opacity" values="0;0.3;0" dur="0.7s" repeatCount="indefinite"/>
+    </line>
+    <line x1="60" y1="335" x2="100" y2="335" stroke="#e63946" stroke-width="2">
+      <animate attributeName="opacity" values="0.2;0;0.2" dur="0.4s" repeatCount="indefinite"/>
+    </line>
+  </g>
+
+  <!-- Pipe coping sparks on exit -->
+  <g>
+    <circle cx="650" cy="350" r="3" fill="#ffd166" opacity="0">
+      <animate attributeName="opacity" values="0;0;0;0;0;0;0;0.8;0" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="3;3;3;3;3;3;3;5;3" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="648" cy="348" r="2" fill="#ff8c00" opacity="0">
+      <animate attributeName="opacity" values="0;0;0;0;0;0;0;0.6;0" dur="4s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Ground shadow that follows -->
+  <ellipse cx="400" cy="485" rx="30" ry="5" fill="black" opacity="0.3">
+    <animate attributeName="cx" values="150;250;350;400;450;550;650" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="rx" values="25;30;35;40;35;30;25" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.3;0.2;0.1;0.05;0.1;0.2;0.3" dur="4s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <!-- Pipe highlight for depth -->
+  <path d="M0,355 Q100,355 150,355 Q250,355 300,305 Q350,255 400,255 Q450,255 500,305 Q550,355 650,355 Q700,355 800,355" fill="none" stroke="#7777aa" stroke-width="1" opacity="0.4"/>
+</svg>

@@ -1,0 +1,358 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <!-- 
+    HALF-PIPE SKATEBOARDING ANIMATION
+    Self-contained SVG with SMIL animations
+    Scene: half-pipe with skater performing tricks
+  -->
+  
+  <defs>
+    <!-- Gradients for the half-pipe -->
+    <linearGradient id="rampGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#888"/>
+      <stop offset="100%" stop-color="#555"/>
+    </linearGradient>
+    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#87CEEB"/>
+      <stop offset="100%" stop-color="#E0F0FF"/>
+    </linearGradient>
+    <linearGradient id="deckGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a2a2a"/>
+      <stop offset="100%" stop-color="#111"/>
+    </linearGradient>
+    <radialGradient id="copingGrad" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#ddd"/>
+      <stop offset="100%" stop-color="#999"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Background sky -->
+  <rect width="800" height="500" fill="url(#skyGrad)"/>
+  
+  <!-- Ground -->
+  <rect x="0" y="400" width="800" height="100" fill="#8B7355"/>
+  <rect x="0" y="395" width="800" height="10" fill="#6B8E23"/>
+  
+  <!-- 
+    HALF-PIPE STRUCTURE
+    Two quarter pipes facing each other with flat bottom
+    Left quarter pipe: center x=200, right edge of curve at x=200
+    Right quarter pipe: center x=600, left edge of curve at x=600
+    Flat bottom: between x=200 and x=600
+    Ramp height: 200px (from y=400 up to y=200)
+    Coping at y=200
+  -->
+  
+  <!-- Left quarter pipe surface -->
+  <path d="M 0 400 L 200 400 A 200 200 0 0 1 400 200 L 400 400 L 0 400 Z" fill="url(#rampGrad)" stroke="#444" stroke-width="2"/>
+  <!-- Right quarter pipe surface (mirrored) -->
+  <path d="M 800 400 L 600 400 A 200 200 0 0 0 400 200 L 400 400 L 800 400 Z" fill="url(#rampGrad)" stroke="#444" stroke-width="2"/>
+  
+  <!-- Ramp flat bottom (transitions) -->
+  <rect x="200" y="380" width="400" height="20" fill="#666" stroke="#444" stroke-width="2"/>
+  
+  <!-- Coping on both sides (metal pipe at top edge) -->
+  <circle cx="200" cy="200" r="5" fill="url(#copingGrad)" stroke="#666" stroke-width="1"/>
+  <circle cx="600" cy="200" r="5" fill="url(#copingGrad)" stroke="#666" stroke-width="1"/>
+  
+  <!-- Vertical walls connecting coping to platform -->
+  <rect x="0" y="190" width="200" height="10" fill="#777" stroke="#555" stroke-width="1"/>
+  <rect x="600" y="190" width="200" height="10" fill="#777" stroke="#555" stroke-width="1"/>
+  
+  <!-- 
+    SKATER GROUP
+    This group is animated to move along the half-pipe and through the air
+    The skater performs:
+    1. Pendulum swing through the pipe (multiple oscillations)
+    2. Aerial trick with 360 spin above the coping
+    3. Landing and swinging to other side
+  -->
+  
+  <!-- 
+    SKATER MOTION PATH
+    Using SMIL animate to create the full loop:
+    - Start at bottom center (400, 360)
+    - Swing to left coping (200, 200)
+    - Back down and to right coping (600, 200)
+    - Aerial trick with rotation
+    - Land and return to start
+  -->
+  
+  <g>
+    <!-- Skater position animation (translate only) -->
+    <animateTransform
+      attributeName="transform"
+      type="translate"
+      values="
+        0,0;
+        0,0;
+        0,0;
+        0,0;
+        0,0;
+        0,0;
+        0,0;
+        0,0;
+        0,0;
+        0,0;
+        0,0
+      "
+      dur="8s"
+      repeatCount="indefinite"
+    />
+    
+    <!-- 
+      Main skater group - positioned and animated
+      The center point of the skater is at (0,0) in local coords
+      We'll animate translate and rotate separately for clarity
+    -->
+  </g>
+  
+  <!-- 
+    ANIMATED SKATER
+    We'll use separate animated groups for position and rotation
+    to properly handle the parabolic arc and board rotation
+  -->
+  
+  <!-- 
+    POSITION ANIMATION GROUP
+    This group moves the skater along the pendulum path and through the air
+    Path: bottom -> left coping -> bottom -> right coping -> aerial trick -> land -> bottom
+  -->
+  <g>
+    <!-- Main position animation using animateMotion along a path -->
+    <!-- Path represents the skater's center of mass trajectory -->
+    <animateMotion
+      dur="8s"
+      repeatCount="indefinite"
+      calcMode="spline"
+      keyTimes="0;0.08;0.16;0.25;0.33;0.41;0.50;0.58;0.66;0.75;0.83;0.92;1"
+      keySplines="
+        0.4 0 0.6 1;
+        0.4 0 0.6 1;
+        0.4 0 0.6 1;
+        0.4 0 0.6 1;
+        0.4 0 0.6 1;
+        0.25 0.1 0.25 1;
+        0.25 0.1 0.25 1;
+        0.4 0 0.6 1;
+        0.4 0 0.6 1;
+        0.4 0 0.6 1;
+        0.4 0 0.6 1;
+        0.4 0 0.6 1
+      "
+      path="
+        M 400 340
+        C 400 340, 350 300, 250 240
+        C 220 220, 200 205, 200 200
+        C 200 195, 220 180, 250 160
+        C 350 100, 400 80, 400 80
+        C 400 80, 450 100, 550 160
+        C 580 180, 600 195, 600 200
+        C 600 205, 580 220, 550 240
+        C 450 300, 400 340, 400 340
+        C 400 340, 400 340, 400 340
+      "
+    />
+    
+    <!-- 
+      SKATER BODY GROUP
+      Contains the complete skater figure and board
+      Rotates during tricks for the 360 spin
+    -->
+    <g>
+      <!-- 
+        SKATER ROTATION (360 spin during aerial)
+        Rotation happens when the skater is airborne above the coping
+        The board and skater rotate together
+      -->
+      <animateTransform
+        attributeName="transform"
+        type="rotate"
+        values="
+          0      400 340;
+          0      400 340;
+          0      200 200;
+          0      200 200;
+          0      400 340;
+          0      400 340;
+          0      600 200;
+          0      600 200;
+          360    600 200;
+          360    400 340;
+          360    400 340;
+          360    400 340;
+          360    400 340
+        "
+        keyTimes="0;0.08;0.16;0.25;0.33;0.41;0.50;0.58;0.66;0.75;0.83;0.92;1"
+        dur="8s"
+        repeatCount="indefinite"
+        calcMode="spline"
+        keySplines="
+          0.4 0 0.6 1;
+          0.4 0 0.6 1;
+          0.4 0 0.6 1;
+          0.4 0 0.6 1;
+          0.4 0 0.6 1;
+          0.25 0.1 0.25 1;
+          0.25 0.1 0.25 1;
+          0.4 0 0.6 1;
+          0.4 0 0.6 1;
+          0.4 0 0.6 1;
+          0.4 0 0.6 1;
+          0.4 0 0.6 1
+        "
+      />
+      
+      <!-- Skateboard deck -->
+      <g>
+        <!-- Deck shape -->
+        <rect x="-22" y="8" width="44" height="6" rx="3" fill="url(#deckGrad)" stroke="#000" stroke-width="0.5"/>
+        <!-- Grip tape texture -->
+        <rect x="-20" y="8.5" width="40" height="2" rx="1" fill="#333"/>
+        
+        <!-- Trucks and wheels -->
+        <!-- Front truck -->
+        <rect x="-16" y="13" width="6" height="3" fill="#aaa" stroke="#666" stroke-width="0.5"/>
+        <circle cx="-15" cy="17" r="2.5" fill="#888" stroke="#555" stroke-width="0.5"/>
+        <circle cx="-11" cy="17" r="2.5" fill="#888" stroke="#555" stroke-width="0.5"/>
+        <!-- Back truck -->
+        <rect x="10" y="13" width="6" height="3" fill="#aaa" stroke="#666" stroke-width="0.5"/>
+        <circle cx="11" cy="17" r="2.5" fill="#888" stroke="#555" stroke-width="0.5"/>
+        <circle cx="15" cy="17" r="2.5" fill="#888" stroke="#555" stroke-width="0.5"/>
+      </g>
+      
+      <!-- Skater figure -->
+      <g>
+        <!-- Legs -->
+        <line x1="-8" y1="8" x2="-4" y2="-8" stroke="#2F4F4F" stroke-width="4" stroke-linecap="round"/>
+        <line x1="8" y1="8" x2="4" y2="-8" stroke="#2F4F4F" stroke-width="4" stroke-linecap="round"/>
+        
+        <!-- Torso -->
+        <rect x="-7" y="-28" width="14" height="20" rx="4" fill="#E74C3C"/>
+        
+        <!-- Arms -->
+        <line x1="-7" y1="-22" x2="-18" y2="-14" stroke="#2F4F4F" stroke-width="3.5" stroke-linecap="round"/>
+        <line x1="7" y1="-22" x2="18" y2="-14" stroke="#2F4F4F" stroke-width="3.5" stroke-linecap="round"/>
+        
+        <!-- Head -->
+        <circle cx="0" cy="-34" r="7" fill="#F5CBA7"/>
+        <!-- Cap -->
+        <path d="M -7 -36 Q 0 -44 7 -36 L 7 -34 L -7 -34 Z" fill="#2C3E50"/>
+        <path d="M -7 -35 L -12 -35 Q -10 -33 -7 -34 Z" fill="#2C3E50"/>
+        
+        <!-- Shoes -->
+        <rect x="-6" y="6" width="6" height="4" rx="2" fill="#111"/>
+        <rect x="6" y="6" width="6" height="4" rx="2" fill="#111"/>
+      </g>
+      
+      <!-- 
+        BOARD ROTATION (kickflip during aerial)
+        The board rotates about its own axis while the skater is airborne
+        This is separate from the skater's body rotation
+      -->
+      <g>
+        <animateTransform
+          attributeName="transform"
+          type="rotate"
+          values="
+            0   0 10;
+            0   0 10;
+            0   0 10;
+            0   0 10;
+            0   0 10;
+            0   0 10;
+            0   0 10;
+            0   0 10;
+            -360 0 10;
+            -360 0 10;
+            -360 0 10;
+            -360 0 10;
+            -360 0 10
+          "
+          keyTimes="0;0.08;0.16;0.25;0.33;0.41;0.50;0.58;0.66;0.75;0.83;0.92;1"
+          dur="8s"
+          repeatCount="indefinite"
+          calcMode="spline"
+          keySplines="
+            0.4 0 0.6 1;
+            0.4 0 0.6 1;
+            0.4 0 0.6 1;
+            0.4 0 0.6 1;
+            0.4 0 0.6 1;
+            0.25 0.1 0.25 1;
+            0.25 0.1 0.25 1;
+            0.4 0 0.6 1;
+            0.4 0 0.6 1;
+            0.4 0 0.6 1;
+            0.4 0 0.6 1;
+            0.4 0 0.6 1
+          "
+        />
+        <!-- Board is already drawn above -->
+      </g>
+    </g>
+  </g>
+  
+  <!-- 
+    ADDITIONAL DETAILS
+    Shadow under the skater for depth
+  -->
+  <ellipse cx="400" cy="400" rx="30" ry="5" fill="rgba(0,0,0,0.15)">
+    <animate attributeName="cx" 
+      values="400;400;200;200;400;400;600;600;500;400;400;400;400"
+      keyTimes="0;0.08;0.16;0.25;0.33;0.41;0.50;0.58;0.66;0.75;0.83;0.92;1"
+      dur="8s" repeatCount="indefinite"
+      calcMode="spline"
+      keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"
+    />
+    <animate attributeName="rx"
+      values="30;30;15;15;30;30;15;15;10;20;30;30;30"
+      keyTimes="0;0.08;0.16;0.25;0.33;0.41;0.50;0.58;0.66;0.75;0.83;0.92;1"
+      dur="8s" repeatCount="indefinite"
+      calcMode="spline"
+      keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"
+    />
+    <animate attributeName="opacity"
+      values="1;1;0.6;0.6;1;1;0.6;0.6;0.3;0.7;1;1;1"
+      keyTimes="0;0.08;0.16;0.25;0.33;0.41;0.50;0.58;0.66;0.75;0.83;0.92;1"
+      dur="8s" repeatCount="indefinite"
+      calcMode="spline"
+      keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"
+    />
+  </ellipse>
+  
+  <!-- 
+    SPEED LINES for motion at the bottom of the ramp
+    Shows high speed at the bottom, fading at the top
+  -->
+  <g opacity="0.3">
+    <line x1="300" y1="380" x2="350" y2="380" stroke="#FFF" stroke-width="1">
+      <animate attributeName="opacity" values="0;0.5;0;0;0;0;0;0;0;0;0;0;0" dur="8s" repeatCount="indefinite"/>
+    </line>
+    <line x1="320" y1="385" x2="380" y2="385" stroke="#FFF" stroke-width="1">
+      <animate attributeName="opacity" values="0;0.4;0;0;0;0;0;0;0;0;0;0;0" dur="8s" repeatCount="indefinite"/>
+    </line>
+    <line x1="450" y1="380" x2="500" y2="380" stroke="#FFF" stroke-width="1">
+      <animate attributeName="opacity" values="0;0;0;0;0.5;0;0;0;0;0;0;0;0" dur="8s" repeatCount="indefinite"/>
+    </line>
+    <line x1="420" y1="385" x2="480" y2="385" stroke="#FFF" stroke-width="1">
+      <animate attributeName="opacity" values="0;0;0;0;0.4;0;0;0;0;0;0;0;0" dur="8s" repeatCount="indefinite"/>
+    </line>
+  </g>
+  
+  <!-- Clouds for atmosphere -->
+  <g fill="white" opacity="0.7">
+    <ellipse cx="120" cy="80" rx="50" ry="20"/>
+    <ellipse cx="160" cy="70" rx="40" ry="18"/>
+    <ellipse cx="80" cy="75" rx="35" ry="15"/>
+  </g>
+  <g fill="white" opacity="0.5">
+    <ellipse cx="650" cy="60" rx="60" ry="22"/>
+    <ellipse cx="700" cy="50" rx="45" ry="18"/>
+    <ellipse cx="610" cy="55" rx="35" ry="14"/>
+  </g>
+  
+  <!-- Sun -->
+  <circle cx="720" cy="60" r="30" fill="#FFD700" opacity="0.8"/>
+  <circle cx="720" cy="60" r="22" fill="#FFEB3B"/>
+  
+</svg>
