@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "podcast-promo/episodes/2026-10-10-sign-in-with-openai-labbonamento-diventa-un-portafoglio_promo.md",
+                "file": "podcast-promo/episodes/2026-10-17-non-esistera-piu-il-software-esisteranno-i-prompt_promo.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-10-10-sign-in-with-openai-labbonamento-diventa-un-portafoglio_promo"
+              "title": "2026-10-17-non-esistera-piu-il-software-esisteranno-i-prompt_promo"
             }
           }
         ],
@@ -202,12 +202,19 @@
   },
   "active": "0627e8d0d878fde4",
   "lastOpenFiles": [
+    "file:/home/maeste/lince_second_brain_plans/00_PRD.md",
+    "podcast-promo/episodes/2026-10-17-non-esistera-piu-il-software-esisteranno-i-prompt_promo.md",
+    "podcast-promo/episodes/2026-10-10-sign-in-with-openai-labbonamento-diventa-un-portafoglio_promo.md",
+    "podcast-promo/episodes/2026-10-17-non-esistera-piu-il-software-esisteranno-i-prompt_promo.md.tmp.2.64c3a73ba17e",
+    "podcast-promo/episodes/2026-10-17-non-esistera-piu-il-software-esisteranno-i-prompt_pre.md",
+    "_posts/2026-10-17-non-esistera-piu-il-software-esisteranno-i-prompt.md",
+    "_posts/2026-10-17-non-esistera-piu-il-software-esisteranno-i-prompt.md.tmp.2.77098e5f2752",
+    "podcast-promo/episodes/2026-10-17-non-esistera-piu-il-software-esisteranno-i-prompt_promo.md.tmp.2.1a786878ab58",
     "podcast-promo/episodes/puntata-52-scaletta.md",
     "podcast-promo/episodes/2026-10-10-sign-in-with-openai-labbonamento-diventa-un-portafoglio_promo.md.tmp.2.05533051ef98",
     "podcast-promo/episodes/2026-10-10-sign-in-with-openai-labbonamento-diventa-un-portafoglio_pre.md",
     "_posts/2026-10-10-sign-in-with-openai-labbonamento-diventa-un-portafoglio.md",
     "_posts/2026-10-10-sign-in-with-openai-labbonamento-diventa-un-portafoglio.md.tmp.2.5a5a847e3636",
-    "podcast-promo/episodes/2026-10-10-sign-in-with-openai-labbonamento-diventa-un-portafoglio_promo.md",
     "podcast-promo/episodes/2026-10-10-sign-in-with-openai-labbonamento-diventa-un-portafoglio_promo.md.tmp.2.278e41e6022c",
     "podcast-promo/episodes/2026-10-03-lagi-personale-e-gia-in-vendita-muse-dots-e-grokbot_promo.md",
     "podcast-promo/episodes/2026-09-26-dovevano-rallentare-opus-55-gpt6-e-jev_promo.md",
@@ -218,11 +225,8 @@
     "podcast-promo/episodes/2026-10-03-lagi-personale-e-gia-in-vendita-muse-dots-e-grokbot_promo.md.tmp.2.7c57c4da4fe7",
     "convert_webm_gif.sh",
     "podcast-promo/episodes/2026-09-19-ave-claude-morituri-te-salutant_promo.md",
-    "podcast-promo/episodes/2026-09-26-dovevano-rallentare-opus-55-gpt6-e-jev_promo.md.tmp.2.cf6804321243",
     "podcast-promo/episodes/2026-09-26-dovevano-rallentare-opus-55-gpt6-e-jev_pre.md",
     "_posts/2026-09-26-dovevano-rallentare-opus-55-gpt6-e-jev.md",
-    "_posts/2026-09-26-dovevano-rallentare-opus-55-gpt6-e-jev.md.tmp.2.3b8e4b4a313a",
-    "podcast-promo/episodes/2026-09-26-dovevano-rallentare-opus-55-gpt6-e-jev_promo.md.tmp.2.13757ccebe6e",
     "podcast-promo/scaletta_episodio_70.md",
     "podcast-promo/episodes/2026-09-19-ave-claude-morituri-te-salutant_pre.md",
     "_posts/2026-09-19-ave-claude-morituri-te-salutant.md",
@@ -240,9 +244,6 @@
     "podcast-promo/episodes/2026-08-29-era-stealth-era-glm-53-flash-e-i-numeri-da-giganti_pre.md",
     "_posts/2026-08-29-era-stealth-era-glm-53-flash-e-i-numeri-da-giganti.md",
     "podcast-promo/scaletta_episodio_68.md",
-    "podcast-promo/episodes/2026-08-22-bannato-da-glm-hybrid-routing-con-litellm_pre.md",
-    "_posts/2026-08-22-bannato-da-glm-hybrid-routing-con-litellm.md",
-    "podcast-promo/episodes/2026-08-15-open-weight-con-l-asterisco_promo.md",
     "assets/images/episodes/ep52.png",
     "temp/dom.jpeg"
   ]
